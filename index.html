@@ -215,6 +215,38 @@
             }
         }
 
+        /* Shine effect for CTA */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg) translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: rotate(30deg) translateX(-100%); }
+            20%, 100% { transform: rotate(30deg) translateX(100%); }
+        }
+
+        /* Scroll Text */
+        .scroll-text {
+            display: block;
+            font-size: 1rem;
+            font-family: var(--font-heading);
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         /* Navbar */
         .navbar {
             position: fixed;
@@ -307,7 +339,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(11, 25, 44, 0.2) 0%, rgba(11, 25, 44, 0.9) 100%);
+            background: linear-gradient(to bottom, rgba(11, 25, 44, 0.3) 0%, rgba(11, 25, 44, 0.7) 70%, var(--bg-main) 100%);
         }
 
         .hero-content {
@@ -1441,42 +1473,64 @@
 
 .mt-4 { margin-top: 30px; }
 
-/* Mockup Window */
+/* Mockup Window - Fantasy Game Frame */
 .mockup-window {
-    background: #111;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    background: #0B192C;
+    border-radius: 8px;
+    border: 6px solid #2C1A14;
+    box-shadow: 0 0 0 4px #DAA520, 0 0 0 8px #1A0F0C, 0 30px 60px rgba(0, 0, 0, 0.8);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin: 10px;
+}
+
+.mockup-window::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+    pointer-events: none;
+    z-index: 10;
 }
 
 .mockup-header {
-    background: #1a1a1a;
+    background: linear-gradient(to bottom, #4A2E00, #2C1A14);
     padding: 12px 20px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    justify-content: center;
+    border-bottom: 3px solid #DAA520;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    z-index: 5;
+}
+
+.mockup-header::before {
+    content: '';
+    position: absolute;
+    top: 4px; bottom: 4px; left: 4px; right: 4px;
+    border: 1px dashed rgba(218, 165, 32, 0.3);
+    pointer-events: none;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+    display: none;
 }
 
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
+.dot.red { display: none; }
+.dot.yellow { display: none; }
+.dot.green { display: none; }
 
 .mockup-title {
-    margin-left: 15px;
-    color: #888;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    font-family: monospace;
+    margin: 0;
+    color: #FBBF24;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
 }
 
 .mockup-content {
@@ -1662,6 +1716,40 @@
     opacity: 0.8;
 }
 
+        /* Header Sound Controls */
+        .header-sound-controls {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 5px;
+        }
+
+        .sound-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .sound-btn:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sound-btn.active-muted {
+            color: var(--accent);
+        }
 </style>
     <link rel="icon" type="image/png" href="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png">
 </head>
@@ -1681,6 +1769,10 @@
                 <a href="#requirements" data-i18n="nav_requirements">Configuration</a>
             </nav>
             <div class="nav-actions">
+                <!-- Header Sound Controls -->
+                <div class="header-sound-controls" style="margin-right: 15px;">
+                    <button id="header-sound-toggle" class="sound-btn" title="Activer/Désactiver le son"><i class="fa-solid fa-volume-xmark"></i></button>
+                </div>
                 <div class="lang-switcher">
                     <i class="fa-solid fa-globe lang-icon"></i>
                     <span class="text-white font-weight-bold"
@@ -1720,30 +1812,58 @@
                 strategy.</p>
 
             <div class="cta-container">
+                <div style="position:relative;">
+                    <div style="position:absolute; top:-15px; right:-10px; background:var(--accent); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; transform:rotate(10deg); z-index:10; box-shadow:0 4px 10px rgba(0,0,0,0.5); pointer-events:none;">
+                        🎁 Starter Pack Inclus !
+                    </div>
                 <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
-                    class="btn btn-massive btn-primary bounce" id="hero-cta" target="_blank" rel="noopener">
+                    class="btn btn-massive btn-primary bounce btn-shine" id="hero-cta" target="_blank" rel="noopener">
                     <span class="btn-text" data-i18n="hero_btn">TÉLÉCHARGER POUR WINDOWS</span>
                     <i class="fa-brands fa-windows"></i>
                 </a>
-                <div class="platform-badge">
-                    <i class="fa-brands fa-windows"></i>
-                    <span data-i18n="hero_badge">Exclusivité Windows PC</span>
+                </div>
+                <!-- Unified Live Stats & Platform Block -->
+                <div style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(10, 14, 23, 0.85); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 8px 18px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.5); backdrop-filter: blur(4px);">
+                        
+                        <!-- Platform Icon -->
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-brands fa-windows" style="font-size: 1.1rem; color: #3b82f6;"></i>
+                            <span style="font-weight: 700; color: #f8fafc;" data-i18n="hero_badge">Windows PC Exclusive</span>
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
+
+                        <!-- Rating -->
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <div style="color: #F59E0B; display: flex; gap: 2px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span style="color: #F59E0B; font-weight: 800; font-size: 0.95rem; margin-left: 2px;">4.8</span>
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
+
+                        <!-- Online Now -->
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 8px; height: 8px; background: #10B981; border-radius: 50%; box-shadow: 0 0 8px #10B981; display: inline-block;"></span>
+                            <span style="font-weight: 700; color: #f8fafc;">138,402</span>
+                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;" data-i18n="stats_online">Online Now</span>
+                        </div>
+
+                        <!-- Divider -->
+                        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
+
+                        <!-- Total Players -->
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="color: #F59E0B; font-weight: 700;">38M+</span>
+                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;" data-i18n="stats_total">Players</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="hero-trust-badges"
-                style="display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; justify-content: center; z-index: 2;">
-                <span class="badge"
-                    style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; font-size: 1rem;">â­
-                    <span data-i18n="trust_players">+1M Players Worldwide</span></span>
-                <span class="badge"
-                    style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; font-size: 1rem;">ðŸŽ®
-                    <span data-i18n="trust_f2p">Free To Play</span></span>
-                <span class="badge"
-                    style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; font-size: 1rem;">âš”ï¸
-                    <span data-i18n="trust_epic">Epic Strategy Battles</span></span>
-            </div>
-        </div>
 
         <div class="scroll-indicator">
             <i class="fa-solid fa-chevron-down animated-bounce"></i>
@@ -1877,38 +1997,10 @@
                             <span class="mockup-title">INFINITY KINGDOM</span>
                         </div>
                         <div class="mockup-content">
-                            <!-- Main Large Image -->
-                            <img id="main-gp-img" src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay.jpg" alt="Gameplay Showcase">
-                            
-                            <!-- Play button overlay indicator (visual only) -->
-                            <div class="play-overlay">
-                                <i class="fa-solid fa-play"></i>
-                            </div>
-                        </div>
-
-                        <!-- Thumbnails Carousel inside the window bottom -->
-                        <div class="thumb-carousel">
-                            <div class="thumb-item active" data-tab="0" onclick="changeGameplay(0)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay.jpg" alt="Thumb 1">
-                            </div>
-                            <div class="thumb-item" data-tab="1" onclick="changeGameplay(1)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-1.jpg" alt="Thumb 2">
-                            </div>
-                            <div class="thumb-item" data-tab="2" onclick="changeGameplay(2)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-2.jpg" alt="Thumb 3">
-                            </div>
-                            <div class="thumb-item" data-tab="3" onclick="changeGameplay(3)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-3.jpg" alt="Thumb 4">
-                            </div>
-                            <div class="thumb-item" data-tab="4" onclick="changeGameplay(4)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-4.jpg" alt="Thumb 5">
-                            </div>
-                            <div class="thumb-item" data-tab="5" onclick="changeGameplay(5)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-5.jpg" alt="Thumb 6">
-                            </div>
-                            <div class="thumb-item" data-tab="6" onclick="changeGameplay(6)">
-                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-6.jpg" alt="Thumb 7">
-                            </div>
+                            <!-- Main Large Video -->
+                            <video id="main-gp-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                                <source src="https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-Free-download-and-play-on-Windows-Microsoft-Store.mp4" type="video/mp4">
+                            </video>
                         </div>
                     </div>
                 </div>
@@ -2163,6 +2255,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Floating Call to Action (Kaynzl m3aya) -->
     <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" class="floating-cta" target="_blank"
@@ -2878,30 +2971,72 @@
             // AUDIO & SOUND EFFECTS SETUP
             // ==========================================
 
-            // 1. Background Music (Replace 'asset/bgm.mp3' with your actual background audio file)
-            const bgMusic = new Audio('asset/bgm.mp3');
+            // 1. Background Music 
+            const bgMusic = new Audio('https://shopghila.com/wp-content/uploads/2026/03/Complexities-of-Sound-Incantation-SPOTISAVER.mp3'); 
             bgMusic.loop = true;
             bgMusic.volume = 0.2; // 20% volume for subtle background music
+            
+            let isMusicPlaying = false;
+            let userMuted = false;
 
-            // 2. Button Click Sound (Replace 'asset/click.mp3' with your actual click audio file)
-            const clickSoundUrl = 'asset/click.mp3';
+            const soundToggleBtn = document.getElementById('header-sound-toggle');
+            const soundIcon = soundToggleBtn.querySelector('i');
 
-            // Start background music on user's first interaction (Browsers block autoplay otherwise)
+            // 2. Button Click Sound
+            const clickSoundUrl = 'https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3';
+
+            // Update icon UI
+            const updateSoundUI = () => {
+                if (bgMusic.muted || bgMusic.paused) {
+                    soundIcon.className = 'fa-solid fa-volume-xmark';
+                    soundToggleBtn.classList.add('active-muted');
+                } else {
+                    soundIcon.className = 'fa-solid fa-volume-high';
+                    soundToggleBtn.classList.remove('active-muted');
+                }
+            };
+
+            // Play background music
             const startBackgroundMusic = () => {
-                bgMusic.play().catch(e => console.log("Bg music playback prevented:", e));
-                // Remove listeners once it starts playing
+                if(userMuted || isMusicPlaying) return;
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    updateSoundUI();
+                }).catch(e => console.log("Bg music playback prevented:", e));
+                // Remove initial interaction listeners
                 document.removeEventListener('click', startBackgroundMusic);
                 document.removeEventListener('keydown', startBackgroundMusic);
                 document.removeEventListener('scroll', startBackgroundMusic);
             };
+
+            // Toggle functionality
+            soundToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // don't trigger global click setup
+                if (bgMusic.paused || bgMusic.muted) {
+                    bgMusic.muted = false;
+                    userMuted = false;
+                    bgMusic.play().catch(err => console.log(err));
+                    isMusicPlaying = true;
+                } else {
+                    bgMusic.muted = true;
+                    userMuted = true;
+                    bgMusic.pause();
+                    isMusicPlaying = false;
+                }
+                updateSoundUI();
+            });
 
             // Listen for any interaction to start music
             document.addEventListener('click', startBackgroundMusic, { once: true });
             document.addEventListener('keydown', startBackgroundMusic, { once: true });
             document.addEventListener('scroll', startBackgroundMusic, { once: true });
 
+            // Initially set it as muted UI if it hasn't interacted yet
+            updateSoundUI();
+
             // Function to play click sound
             const playClickSound = () => {
+                if(userMuted) return;
                 const sound = new Audio(clickSoundUrl);
                 sound.volume = 0.6;
                 sound.play().catch(e => console.log("Click sound prevented:", e));
@@ -2910,21 +3045,20 @@
             // Attach click sound to all buttons, links, and actionable elements
             const actionableElements = document.querySelectorAll('button, .btn, .lang-btn, a, .faq-question, .floating-cta');
             actionableElements.forEach(el => {
-                el.addEventListener('click', playClickSound);
+                if (el !== soundToggleBtn) { // don't double trigger
+                    el.addEventListener('click', playClickSound);
+                }
             });
 
         });
 
     
     // Gameplay Interactive Tabs Logic
-    const gpImages = [
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay.jpg",
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-1.jpg",
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-2.jpg",
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-3.jpg",
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-4.jpg",
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-5.jpg",
-        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-6.jpg"
+    const gpVideos = [
+        "https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-Free-download-and-play-on-Windows-Microsoft-Store.mp4",
+        "https://shopghila.com/wp-content/uploads/2026/03/Video-0.45.mp4",
+        "https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4",
+        "https://shopghila.com/wp-content/uploads/2026/03/Video-1.22.mp4"
     ];
 
     window.changeGameplay = function(index) {
@@ -2940,25 +3074,16 @@
             else tab.classList.remove('active');
         });
 
-        // Update active class on thumbnails
-        document.querySelectorAll('.thumb-item').forEach((thumb, i) => {
-            if(i === index) {
-                thumb.classList.add('active');
-                // Scroll thumbnail into view
-                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            } else {
-                thumb.classList.remove('active');
-            }
-        });
-
-        // Fade image transition
-        const mainImg = document.getElementById('main-gp-img');
-        mainImg.style.opacity = 0;
-        
-        setTimeout(() => {
-            mainImg.src = gpImages[index];
-            mainImg.style.opacity = 1;
-        }, 200);
+        // Fade video transition
+        const mainVid = document.getElementById('main-gp-video');
+        if(mainVid) {
+            mainVid.style.opacity = 0;
+            setTimeout(() => {
+                mainVid.src = gpVideos[sidebarIndex];
+                mainVid.play().catch(e => console.log(e));
+                mainVid.style.opacity = 1;
+            }, 300);
+        }
     };
 
 </script>
