@@ -1362,7 +1362,307 @@
                 font-size: 1rem;
             }
         }
-    </style>
+    
+
+/* Interactive Gameplay Section */
+.gameplay-interactive {
+    padding: 100px 0;
+    background: #060510; /* Very dark background to pop the window */
+    position: relative;
+}
+
+.gameplay-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    align-items: center;
+}
+
+/* Sidebar */
+.gameplay-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tab-item {
+    cursor: pointer;
+    padding: 20px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    border-radius: 0 10px 10px 0;
+}
+
+.tab-item .tab-title {
+    font-family: 'Fredoka', sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tab-item .tab-desc {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin: 0;
+    transition: all 0.4s ease;
+}
+
+/* Active State */
+.tab-item.active {
+    border-left: 4px solid #ffd700;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.tab-item.active .tab-title {
+    color: #ffd700;
+}
+
+.tab-item.active .tab-desc {
+    height: auto;
+    opacity: 1;
+    margin-top: 10px;
+    padding-bottom: 5px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.mt-4 { margin-top: 30px; }
+
+/* Mockup Window */
+.mockup-window {
+    background: #111;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mockup-header {
+    background: #1a1a1a;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.mockup-title {
+    margin-left: 15px;
+    color: #888;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-family: monospace;
+}
+
+.mockup-content {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-gp-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.play-overlay {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #ffd700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.play-overlay:hover {
+    transform: scale(1.1);
+}
+
+.play-overlay i {
+    color: #000;
+    font-size: 2rem;
+    margin-left: 5px; /* optical center */
+}
+
+/* Thumbs Carousel */
+.thumb-carousel {
+    display: flex;
+    padding: 15px;
+    gap: 10px;
+    background: #161616;
+    overflow-x: auto;
+}
+
+/* Hide scrollbar for thumbs */
+.thumb-carousel::-webkit-scrollbar { display: none; }
+.thumb-carousel { -ms-overflow-style: none; scrollbar-width: none; }
+
+.thumb-item {
+    width: 120px;
+    height: 68px; /* 16:9 ratio */
+    min-width: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumb-item:hover, .thumb-item.active {
+    opacity: 1;
+}
+
+.thumb-item.active {
+    border-color: #ffd700;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .gameplay-grid {
+        grid-template-columns: 1fr;
+    }
+    .gameplay-sidebar {
+        order: 2;
+    }
+    .gameplay-visuals {
+        order: 1;
+    }
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, #0a0a1a, #1a0f2e);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials .section-title {
+    margin-bottom: 50px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.testimonial-card {
+    background: rgba(30, 20, 50, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 215, 0, 0.8);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+}
+
+.testi-stars {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.testi-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #e0e0e0;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.testi-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.testi-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffd700;
+}
+
+.testi-info {
+    text-align: left;
+}
+
+.testi-name {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.testi-level {
+    color: #ffd700;
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+</style>
     <link rel="icon" type="image/png" href="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png">
 </head>
 
@@ -1531,44 +1831,88 @@
         </div>
     </section>
 
-    <!-- SECTION 4: FEATURES -->
-    <section class="features" id="features">
-        <div class="container relative">
-            <h2 class="section-title text-center text-white" data-aos="fade-down" style="margin-bottom: 50px;"
-                data-i18n="features_title">Un Royaume Ã  <span class="text-secondary">Conquérir</span></h2>
-            <div class="features-grid">
-                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
-                    <div class="feature-icon"><i class="fa-solid fa-crown"></i></div>
-                    <h3 data-i18n="feature1_title">Bâtissez votre Empire</h3>
-                    <p data-i18n="feature1_desc">Développez votre ville, entraînez vos troupes et collectez des
-                        ressources pour devenir le souverain absolu.</p>
-                </div>
-                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
-                    <div class="feature-icon"><i class="fa-solid fa-dragon"></i></div>
-                    <h3 data-i18n="feature2_title">Élevez des Dragons</h3>
-                    <p data-i18n="feature2_desc">Faites éclore des Å“ufs de dragon, nourrissez-les et envoyez-les
-                        carboniser le champ de bataille.</p>
-                </div>
-                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
-                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 data-i18n="feature3_title">Guerres de Guildes</h3>
-                    <p data-i18n="feature3_desc">Rejoignez des alliés, coordonnez vos attaques et capturez les capitales
-                        mondiales dans des affrontements massifs.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
-    <!-- SECTION 5: GAMEPLAY TRAILER -->
-    <section class="gameplay" id="gameplay">
+    <!-- SECTION 5: INTERACTIVE GAMEPLAY SHOWCASE -->
+    <section class="gameplay-interactive" id="gameplay">
         <div class="container" style="max-width: 1400px; width: 95%;">
-            <div class="gameplay-wrapper" data-aos="zoom-in-up">
-                <div class="video-container-inline">
-                    <video id="inline-video" loop controls playsinline>
-                        <source src="https://shopghila.com/wp-content/uploads/2026/03/Character.mp4" type="video/mp4">
-                        Votre navigateur ne supporte pas la balise vidéo.
-                    </video>
+            <div class="gameplay-grid" data-aos="fade-up">
+                
+                <!-- Left Sidebar: Descriptions and Tabs -->
+                <div class="gameplay-sidebar">
+                    <div class="tab-item active" data-tab="0" onclick="changeGameplay(0)">
+                        <h3 class="tab-title" data-i18n="gp_tab1_title">EXPLORATION INFINIE</h3>
+                        <p class="tab-desc" data-i18n="gp_tab1_desc">Découvrez un monde ouvert massif rempli de secrets, de ressources et de donjons épiques prêts à être conquis avec vos alliés.</p>
+                    </div>
+                    
+                    <div class="tab-item" data-tab="1" onclick="changeGameplay(1)">
+                        <h3 class="tab-title" data-i18n="gp_tab2_title">COMBATS STRATÉGIQUES</h3>
+                        <p class="tab-desc" data-i18n="gp_tab2_desc">Prenez le contrôle de vos troupes en temps réel. Utilisez le terrain et les compétences des Héros pour renverser le cours de la bataille.</p>
+                    </div>
+
+                    <div class="tab-item" data-tab="2" onclick="changeGameplay(2)">
+                        <h3 class="tab-title" data-i18n="gp_tab3_title">CONSTRUCTION DE ROYAUME</h3>
+                        <p class="tab-desc" data-i18n="gp_tab3_desc">Bâtissez et développez votre ville. Améliorez vos défenses, recherchez de nouvelles technologies et entraînez une armée invincible.</p>
+                    </div>
+
+                    <div class="tab-item" data-tab="3" onclick="changeGameplay(3)">
+                        <h3 class="tab-title" data-i18n="gp_tab4_title">SYNERGIES ÉLÉMENTAIRES</h3>
+                        <p class="tab-desc" data-i18n="gp_tab4_desc">Maîtrisez les 7 éléments du jeu. Créez des compositions d'équipe redoutables en combinant l'Eau, le Feu, le Vent et bien plus encore.</p>
+                    </div>
+
+                    <a href="https://dl.gtarcade.com/download/channel?appid=265&source=ikpc1" 
+                       class="btn btn-primary btn-large btn-block mt-4" 
+                       target="_blank" rel="noopener" data-i18n="gp_join_btn">
+                        REJOINDRE LA BATAILLE
+                    </a>
                 </div>
+
+                <!-- Right Area: Mockup Window & Carousel -->
+                <div class="gameplay-visuals">
+                    <div class="mockup-window">
+                        <div class="mockup-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="mockup-title">INFINITY KINGDOM</span>
+                        </div>
+                        <div class="mockup-content">
+                            <!-- Main Large Image -->
+                            <img id="main-gp-img" src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay.jpg" alt="Gameplay Showcase">
+                            
+                            <!-- Play button overlay indicator (visual only) -->
+                            <div class="play-overlay">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
+
+                        <!-- Thumbnails Carousel inside the window bottom -->
+                        <div class="thumb-carousel">
+                            <div class="thumb-item active" data-tab="0" onclick="changeGameplay(0)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay.jpg" alt="Thumb 1">
+                            </div>
+                            <div class="thumb-item" data-tab="1" onclick="changeGameplay(1)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-1.jpg" alt="Thumb 2">
+                            </div>
+                            <div class="thumb-item" data-tab="2" onclick="changeGameplay(2)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-2.jpg" alt="Thumb 3">
+                            </div>
+                            <div class="thumb-item" data-tab="3" onclick="changeGameplay(3)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-3.jpg" alt="Thumb 4">
+                            </div>
+                            <div class="thumb-item" data-tab="4" onclick="changeGameplay(4)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-4.jpg" alt="Thumb 5">
+                            </div>
+                            <div class="thumb-item" data-tab="5" onclick="changeGameplay(5)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-5.jpg" alt="Thumb 6">
+                            </div>
+                            <div class="thumb-item" data-tab="6" onclick="changeGameplay(6)">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-6.jpg" alt="Thumb 7">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1626,7 +1970,62 @@
         </div>
     </section>
 
-    <!-- SECTION 6.5: FAQ (Friction Reduction) -->
+    
+    <!-- SECTION 6: TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-up" data-i18n="testi_title">Ce que disent nos Commandants</h2>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testi-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testi-text" data-i18n="testi_1">"Le meilleur jeu de stratégie auquel j'ai pu jouer. Les graphismes sont magnifiques et les batailles de dragons sont épiques ! Je recommande vivement."</p>
+                    <div class="testi-user">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="User 1" class="testi-avatar">
+                        <div class="testi-info">
+                            <h4 class="testi-name">Alexandre M.</h4>
+                            <p class="testi-level" data-i18n="testi_level1">Seigneur Lvl 45</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testi-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="testi-text" data-i18n="testi_2">"Très addictif et la communauté est super active. Le système d'alliances rend le jeu vraiment intéressant sur le long terme."</p>
+                    <div class="testi-user">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image6.webp.webp" alt="User 2" class="testi-avatar">
+                        <div class="testi-info">
+                            <h4 class="testi-name">Sarah K.</h4>
+                            <p class="testi-level" data-i18n="testi_level2">Commandant Lvl 38</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testi-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testi-text" data-i18n="testi_3">"Jouer sur PC change tout ! Pas de lags, graphismes au top et on peut vraiment affiner ses stratégies. Un vrai plaisir."</p>
+                    <div class="testi-user">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image2.webp.webp" alt="User 3" class="testi-avatar">
+                        <div class="testi-info">
+                            <h4 class="testi-name">David L.</h4>
+                            <p class="testi-level" data-i18n="testi_level3">Maître Dragon Lvl 50</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- SECTION 6.5: FAQ (Friction Reduction) -->
     <section class="faq" id="faq">
         <div class="container" data-aos="fade-up">
             <h2 class="section-title text-center" data-i18n="faq_title">Questions Fréquentes</h2>
@@ -1844,7 +2243,25 @@
                     total_commanders: "commandants totaux",
                     popup_title: "Ne partez pas si vite !",
                     popup_desc: "Votre royaume a besoin d'un commandant. Téléchargez maintenant et obtenez un pack de démarrage exclusif.",
-                    faq_title: "Questions Fréquentes",
+                                        faq_title: "Questions Fréquentes",
+                    testi_title: "Ce que disent nos Commandants",
+                    testi_1: "Le meilleur jeu de stratégie auquel j'ai pu jouer. Les graphismes sont magnifiques et les batailles de dragons sont épiques ! Je recommande vivement.",
+                    testi_level1: "Seigneur Lvl 45",
+                    testi_2: "Très addictif et la communauté est super active. Le système d'alliances rend le jeu vraiment intéressant sur le long terme.",
+                    testi_level2: "Commandant Lvl 38",
+                    testi_3: "Jouer sur PC change tout ! Pas de lags, graphismes au top et on peut vraiment affiner ses stratégies. Un vrai plaisir.",
+                                        testi_level3: "Maître Dragon Lvl 50",
+                    gp_tab1_title: "EXPLORATION INFINIE",
+                    gp_tab1_desc: "Découvrez un monde ouvert massif rempli de secrets, de ressources et de donjons épiques prêts à être conquis avec vos alliés.",
+                    gp_tab2_title: "COMBATS STRATÉGIQUES",
+                    gp_tab2_desc: "Prenez le contrôle de vos troupes en temps réel. Utilisez le terrain et les compétences des Héros pour renverser le cours de la bataille.",
+                    gp_tab3_title: "CONSTRUCTION DE ROYAUME",
+                    gp_tab3_desc: "Bâtissez et développez votre ville. Améliorez vos défenses, recherchez de nouvelles technologies et entraînez une armée invincible.",
+                    gp_tab4_title: "SYNERGIES ÉLÉMENTAIRES",
+                    gp_tab4_desc: "Maîtrisez les 7 éléments du jeu. Créez des compositions d'équipe redoutables en combinant l'Eau, le Feu, le Vent et bien plus encore.",
+                    gp_join_btn: "REJOINDRE LA BATAILLE",
+
+
                     faq_q1: "Le jeu est-il vraiment 100% gratuit ?",
                     faq_a1: "Oui, Infinity Kingdom est un jeu Free-to-Play. Vous pouvez télécharger et jouer au client complet gratuitement.",
                     faq_q2: "Mon PC est-il compatible ?",
@@ -1914,7 +2331,25 @@
                     total_commanders: "total commanders",
                     popup_title: "Don't leave so soon!",
                     popup_desc: "Your kingdom needs a commander. Download now and get an exclusive starter pack.",
-                    faq_title: "Frequently Asked Questions",
+                                        faq_title: "Frequently Asked Questions",
+                    testi_title: "What Our Commanders Say",
+                    testi_1: "The best strategy game I've played. The graphics are beautiful and the dragon battles are epic! Highly recommended.",
+                    testi_level1: "Lord Lvl 45",
+                    testi_2: "Very addictive and the community is super active. The alliance system makes the game really interesting long term.",
+                    testi_level2: "Commander Lvl 38",
+                    testi_3: "Playing on PC changes everything! No lags, top graphics, and you can really refine your strategies. A real pleasure.",
+                                        testi_level3: "Dragon Master Lvl 50",
+                    gp_tab1_title: "INFINITE EXPLORATION",
+                    gp_tab1_desc: "Discover a massive open world filled with secrets, resources, and epic dungeons ready to be conquered with your allies.",
+                    gp_tab2_title: "STRATEGIC COMBAT",
+                    gp_tab2_desc: "Take control of your troops in real-time. Use the terrain and Hero skills to turn the tide of battle.",
+                    gp_tab3_title: "KINGDOM BUILDING",
+                    gp_tab3_desc: "Build and develop your city. Upgrade your defenses, research new technologies, and train an invincible army.",
+                    gp_tab4_title: "ELEMENTAL SYNERGIES",
+                    gp_tab4_desc: "Master the 7 elements of the game. Create devastating team compositions by combining Water, Fire, Wind, and much more.",
+                    gp_join_btn: "JOIN THE BATTLE",
+
+
                     faq_q1: "Is the game really 100% free?",
                     faq_a1: "Yes, Infinity Kingdom is a Free-to-Play game. You can download and play the full client for free.",
                     faq_q2: "Is my PC compatible?",
@@ -1984,7 +2419,25 @@
                     total_commanders: "comandantes totales",
                     popup_title: "Â¡No te vayas tan pronto!",
                     popup_desc: "Tu reino necesita un comandante. Descarga ahora y obtén un paquete de inicio exclusivo.",
-                    faq_title: "Preguntas Frecuentes",
+                                        faq_title: "Preguntas Frecuentes",
+                    testi_title: "Lo que dicen nuestros Comandantes",
+                    testi_1: "El mejor juego de estrategia que he jugado. ¡Los gráficos son hermosos y las batallas de dragones son épicas! Muy recomendable.",
+                    testi_level1: "Señor Lvl 45",
+                    testi_2: "Muy adictivo y la comunidad es súper activa. El sistema de alianzas hace que el juego sea realmente interesante a largo plazo.",
+                    testi_level2: "Comandante Lvl 38",
+                    testi_3: "¡Jugar en PC lo cambia todo! Sin lags, gráficos de primera, y realmente puedes refinar tus estrategias. Un verdadero placer.",
+                                        testi_level3: "Maestro Dragón Lvl 50",
+                    gp_tab1_title: "EXPLORACIÓN INFINITA",
+                    gp_tab1_desc: "Descubre un mundo abierto masivo lleno de secretos, recursos y mazmorras épicas listas para ser conquistadas con tus aliados.",
+                    gp_tab2_title: "COMBATE ESTRATÉGICO",
+                    gp_tab2_desc: "Toma el control de tus tropas en tiempo real. Usa el terreno y las habilidades de los Héroes para cambiar el rumbo de la batalla.",
+                    gp_tab3_title: "CONSTRUCCIÓN DEL REINO",
+                    gp_tab3_desc: "Construye y desarrolla tu ciudad. Mejora tus defensas, investiga nuevas tecnologías y entrena un ejército invencible.",
+                    gp_tab4_title: "SINERGIAS ELEMENTALES",
+                    gp_tab4_desc: "Domina los 7 elementos del juego. Crea composiciones de equipo devastadoras combinando Agua, Fuego, Viento y mucho más.",
+                    gp_join_btn: "ÚNETE A LA BATALLA",
+
+
                     faq_q1: "Â¿El juego es realmente 100% gratis?",
                     faq_a1: "SÃ­, Infinity Kingdom es un juego Free-to-Play. Puedes descargar y jugar al cliente completo de forma gratuita.",
                     faq_q2: "Â¿Es mi PC compatible?",
@@ -2113,7 +2566,25 @@
                     total_commanders: "comandantes totais",
                     popup_title: "NÃ£o vÃ¡ tÃ£o cedo!",
                     popup_desc: "Seu reino precisa de um comandante. Baixe agora e ganhe um pacote inicial exclusivo.",
-                    faq_title: "Perguntas Frequentes",
+                                        faq_title: "Perguntas Frequentes",
+                    testi_title: "O que dizem nossos Comandantes",
+                    testi_1: "O melhor jogo de estratégia que já joguei. Os gráficos são lindos e as batalhas de dragões são épicas! Altamente recomendado.",
+                    testi_level1: "Senhor Lvl 45",
+                    testi_2: "Muito viciante e a comunidade é super ativa. O sistema de alianças torna o jogo realmente interessante a longo prazo.",
+                    testi_level2: "Comandante Lvl 38",
+                    testi_3: "Jogar no PC muda tudo! Sem lags, gráficos de ponta e você pode realmente refinar suas estratégias. Um verdadeiro prazer.",
+                                        testi_level3: "Mestre Dragão Lvl 50",
+                    gp_tab1_title: "EXPLORAÇÃO INFINITA",
+                    gp_tab1_desc: "Descubra um mundo aberto massivo cheio de segredos, recursos e masmorras épicas prontas para serem conquistadas com seus aliados.",
+                    gp_tab2_title: "COMBATE ESTRATÉGICO",
+                    gp_tab2_desc: "Assuma o controle de suas tropas em tempo real. Use o terreno e as habilidades dos Heróis para virar o jogo na batalha.",
+                    gp_tab3_title: "CONSTRUÇÃO DE REINO",
+                    gp_tab3_desc: "Construa e desenvolva sua cidade. Melhore suas defesas, pesquise novas tecnologias e treine um exército invencível.",
+                    gp_tab4_title: "SINERGIAS ELEMENTARES",
+                    gp_tab4_desc: "Domine os 7 elementos do jogo. Crie composições de equipe devastadoras combinando Água, Fogo, Vento e muito mais.",
+                    gp_join_btn: "JUNTE-SE À BATALHA",
+
+
                     faq_q1: "O jogo é realmente 100% gratuito?",
                     faq_a1: "Sim, Infinity Kingdom é um jogo Free-to-Play. Você pode baixar e jogar o cliente completo gratuitamente.",
                     faq_q2: "Meu PC é compatÃ­vel?",
@@ -2444,7 +2915,53 @@
 
         });
 
-    </script>
+    
+    // Gameplay Interactive Tabs Logic
+    const gpImages = [
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay.jpg",
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-1.jpg",
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-2.jpg",
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-3.jpg",
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-4.jpg",
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-5.jpg",
+        "https://shopghila.com/wp-content/uploads/2026/03/Gameplay-6.jpg"
+    ];
+
+    window.changeGameplay = function(index) {
+        // Play click sound if initialized
+        if(window.playClickSound) window.playClickSound();
+
+        // Ensure index wraps correctly for the sidebar which only has 4 tabs
+        const sidebarIndex = index % 4; 
+
+        // Update active class on sidebar
+        document.querySelectorAll('.tab-item').forEach((tab, i) => {
+            if(i === sidebarIndex) tab.classList.add('active');
+            else tab.classList.remove('active');
+        });
+
+        // Update active class on thumbnails
+        document.querySelectorAll('.thumb-item').forEach((thumb, i) => {
+            if(i === index) {
+                thumb.classList.add('active');
+                // Scroll thumbnail into view
+                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+
+        // Fade image transition
+        const mainImg = document.getElementById('main-gp-img');
+        mainImg.style.opacity = 0;
+        
+        setTimeout(() => {
+            mainImg.src = gpImages[index];
+            mainImg.style.opacity = 1;
+        }, 200);
+    };
+
+</script>
 </body>
 
 </html>
