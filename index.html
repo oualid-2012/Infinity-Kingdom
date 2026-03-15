@@ -1,0 +1,2442 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">Infinity Kingdom - Le Jeu de Stratégie MMO</title>
+    <meta name="description" data-i18n-attr="content" data-i18n="page_desc"
+        content="Plongez dans des batailles épiques et bâtissez votre royaume. Téléchargez Infinity Kingdom dès maintenant sur Windows.">
+
+    <!-- Google Fonts: Playful & Fantasy MMO style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome Library (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Library (Animation CDN) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Swiper Library (Carousel CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Custom Styles -->
+    <style>
+        /* Variables - Cartoon Fantasy MMO Style */
+        :root {
+            --bg-main: #0B192C;
+            /* Deep navy blue, rich night sky */
+            --bg-alt: #1A365D;
+            /* Lighter navy */
+            --primary: #FFB800;
+            /* Gold */
+            --primary-hover: #FFD54F;
+            --primary-shadow: #CC9200;
+            --secondary: #4CAF50;
+            /* Green */
+            --secondary-hover: #66BB6A;
+            --secondary-shadow: #388E3C;
+            --accent: #E91E63;
+            /* Pinkish red */
+            --text-light: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #CBD5E1;
+
+            --font-heading: 'Fredoka', sans-serif;
+            --font-body: 'Nunito', sans-serif;
+
+            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            background-color: var(--bg-main);
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Utilities */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-highlight {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        .text-white {
+            color: var(--text-light);
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .mb-4 {
+            margin-bottom: 2rem;
+        }
+
+        /* Cartoon Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.1s;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to bottom, var(--primary-hover), var(--primary));
+            color: #4A2E00;
+            /* Deep brown for contrast on gold */
+            box-shadow: 0 6px 0 var(--primary-shadow), 0 10px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+            border: 3px solid #FFF8D6;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 var(--primary-shadow), 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 var(--primary-shadow);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to bottom, var(--secondary-hover), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 0 var(--secondary-shadow);
+            border: 2px solid #E8F5E9;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--secondary-shadow);
+        }
+
+        .btn-small {
+            padding: 10px 24px;
+            font-size: 1rem;
+        }
+
+        .btn-massive {
+            padding: 20px 48px;
+            font-size: 1.4rem;
+            border-radius: 80px;
+        }
+
+        .bounce {
+            animation: bounce-soft 3s infinite;
+        }
+
+        @keyframes bounce-soft {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(11, 25, 44, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--primary-shadow);
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            height: 60px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+            transition: transform 0.3s;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg img,
+        .hero-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(11, 25, 44, 0.2) 0%, rgba(11, 25, 44, 0.9) 100%);
+        }
+
+        .hero-content {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-main-logo {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .subheadline {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: none;
+            background: -webkit-linear-gradient(#FFF, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .hero-desc {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #E2E8F0;
+            font-weight: 600;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .platform-badge {
+            background: rgba(0, 120, 215, 0.2);
+            border: 2px solid #0078D7;
+            color: #FFF;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: -5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .platform-badge i {
+            color: #00A4EF;
+            font-size: 1.2rem;
+        }
+
+        .free-text {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: var(--primary);
+            z-index: 2;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+        }
+
+        .animated-bounce {
+            animation: arrow-bounce 2s infinite;
+        }
+
+        @keyframes arrow-bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Sections Common */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #FFF;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Hook Promise */
+        .hook-promise {
+            background: var(--bg-alt);
+            border-top: 4px solid var(--primary-shadow);
+            border-bottom: 4px solid var(--primary-shadow);
+            background-image: radial-gradient(circle at 50% 50%, rgba(255, 184, 0, 0.05) 0%, transparent 60%);
+        }
+
+        /* Heroes Swiper Section */
+        .heroes-section {
+            background: url('https://shopghila.com/wp-content/uploads/2026/03/image.webp.webp') center/cover fixed;
+            position: relative;
+        }
+
+        .heroes-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 25, 44, 0.85);
+            /* Darken bg a bit */
+        }
+
+        .swiper {
+            width: 100%;
+            padding-top: 40px;
+            padding-bottom: 60px;
+        }
+
+        .hero-card {
+            background: linear-gradient(145deg, #1E3A8A, #0F172A);
+            border: 4px solid #38BDF8;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-card img {
+            flex: 1;
+            width: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.5s;
+        }
+
+        .hero-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .hero-info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .hero-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Swiper custom navigation */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .swiper-pagination-bullet {
+            background: #FFF;
+            opacity: 0.5;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--primary);
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        /* Features */
+        .features {
+            background: var(--bg-main);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #1E293B;
+            border: 3px solid #334155;
+            padding: 50px 30px;
+            border-radius: 24px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.1;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card:hover::before {
+            transform: scale(4);
+            opacity: 0.05;
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--secondary), #1B5E20);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #FFF;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 4px solid #A5D6A7;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(15deg) scale(1.1);
+            background: linear-gradient(135deg, var(--primary), #FF8F00);
+            border-color: #FFE082;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            color: #FFF;
+            margin-bottom: 15px;
+        }
+
+        /* Gameplay Trailer */
+        .gameplay {
+            background: radial-gradient(circle at center, #1E293B 0%, var(--bg-main) 100%);
+            padding: 80px 0;
+        }
+
+        .gameplay-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            border: 4px solid var(--primary);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 50px rgba(255, 184, 0, 0.2), 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .video-container-inline {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .video-container-inline video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* System Requirements */
+        .requirements {
+            background: var(--bg-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .requirements::after {
+            content: '\f17a';
+            /* Windows Logo FontAwesome */
+            font-family: 'Font Awesome 6 Brands';
+            position: absolute;
+            top: 50%;
+            right: -10%;
+            transform: translateY(-50%);
+            font-size: 40rem;
+            color: rgba(0, 120, 215, 0.03);
+            z-index: 0;
+        }
+
+        .windows-only-banner {
+            background: rgba(0, 120, 215, 0.1);
+            border: 2px solid #0078D7;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: #60A5FA;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .windows-only-banner i {
+            font-size: 2rem;
+            color: #00A4EF;
+        }
+
+        .req-table-wrapper {
+            background: #1E293B;
+            border-radius: 16px;
+            border: 3px solid #334155;
+            overflow-x: auto;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .req-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .req-table th {
+            background: #0F172A;
+            padding: 25px 20px;
+            font-size: 1.4rem;
+            color: var(--primary);
+            text-align: left;
+            border-bottom: 2px solid #334155;
+        }
+
+        .req-table td {
+            padding: 20px;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+            color: #E2E8F0;
+        }
+
+        .req-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .req-table td i {
+            color: #60A5FA;
+            width: 30px;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: var(--bg-alt);
+            padding: 80px 0;
+            border-top: 4px solid var(--primary-shadow);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background: #1E293B;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: #475569;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #FFF;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: #0F172A;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 25px 20px;
+        }
+
+        .faq-answer p {
+            color: #94A3B8;
+            line-height: 1.6;
+        }
+
+        /* Download Section (Bottom) */
+        .download-section {
+            background: linear-gradient(to bottom, var(--bg-alt) 0%, var(--bg-main) 100%);
+            padding: 120px 0;
+            border-top: 4px solid #334155;
+        }
+
+        .download-logo {
+            width: 200px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .download-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 4px solid var(--primary);
+            border-radius: 24px;
+            padding: 60px 40px;
+            max-width: 800px;
+            margin: 40px auto 0;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(255, 184, 0, 0.1);
+        }
+
+        .download-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: #38BDF8;
+        }
+
+        .download-pulse {
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.4);
+        }
+
+        .progress-container {
+            display: none;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: #334155;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 2px solid #0F172A;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: repeating-linear-gradient(45deg,
+                    var(--secondary),
+                    var(--secondary) 10px,
+                    var(--secondary-hover) 10px,
+                    var(--secondary-hover) 20px);
+            background-size: 28px 28px;
+            animation: move-stripes 1s linear infinite;
+            width: 0%;
+            transition: width 0.2s linear;
+        }
+
+        @keyframes move-stripes {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 28px 0;
+            }
+        }
+
+        .progress-text {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: #94A3B8;
+            text-align: center;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .badge-green {
+            background: #059669;
+            border: 2px solid #10B981;
+        }
+
+        .badge-blue {
+            background: #0284C7;
+            border: 2px solid #38BDF8;
+        }
+
+        .badge-orange {
+            background: #EA580C;
+            border: 2px solid #F97316;
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            padding: 60px 0 40px;
+            border-top: 2px solid #1E293B;
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 150px;
+            margin: 0 auto 20px;
+            opacity: 0.8;
+        }
+
+        .footer-brand p {
+            color: #64748B;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .footer-links p {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Language Switcher */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-switcher {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 6px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .lang-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+            background: rgba(11, 25, 44, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            min-width: 100px;
+        }
+
+        .lang-switcher:hover .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lang-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            width: 100%;
+        }
+
+        .lang-btn:hover {
+            color: #FFF;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: #4A2E00;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .glitch {
+                font-size: 3.5rem;
+            }
+
+            .hero-main-logo {
+                width: 80%;
+            }
+
+            .download-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .subheadline {
+                font-size: 1.8rem;
+            }
+
+            .hero-desc {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+
+            .btn-massive {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+
+            .req-table th,
+            .req-table td {
+                font-size: 1rem;
+                padding: 15px 10px;
+            }
+
+            .feature-card {
+                padding: 40px 20px;
+            }
+        }
+
+        /* Live Installation Toast */
+        .live-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #B8860B;
+            /* Muted gold border */
+            border-radius: 12px;
+            padding: 15px 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+
+        .live-toast:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .live-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #10B981;
+            /* Green */
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10B981;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .live-text {
+            color: #DAA520;
+            /* Gold */
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .live-number-group {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .live-number {
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            min-width: 60px;
+            /* Prevent jitter when number changes */
+            display: inline-block;
+        }
+
+        .live-label {
+            color: #94A3B8;
+            font-size: 0.95rem;
+        }
+
+        .live-number-group.small {
+            margin-bottom: 0;
+        }
+
+        .live-number-small {
+            font-size: 1.1rem;
+            color: #FBBF24;
+            /* Yellow/Gold */
+            font-weight: 700;
+        }
+
+        .live-label-small {
+            color: #94A3B8;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .live-toast {
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+        }
+
+        /* CTA Popup Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 25, 44, 0.85);
+            /* Dark blur */
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1E3A8A, #0F172A);
+            border: 4px solid var(--primary);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 700px;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+        }
+
+        .modal-img {
+            flex: 1;
+            background: url('https://shopghila.com/wp-content/uploads/2026/03/image.webp.webp') center/cover;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .modal-img img {
+            width: 130%;
+            margin-left: -15%;
+            filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .modal-text {
+            flex: 1.2;
+            padding: 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .modal-text h3 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .modal-text p {
+            font-size: 1.1rem;
+            color: #CBD5E1;
+            margin-bottom: 25px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .small-badges {
+            margin-top: 0;
+            gap: 10px;
+        }
+
+        .small-badges .badge {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                flex-direction: column;
+                max-width: 400px;
+            }
+
+            .modal-img {
+                height: 150px;
+                overflow: hidden;
+            }
+
+            .modal-img img {
+                width: 100%;
+                margin-left: 0;
+                margin-bottom: -50px;
+            }
+
+            .modal-text {
+                padding: 30px 20px;
+            }
+
+            .modal-text h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+
+        /* Floating Call to Action */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+            color: #4A2E00;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 0 3px #FFF8D6;
+            z-index: 1000;
+            transition: var(--transition);
+            animation: bounce-soft 3s infinite, glow 2s infinite alternate;
+        }
+
+        .floating-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 0 3px #FFF;
+            color: #4A2E00;
+        }
+
+        .floating-cta i {
+            font-size: 1.4rem;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 0 3px #FFF8D6, 0 0 10px rgba(255, 184, 0, 0.5);
+            }
+
+            to {
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 0 3px #FFF8D6, 0 0 20px rgba(255, 184, 0, 0.8);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar hidden-scroll">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Infinity Kingdom Logo"
+                    class="brand-logo">
+            </div>
+            <nav class="nav-links">
+                <a href="#features" data-i18n="nav_features">Caractéristiques</a>
+                <a href="#heroes" data-i18n="nav_heroes">Héros</a>
+                <a href="#gameplay" data-i18n="nav_gameplay">Gameplay</a>
+                <a href="#requirements" data-i18n="nav_requirements">Configuration</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="lang-switcher">
+                    <i class="fa-solid fa-globe lang-icon"></i>
+                    <span class="text-white font-weight-bold"
+                        style="font-family: var(--font-heading); font-weight: 700; margin-right: 5px;"
+                        id="current-lang-display">FR</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+                    <div class="lang-dropdown">
+                        <button class="lang-btn active" data-lang="fr">FR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="es">ES</button>
+                        <button class="lang-btn" data-lang="de">DE</button>
+                        <button class="lang-btn" data-lang="pt">PT</button>
+                    </div>
+                </div>
+                <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
+                    class="btn btn-small btn-primary" target="_blank" rel="noopener" data-i18n="nav_play">Jouer
+                    Gratuitement</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <video autoplay loop muted playsinline class="hero-bg-video">
+                <source src="https://shopghila.com/wp-content/uploads/2026/03/Hero-Section-anime.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+        </div>
+
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
+            <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Infinity Kingdom Game"
+                class="hero-main-logo">
+
+            <h2 class="subheadline" data-i18n="hero_title">Build Your Kingdom. Command Legendary Heroes.</h2>
+            <p class="hero-desc" data-i18n="hero_desc">Enter a colorful fantasy world where you grow your city, recruit
+                famous Immortals, and fight epic battles with dragons. Free to play, easy to start, and packed with
+                strategy.</p>
+
+            <div class="cta-container">
+                <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
+                    class="btn btn-massive btn-primary bounce" id="hero-cta" target="_blank" rel="noopener">
+                    <span class="btn-text" data-i18n="hero_btn">TÉLÉCHARGER POUR WINDOWS</span>
+                    <i class="fa-brands fa-windows"></i>
+                </a>
+                <div class="platform-badge">
+                    <i class="fa-brands fa-windows"></i>
+                    <span data-i18n="hero_badge">Exclusivité Windows PC</span>
+                </div>
+            </div>
+
+            <div class="hero-trust-badges"
+                style="display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; justify-content: center; z-index: 2;">
+                <span class="badge"
+                    style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; font-size: 1rem;">â­
+                    <span data-i18n="trust_players">+1M Players Worldwide</span></span>
+                <span class="badge"
+                    style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; font-size: 1rem;">ðŸŽ®
+                    <span data-i18n="trust_f2p">Free To Play</span></span>
+                <span class="badge"
+                    style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; font-size: 1rem;">âš”ï¸
+                    <span data-i18n="trust_epic">Epic Strategy Battles</span></span>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <i class="fa-solid fa-chevron-down animated-bounce"></i>
+        </div>
+    </section>
+
+    <!-- SECTION 2: HOOK / PROMISE -->
+    <section class="hook-promise">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title text-center" data-i18n="hook_title">Pourquoi plonger dans <span
+                    class="text-highlight">Infinity Kingdom</span> ?</h2>
+            <p class="section-subtitle text-center" data-i18n="hook_desc">Découvrez un univers fantastique vibrant au
+                style cartoon unique. Formez la meilleure équipe d'Immortels, repoussez l'invasion des Nains et
+                participez Ã  d'incroyables batailles de faction !</p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: HEROES SHOWCASE (Characters) -->
+    <section class="heroes-section" id="heroes">
+        <div class="container">
+            <div class="text-center" data-aos="fade-down">
+                <h2 class="section-title" data-i18n="heroes_title">Invoquez des <span
+                        class="text-highlight">Légendes</span></h2>
+                <p class="section-subtitle mb-4" data-i18n="heroes_desc">Commandez des Immortels historiques aux
+                    pouvoirs dévastateurs.</p>
+            </div>
+
+            <!-- Swiper Carousel -->
+            <div class="swiper heroes-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <!-- Hero 1 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="Hero 1">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero1_name">Champion Royal</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 2 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image6.webp.webp" alt="Hero 2">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero2_name">Mage Ancestral</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 3 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image2.webp.webp" alt="Hero 3">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero3_name">Archer Céleste</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 4 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image5.webp.webp" alt="Hero 4">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero4_name">Chevalier d'Acier</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 5 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image1.webp.webp" alt="Hero 5">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero5_name">Guerrier de l'Ombre</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 6 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image4.webp.webp" alt="Hero 6">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero6_name">Paladin de Lumière</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination & Navigation -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FEATURES -->
+    <section class="features" id="features">
+        <div class="container relative">
+            <h2 class="section-title text-center text-white" data-aos="fade-down" style="margin-bottom: 50px;"
+                data-i18n="features_title">Un Royaume Ã  <span class="text-secondary">Conquérir</span></h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="feature-icon"><i class="fa-solid fa-crown"></i></div>
+                    <h3 data-i18n="feature1_title">Bâtissez votre Empire</h3>
+                    <p data-i18n="feature1_desc">Développez votre ville, entraînez vos troupes et collectez des
+                        ressources pour devenir le souverain absolu.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="feature-icon"><i class="fa-solid fa-dragon"></i></div>
+                    <h3 data-i18n="feature2_title">Élevez des Dragons</h3>
+                    <p data-i18n="feature2_desc">Faites éclore des Å“ufs de dragon, nourrissez-les et envoyez-les
+                        carboniser le champ de bataille.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 data-i18n="feature3_title">Guerres de Guildes</h3>
+                    <p data-i18n="feature3_desc">Rejoignez des alliés, coordonnez vos attaques et capturez les capitales
+                        mondiales dans des affrontements massifs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: GAMEPLAY TRAILER -->
+    <section class="gameplay" id="gameplay">
+        <div class="container" style="max-width: 1400px; width: 95%;">
+            <div class="gameplay-wrapper" data-aos="zoom-in-up">
+                <div class="video-container-inline">
+                    <video id="inline-video" loop controls playsinline>
+                        <source src="https://shopghila.com/wp-content/uploads/2026/03/Character.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la balise vidéo.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: SYSTEM REQUIREMENTS -->
+    <section class="requirements" id="requirements">
+        <div class="container" data-aos="fade-up">
+            <div class="windows-only-banner">
+                <i class="fa-brands fa-windows"></i>
+                <span data-i18n="req_banner">Ce jeu est conçu nativement et exclusivement pour les joueurs Windows
+                    PC.</span>
+            </div>
+
+            <h2 class="section-title text-center" data-i18n="req_title">Configuration Windows</h2>
+            <div class="req-table-wrapper">
+                <table class="req-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="req_comp">Composant</th>
+                            <th data-i18n="req_min">Minimum</th>
+                            <th data-i18n="req_rec">Recommandé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fa-brands fa-windows"></i> <span data-i18n="req_os">OS</span></td>
+                            <td>Windows 10 (64-bit)</td>
+                            <td>Windows 10 / 11 (64-bit)</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-microchip"></i> <span data-i18n="req_proc">Processeur</span></td>
+                            <td>Intel Core i3 / AMD Ryzen 3</td>
+                            <td>Intel Core i5 / AMD Ryzen 5</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-memory"></i> <span data-i18n="req_ram">Mémoire RAM</span></td>
+                            <td>8 Go</td>
+                            <td>16 Go</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-vr-cardboard"></i> <span data-i18n="req_gpu">Carte
+                                    Graphique</span></td>
+                            <td>Intel HD 4000 ou équivalent</td>
+                            <td>Geforce GTX 1050 / Radeon RX 560</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-hard-drive"></i> <span data-i18n="req_storage">Stockage</span>
+                            </td>
+                            <td data-i18n="req_storage_min">5 Go d'espace disponible</td>
+                            <td data-i18n="req_storage_rec">10 Go d'espace disponible (SSD)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6.5: FAQ (Friction Reduction) -->
+    <section class="faq" id="faq">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title text-center" data-i18n="faq_title">Questions Fréquentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q1">Le jeu est-il vraiment 100% gratuit ?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a1">Oui, Infinity Kingdom est un jeu Free-to-Play. Vous pouvez télécharger et
+                            jouer au client complet gratuitement.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q2">Mon PC est-il compatible ?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a2">S'il tourne sous Windows 10/11 et dispose d'au moins 8 Go de RAM, vous
+                            êtes prêt Ã  jouer avec des performances optimales.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q3">L'installation est-elle sécurisée ?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a3">Absolument. Le client officiel garantit une installation sûre, optimisée
+                            pour Windows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: DOWNLOAD -->
+    <section class="download-section" id="download">
+        <div class="container text-center" data-aos="zoom-in">
+            <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo" class="download-logo">
+            <h2 class="section-title text-white" data-i18n="download_title">Prêt Ã  régner sur Norheim ?</h2>
+            <p class="download-subtitle" data-i18n="download_subtitle">Rejoignez la plus grande communauté stratégique
+                sur Windows.</p>
+
+            <div class="download-box">
+                <div class="download-info">
+                    <span><i class="fa-solid fa-desktop"></i> <span data-i18n="dl_info1">Exclusivité PC
+                            Windows</span></span>
+                    <span><i class="fa-solid fa-weight-hanging"></i> <span data-i18n="dl_info2">25 MB
+                            (Installeur)</span></span>
+                </div>
+
+                <button id="download-trigger" class="btn btn-massive btn-primary download-pulse">
+                    <span class="btn-text" data-i18n="dl_btn">TÉLÉCHARGER LE CLIENT PC</span>
+                    <i class="fa-solid fa-download"></i>
+                </button>
+
+                <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" id="actual-download-link"
+                    target="_blank" rel="noopener" style="display:none;" data-i18n="dl_link">Lien Téléchargement</a>
+
+                <div class="progress-container" id="download-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text" data-i18n="dl_prep">Préparation de votre royaume...</p>
+                </div>
+
+                <div class="trust-badges">
+                    <span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> <span
+                            data-i18n="dl_trust1">100% Sécurisé</span></span>
+                    <span class="badge badge-blue"><i class="fa-brands fa-windows"></i> <span
+                            data-i18n="dl_trust2">Optimisé Windows</span></span>
+                    <span class="badge badge-orange"><i class="fa-solid fa-bolt"></i> <span
+                            data-i18n="dl_trust3">Téléchargement Rapide</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo" class="footer-logo">
+                <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC.</p>
+            </div>
+            <div class="footer-links">
+                <p data-i18n="footer_copy">&copy; 2026 Infinity Kingdom. Exclusif Windows PC.<br>Tous droits réservés,
+                    développé spécialement pour l'écosystème Microsoft Windows.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Installation Notification -->
+    <div id="live-notification" class="live-toast">
+        <div class="live-header">
+            <span class="live-dot pulse-dot"></span>
+            <span class="live-text">LIVE</span>
+        </div>
+        <div class="live-body">
+            <div class="live-number-group">
+                <span class="live-number" id="installing-now">1251</span>
+                <span class="live-label" data-i18n="installing_now">installing now</span>
+            </div>
+            <div class="live-number-group small">
+                <span class="live-number-small" id="total-commanders">52395</span>
+                <span class="live-label-small" data-i18n="total_commanders">total commanders</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exit-Intent / Timer Popup -->
+    <div class="modal-overlay" id="cta-popup">
+        <div class="modal-content">
+            <button class="modal-close" id="close-popup"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-img">
+                <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="Commander">
+            </div>
+            <div class="modal-text">
+                <h3 data-i18n="popup_title">Ne partez pas si vite !</h3>
+                <p data-i18n="popup_desc">Votre royaume a besoin d'un commandant. Téléchargez maintenant et obtenez un
+                    pack de démarrage exclusif.</p>
+                <button class="btn btn-massive btn-primary bounce modal-btn">
+                    <span class="btn-text" data-i18n="dl_btn">TÉLÉCHARGER LE CLIENT PC</span>
+                    <i class="fa-solid fa-download"></i>
+                </button>
+                <div class="trust-badges small-badges">
+                    <span class="badge badge-green"><i class="fa-solid fa-shield-check"></i> <span
+                            data-i18n="dl_trust1">100% Sécurisé</span></span>
+                    <span class="badge badge-blue"><i class="fa-brands fa-windows"></i> <span
+                            data-i18n="dl_trust2">Windows</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Call to Action (Kaynzl m3aya) -->
+    <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" class="floating-cta" target="_blank"
+        rel="noopener">
+        <i class="fa-solid fa-download"></i>
+        <span data-i18n="dl_btn">TÉLÉCHARGER LE CLIENT PC</span>
+    </a>
+
+    <!-- Scripts Libraries -->
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper Carousel -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Setup Translations ---
+            const i18n = {
+                fr: {
+                    page_title: "Infinity Kingdom - Le Jeu de Stratégie MMO",
+                    page_desc: "Plongez dans des batailles épiques et bâtissez votre royaume. Téléchargez Infinity Kingdom dès maintenant sur Windows.",
+                    nav_features: "Caractéristiques",
+                    nav_heroes: "Héros",
+                    nav_gameplay: "Gameplay",
+                    nav_requirements: "Configuration",
+                    nav_play: "Play Now - Free",
+                    hero_title: "Build Your Kingdom. Command Legendary Heroes.",
+                    hero_desc: "Enter a colorful fantasy world where you grow your city, recruit famous Immortals, and fight epic battles with dragons. Free to play, easy to start, and packed with strategy.",
+                    hero_btn: "Play Now - Free",
+                    trust_players: "+1M Joueurs dans le Monde",
+                    trust_f2p: "Gratuit Ã  Jouer",
+                    trust_epic: "Batailles Stratégiques Épiques",
+                    hero_badge: "Exclusivité Windows PC",
+                    hook_title: "Pourquoi plonger dans <span class='text-highlight'>Infinity Kingdom</span> ?",
+                    hook_desc: "Découvrez un univers fantastique vibrant au style cartoon unique. Formez la meilleure équipe d'Immortels, repoussez l'invasion des Nains et participez Ã  d'incroyables batailles de faction !",
+                    heroes_title: "Invoquez des <span class='text-highlight'>Légendes</span>",
+                    heroes_desc: "Commandez des Immortels historiques aux pouvoirs dévastateurs.",
+                    hero1_name: "Champion Royal",
+                    hero2_name: "Mage Ancestral",
+                    hero3_name: "Archer Céleste",
+                    hero4_name: "Chevalier d'Acier",
+                    hero5_name: "Guerrier de l'Ombre",
+                    hero6_name: "Paladin de Lumière",
+                    hero_btn_discover: "Découvrir",
+                    features_title: "Un Royaume Ã  <span class='text-secondary'>Conquérir</span>",
+                    feature1_title: "Bâtissez votre Empire",
+                    feature1_desc: "Développez votre ville, entraînez vos troupes et collectez des ressources pour devenir le souverain absolu.",
+                    feature2_title: "Élevez des Dragons",
+                    feature2_desc: "Faites éclore des Å“ufs de dragon, nourrissez-les et envoyez-les carboniser le champ de bataille.",
+                    feature3_title: "Guerres de Guildes",
+                    feature3_desc: "Rejoignez des alliés, coordonnez vos attaques et capturez les capitales mondiales dans des affrontements massifs.",
+                    gameplay_btn: "Regarder le Gameplay",
+                    req_banner: "Ce jeu est conçu nativement et exclusivement pour les joueurs Windows PC.",
+                    req_title: "Configuration Windows",
+                    req_comp: "Composant",
+                    req_min: "Minimum",
+                    req_rec: "Recommandé",
+                    req_os: "OS",
+                    req_proc: "Processeur",
+                    req_ram: "Mémoire RAM",
+                    req_gpu: "Carte Graphique",
+                    req_storage: "Stockage",
+                    req_storage_min: "5 Go d'espace disponible",
+                    req_storage_rec: "10 Go d'espace disponible (SSD)",
+                    download_title: "Prêt Ã  régner sur Norheim ?",
+                    download_subtitle: "Rejoignez la plus grande communauté stratégique sur Windows.",
+                    dl_info1: "Exclusivité PC Windows",
+                    dl_info2: "25 MB (Installeur)",
+                    dl_btn: "Play Now - Free",
+                    dl_link: "Lien Téléchargement",
+                    dl_prep: "Préparation de votre royaume...",
+                    dl_trust1: "100% Sécurisé",
+                    dl_trust2: "Optimisé Windows",
+                    dl_trust3: "Téléchargement Rapide",
+                    footer_desc: "Le jeu de stratégie MMO cartoon le plus ambitieux sur PC.",
+                    footer_copy: "&copy; 2026 Infinity Kingdom. Exclusif Windows PC.<br>Tous droits réservés, développé spécialement pour l'écosystème Microsoft Windows.",
+                    installing_now: "installations en cours",
+                    total_commanders: "commandants totaux",
+                    popup_title: "Ne partez pas si vite !",
+                    popup_desc: "Votre royaume a besoin d'un commandant. Téléchargez maintenant et obtenez un pack de démarrage exclusif.",
+                    faq_title: "Questions Fréquentes",
+                    faq_q1: "Le jeu est-il vraiment 100% gratuit ?",
+                    faq_a1: "Oui, Infinity Kingdom est un jeu Free-to-Play. Vous pouvez télécharger et jouer au client complet gratuitement.",
+                    faq_q2: "Mon PC est-il compatible ?",
+                    faq_a2: "S'il tourne sous Windows 10/11 et dispose d'au moins 8 Go de RAM, vous êtes prêt Ã  jouer avec des performances optimales.",
+                    faq_q3: "L'installation est-elle sécurisée ?",
+                    faq_a3: "Absolument. Le client officiel garantit une installation sûre, optimisée pour Windows."
+                },
+                en: {
+                    page_title: "Infinity Kingdom - MMO Strategy Game",
+                    page_desc: "Dive into epic battles and build your kingdom. Download Infinity Kingdom now on Windows.",
+                    nav_features: "Features",
+                    nav_heroes: "Heroes",
+                    nav_gameplay: "Gameplay",
+                    nav_requirements: "System Requirements",
+                    nav_play: "Play Now - Free",
+                    hero_title: "Build Your Kingdom. Command Legendary Heroes.",
+                    hero_desc: "Enter a colorful fantasy world where you grow your city, recruit famous Immortals, and fight epic battles with dragons. Free to play, easy to start, and packed with strategy.",
+                    hero_btn: "Play Now - Free",
+                    trust_players: "+1M Players Worldwide",
+                    trust_f2p: "Free To Play",
+                    trust_epic: "Epic Strategy Battles",
+                    hero_badge: "Windows PC Exclusive",
+                    hook_title: "Why dive into <span class='text-highlight'>Infinity Kingdom</span>?",
+                    hook_desc: "Discover a vibrant fantasy universe with a unique cartoon style. Form the best team of Immortals, repel the Dwarf invasion, and participate in incredible faction battles!",
+                    heroes_title: "Summon <span class='text-highlight'>Legends</span>",
+                    heroes_desc: "Command historical Immortals with devastating powers.",
+                    hero1_name: "Royal Champion",
+                    hero2_name: "Ancestral Mage",
+                    hero3_name: "Celestial Archer",
+                    hero4_name: "Steel Knight",
+                    hero5_name: "Shadow Warrior",
+                    hero6_name: "Paladin of Light",
+                    hero_btn_discover: "Discover",
+                    features_title: "A Kingdom to <span class='text-secondary'>Conquer</span>",
+                    feature1_title: "Build your Empire",
+                    feature1_desc: "Develop your city, train your troops, and collect resources to become the absolute ruler.",
+                    feature2_title: "Raise Dragons",
+                    feature2_desc: "Hatch dragon eggs, feed them, and send them to scorch the battlefield.",
+                    feature3_title: "Guild Wars",
+                    feature3_desc: "Join allies, coordinate your attacks, and capture world capitals in massive clashes.",
+                    gameplay_btn: "Watch Gameplay",
+                    req_banner: "This game is natively and exclusively designed for Windows PC players.",
+                    req_title: "Windows System Requirements",
+                    req_comp: "Component",
+                    req_min: "Minimum",
+                    req_rec: "Recommended",
+                    req_os: "OS",
+                    req_proc: "Processor",
+                    req_ram: "RAM",
+                    req_gpu: "Graphics Card",
+                    req_storage: "Storage",
+                    req_storage_min: "5 GB available space",
+                    req_storage_rec: "10 GB available space (SSD)",
+                    download_title: "Ready to rule Norheim?",
+                    download_subtitle: "Join the largest strategic community on Windows.",
+                    dl_info1: "Windows PC Exclusive",
+                    dl_info2: "25 MB (Installer)",
+                    dl_btn: "Play Now - Free",
+                    dl_link: "Download Link",
+                    dl_prep: "Preparing your kingdom...",
+                    dl_trust1: "100% Secure",
+                    dl_trust2: "Windows Optimized",
+                    dl_trust3: "Fast Download",
+                    footer_desc: "The most ambitious cartoon MMO strategy game on PC.",
+                    footer_copy: "&copy; 2026 Infinity Kingdom. Windows PC Exclusive.<br>All rights reserved, developed specifically for the Microsoft Windows ecosystem.",
+                    installing_now: "installing now",
+                    total_commanders: "total commanders",
+                    popup_title: "Don't leave so soon!",
+                    popup_desc: "Your kingdom needs a commander. Download now and get an exclusive starter pack.",
+                    faq_title: "Frequently Asked Questions",
+                    faq_q1: "Is the game really 100% free?",
+                    faq_a1: "Yes, Infinity Kingdom is a Free-to-Play game. You can download and play the full client for free.",
+                    faq_q2: "Is my PC compatible?",
+                    faq_a2: "If it runs on Windows 10/11 and has at least 8 GB of RAM, you are ready to play with optimal performance.",
+                    faq_q3: "Is the installation secure?",
+                    faq_a3: "Absolutely. The official client guarantees a safe installation, optimized for Windows."
+                },
+                es: {
+                    page_title: "Infinity Kingdom - Juego de Estrategia MMO",
+                    page_desc: "Sumérgete en batallas épicas y construye tu reino. Descarga Infinity Kingdom ahora en Windows.",
+                    nav_features: "CaracterÃ­sticas",
+                    nav_heroes: "Héroes",
+                    nav_gameplay: "Jugabilidad",
+                    nav_requirements: "Requisitos",
+                    nav_play: "Play Now - Free",
+                    hero_title: "Build Your Kingdom. Command Legendary Heroes.",
+                    hero_desc: "Enter a colorful fantasy world where you grow your city, recruit famous Immortals, and fight epic battles with dragons. Free to play, easy to start, and packed with strategy.",
+                    hero_btn: "Play Now - Free",
+                    trust_players: "+1M Jugadores en Todo el Mundo",
+                    trust_f2p: "Gratis para Jugar",
+                    trust_epic: "Batallas Estratégicas Épicas",
+                    hero_badge: "Exclusivo para PC Windows",
+                    hook_title: "Â¿Por qué jugar <span class='text-highlight'>Infinity Kingdom</span>?",
+                    hook_desc: "Descubre un vibrante universo fantÃ¡stico con un estilo de dibujos animados Ãºnico. Â¡Forma el mejor equipo de Inmortales, repele la invasiÃ³n de los Enanos y participa en increÃ­bles batallas de facciones!",
+                    heroes_title: "Convoca <span class='text-highlight'>Leyendas</span>",
+                    heroes_desc: "Comanda Inmortales histÃ³ricos con poderes devastadores.",
+                    hero1_name: "CampeÃ³n Real",
+                    hero2_name: "Mago Ancestral",
+                    hero3_name: "Arquero Celestial",
+                    hero4_name: "Caballero de Acero",
+                    hero5_name: "Guerrero de la Sombra",
+                    hero6_name: "PaladÃ­n de Luz",
+                    hero_btn_discover: "Descubrir",
+                    features_title: "Un Reino por <span class='text-secondary'>Conquistar</span>",
+                    feature1_title: "Construye tu Imperio",
+                    feature1_desc: "Desarrolla tu ciudad, entrena a tus tropas y reÃºne recursos para convertirte en el gobernante absoluto.",
+                    feature2_title: "CrÃ­a Dragones",
+                    feature2_desc: "Incuba huevos de dragÃ³n, aliméntalos y envÃ­alos a calcinar el campo de batalla.",
+                    feature3_title: "Guerras de Gremios",
+                    feature3_desc: "Ãšnete a aliados, coordina tus ataques y captura capitales mundiales en enfrentamientos masivos.",
+                    gameplay_btn: "Ver Jugabilidad",
+                    req_banner: "Este juego estÃ¡ diseÃ±ado de forma nativa y exclusiva para jugadores de PC con Windows.",
+                    req_title: "Requisitos del Sistema Windows",
+                    req_comp: "Componente",
+                    req_min: "MÃ­nimo",
+                    req_rec: "Recomendado",
+                    req_os: "SO",
+                    req_proc: "Procesador",
+                    req_ram: "Memoria RAM",
+                    req_gpu: "Tarjeta GrÃ¡fica",
+                    req_storage: "Almacenamiento",
+                    req_storage_min: "5 GB de espacio disponible",
+                    req_storage_rec: "10 GB de espacio disponible (SSD)",
+                    download_title: "Â¿Listo para gobernar Norheim?",
+                    download_subtitle: "Ãšnete a la mayor comunidad estratégica en Windows.",
+                    dl_info1: "Exclusivo de PC Windows",
+                    dl_info2: "25 MB (Instalador)",
+                    dl_btn: "Play Now - Free",
+                    dl_link: "Enlace de Descarga",
+                    dl_prep: "Preparando tu reino...",
+                    dl_trust1: "100% Seguro",
+                    dl_trust2: "Optimizado para Windows",
+                    dl_trust3: "Descarga RÃ¡pida",
+                    footer_desc: "El juego de estrategia MMO de dibujos animados mÃ¡s ambicioso para PC.",
+                    footer_copy: "&copy; 2026 Infinity Kingdom. Exclusivo para PC Windows.<br>Todos los derechos reservados, desarrollado especÃ­ficamente para el ecosistema Microsoft Windows.",
+                    installing_now: "instalando ahora",
+                    total_commanders: "comandantes totales",
+                    popup_title: "Â¡No te vayas tan pronto!",
+                    popup_desc: "Tu reino necesita un comandante. Descarga ahora y obtén un paquete de inicio exclusivo.",
+                    faq_title: "Preguntas Frecuentes",
+                    faq_q1: "Â¿El juego es realmente 100% gratis?",
+                    faq_a1: "SÃ­, Infinity Kingdom es un juego Free-to-Play. Puedes descargar y jugar al cliente completo de forma gratuita.",
+                    faq_q2: "Â¿Es mi PC compatible?",
+                    faq_a2: "Si funciona con Windows 10/11 y tiene al menos 8 GB de RAM, estÃ¡s listo para jugar con un rendimiento Ã³ptimo.",
+                    faq_q3: "Â¿La instalaciÃ³n es segura?",
+                    faq_a3: "Absolutamente. El cliente oficial garantiza una instalaciÃ³n segura, optimizada para Windows."
+                },
+                de: {
+                    page_title: "Infinity Kingdom - MMO-Strategiespiel",
+                    page_desc: "Tauche ein in epische Schlachten und baue dein KÃ¶nigreich auf. Lade Infinity Kingdom jetzt fÃ¼r Windows herunter.",
+                    nav_features: "Eigenschaften",
+                    nav_heroes: "Helden",
+                    nav_gameplay: "Spielweise",
+                    nav_requirements: "Systemanforderungen",
+                    nav_play: "Play Now - Free",
+                    hero_title: "Build Your Kingdom. Command Legendary Heroes.",
+                    hero_desc: "Enter a colorful fantasy world where you grow your city, recruit famous Immortals, and fight epic battles with dragons. Free to play, easy to start, and packed with strategy.",
+                    hero_btn: "Play Now - Free",
+                    trust_players: "+1M Spieler Weltweit",
+                    trust_f2p: "Kostenlos Spielbar",
+                    trust_epic: "Epische Strategieschlachten",
+                    hero_badge: "Windows PC Exklusiv",
+                    hook_title: "Warum <span class='text-highlight'>Infinity Kingdom</span> spielen?",
+                    hook_desc: "Entdecke ein lebendiges Fantasy-Universum in einem einzigartigen Cartoon-Stil. Bilde das beste Team von Unsterblichen, wehre die Zwergeninvasion ab und nimm an unglaublichen FraktionskÃ¤mpfen teil!",
+                    heroes_title: "BeschwÃ¶re <span class='text-highlight'>Legenden</span>",
+                    heroes_desc: "Befehlige historische Unsterbliche mit verheerenden KrÃ¤ften.",
+                    hero1_name: "KÃ¶niglicher Champion",
+                    hero2_name: "Ahnenmagier",
+                    hero3_name: "Himmlischer BogenschÃ¼tze",
+                    hero4_name: "Stahlritter",
+                    hero5_name: "Schattenkrieger",
+                    hero6_name: "Lichtpaladin",
+                    hero_btn_discover: "Entdecken",
+                    features_title: "Ein KÃ¶nigreich zu <span class='text-secondary'>Erobern</span>",
+                    feature1_title: "Baue dein Imperium",
+                    feature1_desc: "Entwickle deine Stadt, trainiere deine Truppen und sammle Ressourcen, um der unangefochtene Herrscher zu werden.",
+                    feature2_title: "ZÃ¼chte Drachen",
+                    feature2_desc: "BrÃ¼te Dracheneier aus, fÃ¼ttere sie und schicke sie, um das Schlachtfeld zu verbrennen.",
+                    feature3_title: "Gildenkriege",
+                    feature3_desc: "SchlieÃŸe dich VerbÃ¼ndeten an, koordiniere deine Angriffe und erobere WeltstÃ¤dte in massiven ZusammenstÃ¶ÃŸen.",
+                    gameplay_btn: "Gameplay ansehen",
+                    req_banner: "Dieses Spiel wurde nativ und exklusiv fÃ¼r Windows-PC-Spieler entwickelt.",
+                    req_title: "Windows-Systemanforderungen",
+                    req_comp: "Komponente",
+                    req_min: "Minimum",
+                    req_rec: "Empfohlen",
+                    req_os: "Betriebssystem",
+                    req_proc: "Prozessor",
+                    req_ram: "RAM",
+                    req_gpu: "Grafikkarte",
+                    req_storage: "Speicherplatz",
+                    req_storage_min: "5 GB verfÃ¼gbarer Speicherplatz",
+                    req_storage_rec: "10 GB verfÃ¼gbarer Speicherplatz (SSD)",
+                    download_title: "Bereit, Norheim zu regieren?",
+                    download_subtitle: "Tritt der grÃ¶ÃŸten strategischen Community auf Windows bei.",
+                    dl_info1: "Exklusiv fÃ¼r Windows PC",
+                    dl_info2: "25 MB (Installationsprogramm)",
+                    dl_btn: "Play Now - Free",
+                    dl_link: "Download-Link",
+                    dl_prep: "Dein KÃ¶nigreich wird vorbereitet...",
+                    dl_trust1: "100% Sicher",
+                    dl_trust2: "FÃ¼r Windows optimiert",
+                    dl_trust3: "Schneller Download",
+                    footer_desc: "Das ehrgeizigste Cartoon-MMO-Strategiespiel auf dem PC.",
+                    footer_copy: "&copy; 2026 Infinity Kingdom. Exklusiv fÃ¼r Windows PC.<br>Alle Rechte vorbehalten, speziell fÃ¼r das Microsoft Windows-Ã–kosystem entwickelt."
+                },
+                pt: {
+                    page_title: "Infinity Kingdom - Jogo de Estratégia MMO",
+                    page_desc: "Mergulhe em batalhas épicas e construa seu reino. Baixe Infinity Kingdom agora no Windows.",
+                    nav_features: "Recursos",
+                    nav_heroes: "HerÃ³is",
+                    nav_gameplay: "Jogabilidade",
+                    nav_requirements: "Requisitos",
+                    nav_play: "Play Now - Free",
+                    hero_title: "Build Your Kingdom. Command Legendary Heroes.",
+                    hero_desc: "Enter a colorful fantasy world where you grow your city, recruit famous Immortals, and fight epic battles with dragons. Free to play, easy to start, and packed with strategy.",
+                    hero_btn: "Play Now - Free",
+                    trust_players: "+1M Jogadores pelo Mundo",
+                    trust_f2p: "GrÃ¡tis para Jogar",
+                    trust_epic: "Batalhas Estratégicas Épicas",
+                    hero_badge: "Exclusivo para PC Windows",
+                    hook_title: "Por que jogar <span class='text-highlight'>Infinity Kingdom</span>?",
+                    hook_desc: "Descubra um universo de fantasia vibrante com um estilo de desenho animado Ãºnico. Forme a melhor equipe de Imortais, repela a invasÃ£o dos AnÃµes e participe de batalhas incrÃ­veis de facçÃµes!",
+                    heroes_title: "Convoque <span class='text-highlight'>Lendas</span>",
+                    heroes_desc: "Comande Imortais histÃ³ricos com poderes devastadores.",
+                    hero1_name: "CampeÃ£o Real",
+                    hero2_name: "Mago Ancestral",
+                    hero3_name: "Arqueiro Celestial",
+                    hero4_name: "Cavaleiro de Aço",
+                    hero5_name: "Guerreiro das Sombras",
+                    hero6_name: "Paladino da Luz",
+                    hero_btn_discover: "Descobrir",
+                    features_title: "Um Reino para <span class='text-secondary'>Conquistar</span>",
+                    feature1_title: "Construa seu Império",
+                    feature1_desc: "Desenvolva sua cidade, treine suas tropas e colete recursos para se tornar o governante absoluto.",
+                    feature2_title: "Crie DragÃµes",
+                    feature2_desc: "Choque ovos de dragÃ£o, alimente-os e envie-os para queimar o campo de batalha.",
+                    feature3_title: "Guerras de Guildas",
+                    feature3_desc: "Junte-se a aliados, coordene seus ataques e capture capitais mundiais em confrontos em massa.",
+                    gameplay_btn: "Ver Jogabilidade",
+                    req_banner: "Este jogo foi projetado nativamente e exclusivamente para jogadores de PC Windows.",
+                    req_title: "Requisitos de Sistema do Windows",
+                    req_comp: "Componente",
+                    req_min: "MÃ­nimo",
+                    req_rec: "Recomendado",
+                    req_os: "SO",
+                    req_proc: "Processador",
+                    req_ram: "MemÃ³ria RAM",
+                    req_gpu: "Placa de VÃ­deo",
+                    req_storage: "Armazenamento",
+                    req_storage_min: "5 GB de espaço disponÃ­vel",
+                    req_storage_rec: "10 GB de espaço disponÃ­vel (SSD)",
+                    download_title: "Pronto para governar Norheim?",
+                    download_subtitle: "Junte-se Ã  maior comunidade estratégica no Windows.",
+                    dl_info1: "Exclusivo para PC Windows",
+                    dl_info2: "25 MB (Instalador)",
+                    dl_btn: "Play Now - Free",
+                    dl_link: "Link de Download",
+                    dl_prep: "Preparando seu reino...",
+                    dl_trust1: "100% Seguro",
+                    dl_trust2: "Otimizado para Windows",
+                    dl_trust3: "Download RÃ¡pido",
+                    footer_desc: "O jogo de estratégia MMO de desenho animado mais ambicioso no PC.",
+                    footer_copy: "&copy; 2026 Infinity Kingdom. Exclusivo para PC Windows.<br>Todos os direitos reservados, desenvolvido especificamente para o ecossistema Microsoft Windows.",
+                    installing_now: "instalando agora",
+                    total_commanders: "comandantes totais",
+                    popup_title: "NÃ£o vÃ¡ tÃ£o cedo!",
+                    popup_desc: "Seu reino precisa de um comandante. Baixe agora e ganhe um pacote inicial exclusivo.",
+                    faq_title: "Perguntas Frequentes",
+                    faq_q1: "O jogo é realmente 100% gratuito?",
+                    faq_a1: "Sim, Infinity Kingdom é um jogo Free-to-Play. Você pode baixar e jogar o cliente completo gratuitamente.",
+                    faq_q2: "Meu PC é compatÃ­vel?",
+                    faq_a2: "Se rodar no Windows 10/11 e tiver pelo menos 8 GB de RAM, você estÃ¡ pronto para jogar com desempenho ideal.",
+                    faq_q3: "A instalaçÃ£o é segura?",
+                    faq_a3: "Absolutamente. O cliente oficial garante uma instalaçÃ£o segura, otimizada para Windows."
+                }
+            };
+
+            function switchLanguage(lang) {
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (i18n[lang] && i18n[lang][key]) {
+                        if (el.hasAttribute('data-i18n-attr')) {
+                            el.setAttribute(el.getAttribute('data-i18n-attr'), i18n[lang][key]);
+                        } else {
+                            el.innerHTML = i18n[lang][key];
+                        }
+                    }
+                });
+
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                const langDisplay = document.getElementById('current-lang-display');
+                if (langDisplay) {
+                    langDisplay.innerText = lang.toUpperCase();
+                }
+                window.currentLang = lang;
+            }
+
+            // Auto-detect language
+            const userLangFull = navigator.language || navigator.userLanguage;
+            const userLang = userLangFull.split('-')[0].toLowerCase();
+
+            // Supported languages fallback to 'en'
+            const supportedLangs = ['fr', 'en', 'es', 'de', 'pt'];
+            let defaultLang = supportedLangs.includes(userLang) ? userLang : 'en';
+
+            // Initial switch
+            switchLanguage(defaultLang);
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    switchLanguage(e.target.getAttribute('data-lang'));
+                });
+            });
+            // Initialize AOS Animation Library
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100,
+                    easing: 'ease-out-cubic'
+                });
+            }
+
+            // Initialize Swiper Carousel for Heroes
+            if (typeof Swiper !== 'undefined') {
+                const swiper = new Swiper('.heroes-slider', {
+                    effect: 'coverflow',
+                    grabCursor: true,
+                    centeredSlides: true,
+                    slidesPerView: 'auto',
+                    coverflowEffect: {
+                        rotate: 20,
+                        stretch: 0,
+                        depth: 200,
+                        modifier: 1,
+                        slideShadows: true,
+                    },
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        320: {
+                            slidesPerView: 1,
+                            spaceBetween: 20
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 30
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 40
+                        }
+                    }
+                });
+            }
+
+            // Navbar Scroll Effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Play video on scroll intersection (starts on its own upon arrival)
+            const video = document.getElementById('inline-video');
+            if (video) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            video.play().catch(err => console.log('Autoplay prevented', err));
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(video);
+            }
+
+            // Windows Download Progress Animation
+            const downloadTrigger = document.getElementById('download-trigger');
+            const progressContainer = document.getElementById('download-progress');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+            const actualDownloadLink = document.getElementById('actual-download-link');
+
+            if (downloadTrigger && progressContainer && progressFill && actualDownloadLink) {
+                downloadTrigger.addEventListener('click', () => {
+                    // Hide button, show progress
+                    downloadTrigger.style.display = 'none';
+                    progressContainer.style.display = 'block';
+
+                    // Check OS (basic) just for flavor if we wanted, but we'll assume Windows since it's targeted
+                    let isWindows = navigator.platform.indexOf('Win') > -1;
+                    if (!isWindows) {
+                        progressText.innerHTML = window.currentLang === 'fr'
+                            ? '<i class="fa-solid fa-triangle-exclamation" style="color:#FFA000"></i> Attention: Ce jeu est exclusif Windows.'
+                            : '<i class="fa-solid fa-triangle-exclamation" style="color:#FFA000"></i> Warning: This game is Windows exclusive.';
+                    } else {
+                        progressText.innerHTML = window.currentLang === 'fr'
+                            ? "Préparation de l'installateur Windows..."
+                            : "Preparing Windows installer...";
+                    }
+
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        // Increment progress
+                        progress += Math.random() * 20 + 5;
+                        if (progress >= 100) {
+                            progress = 100;
+                            clearInterval(interval);
+
+                            // Show completion
+                            progressText.innerHTML = window.currentLang === 'fr'
+                                ? '<i class="fa-solid fa-check-circle" style="color:#10B981"></i> Téléchargement démarré !'
+                                : '<i class="fa-solid fa-check-circle" style="color:#10B981"></i> Download started !';
+                            progressFill.style.background = '#10B981';
+
+                            // Trigger actual download (redirect)
+                            setTimeout(() => {
+                                actualDownloadLink.click();
+
+                                // Reset UI after 3s
+                                setTimeout(() => {
+                                    downloadTrigger.style.display = 'inline-flex';
+                                    progressContainer.style.display = 'none';
+                                    progressFill.style.width = '0%';
+                                    progressFill.style.background = 'repeating-linear-gradient(45deg, var(--secondary), var(--secondary) 10px, var(--secondary-hover) 10px, var(--secondary-hover) 20px)';
+                                    progressText.innerText = window.currentLang === 'fr'
+                                        ? 'Préparation de votre royaume...'
+                                        : 'Preparing your kingdom...';
+                                }, 3000);
+                            }, 500);
+                        }
+                        progressFill.style.width = `${progress}%`;
+                    }, 250);
+                });
+            }
+
+            // Live Installation Notification Logic
+            const installingNowEl = document.getElementById('installing-now');
+            const totalCommandersEl = document.getElementById('total-commanders');
+            const liveToast = document.getElementById('live-notification');
+
+            if (installingNowEl && totalCommandersEl) {
+                let currentInstalling = 1251;
+
+                setInterval(() => {
+                    // Randomly fluctuate installing number between -5 and +15
+                    const change = Math.floor(Math.random() * 21) - 5;
+                    currentInstalling += change;
+
+                    // Ensure it doesn't drop too low
+                    if (currentInstalling < 800) currentInstalling = 800;
+
+                    installingNowEl.innerText = currentInstalling;
+                }, 3500);
+
+                // Click on toast scrolls to download section
+                if (liveToast) {
+                    liveToast.addEventListener('click', () => {
+                        document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
+            }
+
+            // Pop-up Logic
+            const popup = document.getElementById('cta-popup');
+            const closePopup = document.getElementById('close-popup');
+            const modalBtn = document.querySelector('.modal-btn');
+
+            if (popup && closePopup) {
+                let popupShown = sessionStorage.getItem('popupShown');
+
+                const showPopup = () => {
+                    if (!popupShown) {
+                        popup.classList.add('active');
+                        sessionStorage.setItem('popupShown', 'true');
+                        popupShown = true;
+                    }
+                };
+
+                // Trigger after 15 seconds
+                setTimeout(showPopup, 15000);
+
+                // Trigger on exit intent (mouse leaves window top)
+                document.addEventListener('mouseleave', (e) => {
+                    if (e.clientY <= 0) {
+                        showPopup();
+                    }
+                });
+
+                // Close logic
+                closePopup.addEventListener('click', () => {
+                    popup.classList.remove('active');
+                });
+
+                // Click outside modal
+                popup.addEventListener('click', (e) => {
+                    if (e.target === popup) {
+                        popup.classList.remove('active');
+                    }
+                });
+
+                // Modal CTA initiates download process
+                if (modalBtn) {
+                    modalBtn.addEventListener('click', () => {
+                        popup.classList.remove('active');
+                        document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+                        // trigger main CTA click
+                        setTimeout(() => {
+                            const dlTrigger = document.getElementById('download-trigger');
+                            if (dlTrigger && dlTrigger.style.display !== 'none') {
+                                dlTrigger.click();
+                            }
+                        }, 800);
+                    });
+                }
+            }
+
+            // FAQ Accordion Logic
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        // Close all
+                        faqItems.forEach(faq => faq.classList.remove('active'));
+                        // Open clicked if it wasn't open
+                        if (!isActive) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+
+            // ==========================================
+            // AUDIO & SOUND EFFECTS SETUP
+            // ==========================================
+
+            // 1. Background Music (Replace 'asset/bgm.mp3' with your actual background audio file)
+            const bgMusic = new Audio('asset/bgm.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.2; // 20% volume for subtle background music
+
+            // 2. Button Click Sound (Replace 'asset/click.mp3' with your actual click audio file)
+            const clickSoundUrl = 'asset/click.mp3';
+
+            // Start background music on user's first interaction (Browsers block autoplay otherwise)
+            const startBackgroundMusic = () => {
+                bgMusic.play().catch(e => console.log("Bg music playback prevented:", e));
+                // Remove listeners once it starts playing
+                document.removeEventListener('click', startBackgroundMusic);
+                document.removeEventListener('keydown', startBackgroundMusic);
+                document.removeEventListener('scroll', startBackgroundMusic);
+            };
+
+            // Listen for any interaction to start music
+            document.addEventListener('click', startBackgroundMusic, { once: true });
+            document.addEventListener('keydown', startBackgroundMusic, { once: true });
+            document.addEventListener('scroll', startBackgroundMusic, { once: true });
+
+            // Function to play click sound
+            const playClickSound = () => {
+                const sound = new Audio(clickSoundUrl);
+                sound.volume = 0.6;
+                sound.play().catch(e => console.log("Click sound prevented:", e));
+            };
+
+            // Attach click sound to all buttons, links, and actionable elements
+            const actionableElements = document.querySelectorAll('button, .btn, .lang-btn, a, .faq-question, .floating-cta');
+            actionableElements.forEach(el => {
+                el.addEventListener('click', playClickSound);
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
