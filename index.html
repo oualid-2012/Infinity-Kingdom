@@ -531,6 +531,11 @@
             height: 520px;
             cursor: pointer;
             position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .hero-card:hover, .hero-card.is-flipped {
+            z-index: 50;
         }
 
         .hero-card-inner {
@@ -542,7 +547,8 @@
             transform-style: preserve-3d;
         }
 
-        .hero-card:hover .hero-card-inner {
+        .hero-card:hover .hero-card-inner,
+        .hero-card.is-flipped .hero-card-inner {
             transform: rotateY(180deg);
         }
 
@@ -1955,20 +1961,86 @@
             border-color: #ffd700;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .gameplay-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gameplay-sidebar {
-                order: 2;
-            }
-
-            .gameplay-visuals {
-                order: 1;
-            }
+        /* Tactical Console Frame */
+        .tactical-console {
+            background: #0B192C;
+            border: 4px solid #1E3A8A;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(30, 58, 138, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(59, 130, 246, 0.3);
         }
+
+        .console-hud-header {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.4);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #60A5FA;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hud-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-indicator-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+        }
+
+        .pulse {
+            animation: console-pulse 2s infinite;
+        }
+
+        @keyframes console-pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .hud-coordinates {
+            opacity: 0.7;
+            font-family: monospace;
+        }
+
+        .console-scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.4;
+        }
+
+        .console-corners .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3B82F6;
+            z-index: 6;
+            pointer-events: none;
+            filter: drop-shadow(0 0 5px #3B82F6);
+        }
+
+        .corner.top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .corner.top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+        .corner.bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+        .corner.bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
 
         /* Testimonials Section */
         .testimonials {
@@ -2273,33 +2345,32 @@
     <!-- SECTION 3: GAMEPLAY -->
     <section class="gameplay-interactive" id="gameplay">
         <div class="container" style="max-width: 1400px; width: 95%;">
+            <div class="text-center mb-4" data-aos="fade-down">
+                <h2 class="section-title" data-i18n="gp_section_title">Tactical <span class="text-highlight">Battlefront</span></h2>
+                <p class="section-subtitle" data-i18n="gp_section_subtitle">Experience the ultimate PC strategy experience with enhanced controls and precision.</p>
+            </div>
             <div class="gameplay-grid" data-aos="fade-up">
 
                 <!-- Left Sidebar: Descriptions and Tabs -->
                 <div class="gameplay-sidebar">
                     <div class="tab-item active" data-tab="0" onclick="changeGameplay(0)">
-                        <h3 class="tab-title" data-i18n="gp_tab1_title">EXPLORATION INFINIE</h3>
-                        <p class="tab-desc" data-i18n="gp_tab1_desc">Découvrez un monde ouvert massif rempli de secrets,
-                            de ressources et de donjons épiques prêts à être conquis avec vos alliés.</p>
+                        <h3 class="tab-title" data-i18n="gp_tab1_title">NORHEIM EXPLORATION</h3>
+                        <p class="tab-desc" data-i18n="gp_tab1_desc">Discover a massive open world filled with ancient secrets, hidden ruins, and legendary treasures waiting to be claimed.</p>
                     </div>
 
                     <div class="tab-item" data-tab="1" onclick="changeGameplay(1)">
-                        <h3 class="tab-title" data-i18n="gp_tab2_title">COMBATS STRATÉGIQUES</h3>
-                        <p class="tab-desc" data-i18n="gp_tab2_desc">Prenez le contrôle de vos troupes en temps réel.
-                            Utilisez le terrain et les compétences des Héros pour renverser le cours de la bataille.</p>
+                        <h3 class="tab-title" data-i18n="gp_tab2_title">PRECISION PC WARFARE</h3>
+                        <p class="tab-desc" data-i18n="gp_tab2_desc">Command your legions with pixel-perfect accuracy. Experience epic large-scale battles optimized for Windows performance.</p>
                     </div>
 
                     <div class="tab-item" data-tab="2" onclick="changeGameplay(2)">
-                        <h3 class="tab-title" data-i18n="gp_tab3_title">CONSTRUCTION DE ROYAUME</h3>
-                        <p class="tab-desc" data-i18n="gp_tab3_desc">Bâtissez et développez votre ville. Améliorez vos
-                            défenses, recherchez de nouvelles technologies et entraînez une armée invincible.</p>
+                        <h3 class="tab-title" data-i18n="gp_tab3_title">EMPIRE ARCHITECTURE</h3>
+                        <p class="tab-desc" data-i18n="gp_tab3_desc">Design and fortify your capital. Advanced structural building and resource management to ensure your kingdom's survival.</p>
                     </div>
 
                     <div class="tab-item" data-tab="3" onclick="changeGameplay(3)">
-                        <h3 class="tab-title" data-i18n="gp_tab4_title">SYNERGIES ÉLÉMENTAIRES</h3>
-                        <p class="tab-desc" data-i18n="gp_tab4_desc">Maîtrisez les 7 éléments du jeu. Créez des
-                            compositions d'équipe redoutables en combinant l'Eau, le Feu, le Vent et bien plus encore.
-                        </p>
+                        <h3 class="tab-title" data-i18n="gp_tab4_title">ELEMENTAL MASTERY</h3>
+                        <p class="tab-desc" data-i18n="gp_tab4_desc">Unlock the hidden synergies of the 7 elements. Create devastating army combinations using Water, Fire, Wind, and more.</p>
                     </div>
 
                     <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
@@ -2309,19 +2380,28 @@
                     </a>
                 </div>
 
-                <!-- Right Area: Mockup Window & Carousel -->
+                <!-- Right Area: Tactical Console -->
                 <div class="gameplay-visuals">
-                    <div class="mockup-window">
-                        <div class="mockup-header">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                            <span class="mockup-title">INFINITY KINGDOM</span>
+                    <div class="mockup-window tactical-console">
+                        <div class="mockup-header console-hud-header">
+                            <div class="hud-status">
+                                <span class="status-indicator-dot pulse"></span>
+                                <span class="status-text">SIGNAL: ACTIVE</span>
+                            </div>
+                            <span class="mockup-title">TACTICAL FEED</span>
+                            <div class="hud-coordinates">NORHEIM_COORD: 51.50/0.12</div>
                         </div>
                         <div class="mockup-content">
+                            <div class="console-scanlines"></div>
+                            <div class="console-corners">
+                                <span class="corner top-left"></span>
+                                <span class="corner top-right"></span>
+                                <span class="corner bottom-left"></span>
+                                <span class="corner bottom-right"></span>
+                            </div>
                             <!-- Main Large Video -->
                             <video id="main-gp-video" autoplay loop controls playsinline
-                                style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                                style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
                                 <source
                                     src="https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4"
                                     type="video/mp4">
@@ -3022,6 +3102,16 @@
                     faq_a2: "S'il tourne sous Windows 10/11 et dispose d'au moins 8 Go de RAM, vous êtes prêt Ã  jouer avec des performances optimales.",
                     faq_q3: "L'installation est-elle sécurisée ?",
                     faq_a3: "Absolument. Le client officiel garantit une installation sûre, optimisée pour Windows.",
+                    gp_section_title: "Champ de Bataille <span class='text-highlight'>Tactique</span>",
+                    gp_section_subtitle: "Vivez l'expérience ultime de stratégie sur PC avec des contrôles améliorés et une précision accrue.",
+                    gp_tab1_title: "EXPLORATION DE NORHEIM",
+                    gp_tab1_desc: "Découvrez un monde ouvert massif rempli de secrets anciens, de ruines cachées et de trésors légendaires prêts à être conquis.",
+                    gp_tab2_title: "GUERRE DE PRÉCISION PC",
+                    gp_tab2_desc: "Commandez vos légions avec une précision chirurgicale. Vivez des batailles épiques à grande échelle optimisées pour Windows.",
+                    gp_tab3_title: "ARCHITECTURE D'EMPIRE",
+                    gp_tab3_desc: "Concevez et fortifiez votre capitale. Construction structurelle avancée et gestion des ressources pour assurer la survie de votre royaume.",
+                    gp_tab4_title: "MAÎTRISE ÉLÉMENTAIRE",
+                    gp_tab4_desc: "Débloquez les synergies cachées des 7 éléments. Créez des combinaisons d'armée dévastatrices avec l'Eau, le Feu, le Vent et plus encore.",
                     nav_faq: "FAQ",
                     nav_testimonials: "Avis",
                     footer_links_title: "Navigation",
@@ -3104,15 +3194,17 @@
                     testi_level2: "Commander Lvl 38",
                     testi_3: "Playing on PC changes everything! No lags, top graphics, and you can really refine your strategies. A real pleasure.",
                     testi_level3: "Dragon Master Lvl 50",
-                    gp_tab1_title: "INFINITE EXPLORATION",
-                    gp_tab1_desc: "Discover a massive open world filled with secrets, resources, and epic dungeons ready to be conquered with your allies.",
-                    gp_tab2_title: "STRATEGIC COMBAT",
-                    gp_tab2_desc: "Take control of your troops in real-time. Use the terrain and Hero skills to turn the tide of battle.",
-                    gp_tab3_title: "KINGDOM BUILDING",
-                    gp_tab3_desc: "Build and develop your city. Upgrade your defenses, research new technologies, and train an invincible army.",
-                    gp_tab4_title: "ELEMENTAL SYNERGIES",
-                    gp_tab4_desc: "Master the 7 elements of the game. Create devastating team compositions by combining Water, Fire, Wind, and much more.",
                     gp_join_btn: "JOIN THE BATTLE",
+                    gp_section_title: "Tactical <span class='text-highlight'>Battlefront</span>",
+                    gp_section_subtitle: "Experience the ultimate PC strategy experience with enhanced controls and precision.",
+                    gp_tab1_title: "NORHEIM EXPLORATION",
+                    gp_tab1_desc: "Discover a massive open world filled with ancient secrets, hidden ruins, and legendary treasures waiting to be claimed.",
+                    gp_tab2_title: "PRECISION PC WARFARE",
+                    gp_tab2_desc: "Command your legions with pixel-perfect accuracy. Experience epic large-scale battles optimized for Windows performance.",
+                    gp_tab3_title: "EMPIRE ARCHITECTURE",
+                    gp_tab3_desc: "Design and fortify your capital. Advanced structural building and resource management to ensure your kingdom's survival.",
+                    gp_tab4_title: "ELEMENTAL MASTERY",
+                    gp_tab4_desc: "Unlock the hidden synergies of the 7 elements. Create devastating army combinations using Water, Fire, Wind, and more.",
 
 
                     faq_q1: "Is the game really 100% free?",
@@ -3205,15 +3297,17 @@
                     testi_level2: "Comandante Lvl 38",
                     testi_3: "¡Jugar en PC lo cambia todo! Sin lags, gráficos de primera, y realmente puedes refinar tus estrategias. Un verdadero placer.",
                     testi_level3: "Maestro Dragón Lvl 50",
-                    gp_tab1_title: "EXPLORACIÓN INFINITA",
-                    gp_tab1_desc: "Descubre un mundo abierto masivo lleno de secretos, recursos y mazmorras épicas listas para ser conquistadas con tus aliados.",
-                    gp_tab2_title: "COMBATE ESTRATÉGICO",
-                    gp_tab2_desc: "Toma el control de tus tropas en tiempo real. Usa el terreno y las habilidades de los Héroes para cambiar el rumbo de la batalla.",
-                    gp_tab3_title: "CONSTRUCCIÓN DEL REINO",
-                    gp_tab3_desc: "Construye y desarrolla tu ciudad. Mejora tus defensas, investiga nuevas tecnologías y entrena un ejército invencible.",
-                    gp_tab4_title: "SINERGIAS ELEMENTALES",
-                    gp_tab4_desc: "Domina los 7 elementos del juego. Crea composiciones de equipo devastadoras combinando Agua, Fuego, Viento y mucho más.",
                     gp_join_btn: "ÚNETE A LA BATALLA",
+                    gp_section_title: "Frente de Batalla <span class='text-highlight'>Táctico</span>",
+                    gp_section_subtitle: "Vive la experiencia definitiva de estrategia en PC con controles mejorados y máxima precisión.",
+                    gp_tab1_title: "EXPLORACIÓN DE NORHEIM",
+                    gp_tab1_desc: "Descubre un mundo abierto masivo lleno de secretos antiguos, ruinas ocultas y tesoros legendarios esperando ser reclamados.",
+                    gp_tab2_title: "GUERRA DE PRECISIÓN PC",
+                    gp_tab2_desc: "Comanda tus legiones con precisión quirúrgica. Vive batallas épicas a gran escala optimizadas para el rendimiento de Windows.",
+                    gp_tab3_title: "ARQUITECTURA DE IMPERIO",
+                    gp_tab3_desc: "Diseña y fortifica tu capital. Construcción estructural avanzada y gestión de recursos para asegurar la supervivencia de tu reino.",
+                    gp_tab4_title: "MAESTRÍA ELEMENTAL",
+                    gp_tab4_desc: "Desbloquea las sinergias ocultas de los 7 elementos. Crea combinaciones de ejército devastadoras usando Agua, Fuego, Viento y más.",
 
 
                     faq_q1: "Â¿El juego es realmente 100% gratis?",
@@ -3294,15 +3388,16 @@
                     dl_trust3: "Schneller Download",
                     footer_desc: "Das ehrgeizigste Cartoon-MMO-Strategiespiel auf dem PC.",
                     footer_copy: "© 2026 Infinity Kingdom. Alle Rechte vorbehalten.",
-                    nav_faq: "FAQ",
-                    nav_testimonials: "Bewertungen",
-                    footer_links_title: "Navigation",
-                    footer_link_home: "Startseite",
-                    footer_play_title: "Spielen",
-                    footer_download: "Kostenlos herunterladen",
-                    footer_client: "Windows PC Client",
-                    footer_free: "Kostenlos herunterladen und spielen.",
-                    footer_exclusive: "Ausschließlich für Microsoft Windows entwickelt"
+                    gp_section_title: "Taktisches <span class='text-highlight'>Schlachtfeld</span>",
+                    gp_section_subtitle: "Erlebe das ultimative PC-Strategieerlebnis mit verbesserter Steuerung und Präzision.",
+                    gp_tab1_title: "NORHEIM-ERKUNDUNG",
+                    gp_tab1_desc: "Entdecke eine riesige offene Welt voller alter Geheimnisse, verborgener Ruinen und legendärer Schätze.",
+                    gp_tab2_title: "PRÄZISIONS-PC-KRIEGSFÜHRUNG",
+                    gp_tab2_desc: "Befehlige deine Legionen mit punktgenauer Genauigkeit. Erlebe epische Schlachten, die für Windows optimiert sind.",
+                    gp_tab3_title: "IMPERIUMS-ARCHITEKTUR",
+                    gp_tab3_desc: "Entwirf und festige deine Hauptstadt. Fortgeschrittener Hochbau und Ressourcen管理, um das Überleben deines Reiches zu sichern.",
+                    gp_tab4_title: "ELEMENTARE MEISTERSCHAFT",
+                    gp_tab4_desc: "Schalte die verborgenen Synergien der 7 Elemente frei. Erstelle verheerende Armeekombinationen mit Wasser, Feuer, Wind und mehr.",
                 },
                 pt: {
                     page_title: "Infinity Kingdom - Jogo de Estratégia MMO",
@@ -3376,15 +3471,17 @@
                     testi_level2: "Comandante Lvl 38",
                     testi_3: "Jogar no PC muda tudo! Sem lags, gráficos de ponta e você pode realmente refinar suas estratégias. Um verdadeiro prazer.",
                     testi_level3: "Mestre Dragão Lvl 50",
-                    gp_tab1_title: "EXPLORAÇÃO INFINITA",
-                    gp_tab1_desc: "Descubra um mundo aberto massivo cheio de segredos, recursos e masmorras épicas prontas para serem conquistadas com seus aliados.",
-                    gp_tab2_title: "COMBATE ESTRATÉGICO",
-                    gp_tab2_desc: "Assuma o controle de suas tropas em tempo real. Use o terreno e as habilidades dos Heróis para virar o jogo na batalha.",
-                    gp_tab3_title: "CONSTRUÇÃO DE REINO",
-                    gp_tab3_desc: "Construa e desenvolva sua cidade. Melhore suas defesas, pesquise novas tecnologias e treine um exército invencível.",
-                    gp_tab4_title: "SINERGIAS ELEMENTARES",
-                    gp_tab4_desc: "Domine os 7 elementos do jogo. Crie composições de equipe devastadoras combinando Água, Fogo, Vento e muito mais.",
                     gp_join_btn: "JUNTE-SE À BATALHA",
+                    gp_section_title: "Campo de Batalha <span class='text-highlight'>Tático</span>",
+                    gp_section_subtitle: "Viva a experiência definitiva de estratégia no PC com controles aprimorados e precisão absoluta.",
+                    gp_tab1_title: "EXPLORAÇÃO DE NORHEIM",
+                    gp_tab1_desc: "Descubra um mundo aberto massivo repleto de segredos antigos, ruínas escondidas e tesouros lendários esperando para serem reivindicados.",
+                    gp_tab2_title: "GUERRA DE PRECISÃO PC",
+                    gp_tab2_desc: "Comande suas legiões com precisão cirúrgica. Experimente batalhas épicas em grande escala otimizadas para Windows.",
+                    gp_tab3_title: "ARQUITETURA DE IMPÉRIO",
+                    gp_tab3_desc: "Projete e fortifique sua capital. Construção estrutural avançada e gestão de recursos para garantir a sobrevivência do seu reino.",
+                    gp_tab4_title: "MESTRIA ELEMENTAR",
+                    gp_tab4_desc: "Desbloqueie as sinergias ocultas dos 7 elementos. Crie combinações de exército devastadoras usando Água, Fogo, Vento e muito mais.",
 
 
                     faq_q1: "O jogo é realmente 100% gratuito?",
@@ -3472,7 +3569,7 @@
                         stretch: 0,
                         depth: 200,
                         modifier: 1,
-                        slideShadows: true,
+                        slideShadows: false,
                     },
                     loop: true,
                     autoplay: {
@@ -3501,6 +3598,20 @@
                             spaceBetween: 40
                         }
                     }
+                });
+
+                // Mobile/Touch flip interaction
+                document.querySelectorAll('.hero-card').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // Toggle flipped state
+                        this.classList.toggle('is-flipped');
+                        
+                        // Close other cards
+                        document.querySelectorAll('.hero-card').forEach(c => {
+                            if (c !== this) c.classList.remove('is-flipped');
+                        });
+                    });
                 });
             }
 
@@ -3759,7 +3870,7 @@
             updateSoundUI();
 
             // Function to play click sound
-            const playClickSound = () => {
+            window.playClickSound = () => {
                 if (userMuted) return;
                 const sound = new Audio(clickSoundUrl);
                 sound.volume = 0.6;
@@ -3770,7 +3881,7 @@
             const actionableElements = document.querySelectorAll('button, .btn, .lang-btn, a, .faq-question, .floating-cta');
             actionableElements.forEach(el => {
                 if (el !== soundToggleBtn) { // don't double trigger
-                    el.addEventListener('click', playClickSound);
+                    el.addEventListener('click', window.playClickSound);
                 }
             });
 
