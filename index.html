@@ -695,12 +695,15 @@
         .requirements::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(2, 6, 23, 0.65);
             z-index: 0;
         }
 
-        .requirements > .container {
+        .requirements>.container {
             position: relative;
             z-index: 1;
         }
@@ -1012,8 +1015,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1103,6 +1106,7 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
+
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
@@ -1359,7 +1363,7 @@
             align-items: center;
             gap: 18px;
             z-index: 1000;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-width: 350px;
@@ -1369,7 +1373,7 @@
             transform: scale(1.05) translateY(-5px);
             border-color: var(--primary);
             background: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 20px rgba(255, 184, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 184, 0, 0.2);
         }
 
         .live-icon-box {
@@ -1388,9 +1392,17 @@
         }
 
         @keyframes broadcast-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .live-info-box {
@@ -1424,8 +1436,15 @@
         }
 
         @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(3); opacity: 0; }
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
         }
 
         .live-tag-text {
@@ -2000,7 +2019,8 @@
             justify-content: center;
             box-shadow: 0 0 20px rgba(255, 184, 0, 0.2);
             transition: all 0.3s ease;
-            overflow: hidden; /* Ensure avatar zoom stays inside */
+            overflow: hidden;
+            /* Ensure avatar zoom stays inside */
         }
 
         .testi-avatar {
@@ -2009,13 +2029,16 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #0a0a1a;
-            transform: scale(1.6); /* Zoom in on face */
-            object-position: center 20%; /* Top-center focus */
+            transform: scale(1.6);
+            /* Zoom in on face */
+            object-position: center 20%;
+            /* Top-center focus */
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .testimonial-card:hover .testi-avatar {
-            transform: scale(1.8); /* Slight extra zoom on hover */
+            transform: scale(1.8);
+            /* Slight extra zoom on hover */
         }
 
         .testimonial-card:hover .testi-avatar-container {
@@ -2251,7 +2274,7 @@
                         </p>
                     </div>
 
-                    <a href="https://dl.gtarcade.com/download/channel?appid=265&source=ikpc1"
+                    <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
                         class="btn btn-primary btn-large btn-block mt-4" target="_blank" rel="noopener"
                         data-i18n="gp_join_btn">
                         REJOINDRE LA BATAILLE
@@ -2272,7 +2295,7 @@
                             <video id="main-gp-video" autoplay loop controls playsinline
                                 style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
                                 <source
-                                    src="https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-on-Steam.mp4"
+                                    src="https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4"
                                     type="video/mp4">
                             </video>
                         </div>
@@ -2374,8 +2397,8 @@
                     </p>
                     <div class="testi-user">
                         <div class="testi-avatar-container">
-                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-dir3.webp" alt="Champion Royal"
-                                class="testi-avatar">
+                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-dir3.webp"
+                                alt="Champion Royal" class="testi-avatar">
                         </div>
                         <div class="testi-info">
                             <h4 class="testi-name">Champion Royal</h4>
@@ -2395,8 +2418,8 @@
                         système d'alliances rend le jeu vraiment intéressant sur le long terme."</p>
                     <div class="testi-user">
                         <div class="testi-avatar-container">
-                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-fass.webp" alt="Mage Ancestral"
-                                class="testi-avatar">
+                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-fass.webp"
+                                alt="Mage Ancestral" class="testi-avatar">
                         </div>
                         <div class="testi-info">
                             <h4 class="testi-name">Mage Ancestral</h4>
@@ -2416,8 +2439,8 @@
                         et on peut vraiment affiner ses stratégies. Un vrai plaisir."</p>
                     <div class="testi-user">
                         <div class="testi-avatar-container">
-                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-fill.webp" alt="Archer Céleste"
-                                class="testi-avatar">
+                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-fill.webp"
+                                alt="Archer Céleste" class="testi-avatar">
                         </div>
                         <div class="testi-info">
                             <h4 class="testi-name">Archer Céleste</h4>
@@ -2494,7 +2517,9 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a1">Infinity Kingdom is a colorful MMO strategy game where players build cities, collect powerful heroes called Immortals, and battle enemies on a shared world map.</p>
+                        <p data-i18n="faq_a1">Infinity Kingdom is a colorful MMO strategy game where players build
+                            cities, collect powerful heroes called Immortals, and battle enemies on a shared world map.
+                        </p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2503,7 +2528,8 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a2">Yes. Infinity Kingdom is free to download and play, with optional in-game purchases for players who want faster progress.</p>
+                        <p data-i18n="faq_a2">Yes. Infinity Kingdom is free to download and play, with optional in-game
+                            purchases for players who want faster progress.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2512,7 +2538,8 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a3">Yes. The game includes tutorials, beginner protection, and easy early progression, making it friendly for new players.</p>
+                        <p data-i18n="faq_a3">Yes. The game includes tutorials, beginner protection, and easy early
+                            progression, making it friendly for new players.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2521,7 +2548,8 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a4">The game stands out because of its unique Immortal heroes, elemental dragon system, and colorful 3D world, which adds depth to battles and strategy.</p>
+                        <p data-i18n="faq_a4">The game stands out because of its unique Immortal heroes, elemental
+                            dragon system, and colorful 3D world, which adds depth to battles and strategy.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2530,7 +2558,8 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a5">Yes. You can join alliances, work together in events, help each other grow faster, and fight large battles against other alliances.</p>
+                        <p data-i18n="faq_a5">Yes. You can join alliances, work together in events, help each other grow
+                            faster, and fight large battles against other alliances.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2539,7 +2568,8 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a6">The game is available on mobile through the Google Play Store and Apple App Store.</p>
+                        <p data-i18n="faq_a6">The game is available on mobile through the Google Play Store and Apple
+                            App Store.</p>
                     </div>
                 </div>
             </div>
@@ -2553,7 +2583,9 @@
             <video autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
                 <source src="https://shopghila.com/wp-content/uploads/2026/03/Hero-Section-anime.mp4" type="video/mp4">
             </video>
-            <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(2,6,23,0.8), rgba(2,6,23,0.4));"></div>
+            <div
+                style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(2,6,23,0.8), rgba(2,6,23,0.4));">
+            </div>
         </div>
 
         <div class="container text-center" data-aos="zoom-in" style="position:relative; z-index:1;">
@@ -2603,10 +2635,13 @@
             <div class="footer-container">
                 <!-- Brand Column -->
                 <div class="footer-brand">
-                    <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo" class="footer-logo">
-                    <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC. Bâtissez votre empire, recrutez des Immortels et dominez Norheim.</p>
+                    <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo"
+                        class="footer-logo">
+                    <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC. Bâtissez votre
+                        empire, recrutez des Immortels et dominez Norheim.</p>
                     <div class="footer-social">
-                        <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" target="_blank" rel="noopener" title="Télécharger"><i class="fa-solid fa-download"></i></a>
+                        <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" target="_blank"
+                            rel="noopener" title="Télécharger"><i class="fa-solid fa-download"></i></a>
                     </div>
                 </div>
 
@@ -2614,11 +2649,16 @@
                 <div class="footer-col">
                     <h4 data-i18n="footer_links_title">Navigation</h4>
                     <ul>
-                        <li><a href="#hero"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_link_home">Accueil</span></a></li>
-                        <li><a href="#heroes"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_heroes">Héros</span></a></li>
-                        <li><a href="#gameplay"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_gameplay">Gameplay</span></a></li>
-                        <li><a href="#requirements"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_requirements">Configuration</span></a></li>
-                        <li><a href="#testimonials"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_testimonials">Avis</span></a></li>
+                        <li><a href="#hero"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="footer_link_home">Accueil</span></a></li>
+                        <li><a href="#heroes"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="nav_heroes">Héros</span></a></li>
+                        <li><a href="#gameplay"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="nav_gameplay">Gameplay</span></a></li>
+                        <li><a href="#requirements"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="nav_requirements">Configuration</span></a></li>
+                        <li><a href="#testimonials"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="nav_testimonials">Avis</span></a></li>
                         <li><a href="#faq"><i class="fa-solid fa-chevron-right"></i> FAQ</a></li>
                     </ul>
                 </div>
@@ -2627,15 +2667,21 @@
                 <div class="footer-col">
                     <h4 data-i18n="footer_play_title">Jouer</h4>
                     <ul>
-                        <li><a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_download">Télécharger gratuitement</span></a></li>
-                        <li><a href="#download"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_client">Client PC Windows</span></a></li>
+                        <li><a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
+                                target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="footer_download">Télécharger gratuitement</span></a></li>
+                        <li><a href="#download"><i class="fa-solid fa-chevron-right"></i> <span
+                                    data-i18n="footer_client">Client PC Windows</span></a></li>
                     </ul>
-                    <div style="margin-top:25px; padding:15px; background:rgba(255,184,0,0.08); border:1px solid rgba(255,184,0,0.2); border-radius:12px;">
+                    <div
+                        style="margin-top:25px; padding:15px; background:rgba(255,184,0,0.08); border:1px solid rgba(255,184,0,0.2); border-radius:12px;">
                         <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                             <i class="fa-brands fa-windows" style="color:#3b82f6; font-size:1.3rem;"></i>
-                            <span style="font-family:var(--font-heading); font-weight:700; color:#fff; font-size:1rem;" data-i18n="hero_badge">Exclusivité Windows PC</span>
+                            <span style="font-family:var(--font-heading); font-weight:700; color:#fff; font-size:1rem;"
+                                data-i18n="hero_badge">Exclusivité Windows PC</span>
                         </div>
-                        <p style="color:#64748B; font-size:0.85rem; margin:0;" data-i18n="footer_free">Gratuit à télécharger et à jouer.</p>
+                        <p style="color:#64748B; font-size:0.85rem; margin:0;" data-i18n="footer_free">Gratuit à
+                            télécharger et à jouer.</p>
                     </div>
                 </div>
             </div>
@@ -2650,7 +2696,7 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Premium Live Installation Notification -->
     <div id="live-notification" class="live-notification-premium">
         <div class="live-icon-box">
@@ -2683,7 +2729,8 @@
                 <p class="hero-modal-desc" id="hm-desc">Description du héros ici.</p>
                 <div class="stats-bar" style="margin-bottom:15px;">
                     <span style="color:var(--text-muted); font-size:0.9rem;">Power</span>
-                    <div style="background:rgba(255,255,255,0.1); height:8px; border-radius:4px; overflow:hidden; margin-top:5px;">
+                    <div
+                        style="background:rgba(255,255,255,0.1); height:8px; border-radius:4px; overflow:hidden; margin-top:5px;">
                         <div id="hm-power-bar" style="background:#10B981; height:100%; width:80%;"></div>
                     </div>
                 </div>
@@ -3637,11 +3684,11 @@
 
         if (hmOverlay && hmCloseBtn) {
             const discoverBtns = document.querySelectorAll('.hero-card .btn-secondary');
-            
+
             discoverBtns.forEach((btn, index) => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    
+
                     // Fetch data
                     const idx = index % heroData.length; // Ensure index is safe
                     const data = heroData[idx];
@@ -3654,11 +3701,11 @@
                     hmPowerBar.style.width = data.power + '%';
 
                     // Determine color based on type keyword optionally, but keeping styling simple
-                    if(data.type.includes('Magiques') || data.type.includes('Soutien')){
+                    if (data.type.includes('Magiques') || data.type.includes('Soutien')) {
                         hmType.style.color = "#C084FC";
                         hmType.style.borderColor = "rgba(192, 132, 252, 0.4)";
                         hmType.style.background = "rgba(192, 132, 252, 0.2)";
-                    } else if(data.type.includes('Tank') || data.type.includes('Guerrier')) {
+                    } else if (data.type.includes('Tank') || data.type.includes('Guerrier')) {
                         hmType.style.color = "#F87171";
                         hmType.style.borderColor = "rgba(248, 113, 113, 0.4)";
                         hmType.style.background = "rgba(248, 113, 113, 0.2)";
@@ -3685,7 +3732,7 @@
             });
             // Close on escape
             document.addEventListener('keydown', (e) => {
-                if(e.key === 'Escape' && hmOverlay.classList.contains('active')) {
+                if (e.key === 'Escape' && hmOverlay.classList.contains('active')) {
                     hmOverlay.classList.remove('active');
                 }
             });
@@ -3694,8 +3741,8 @@
 
         // Gameplay Interactive Tabs Logic
         const gpVideos = [
-            "https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-on-Steam.mp4",
             "https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4",
+            "https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-on-Steam.mp4",
             "https://shopghila.com/wp-content/uploads/2026/03/Video-0.45.mp4",
             "https://shopghila.com/wp-content/uploads/2026/03/Video-1.22.mp4"
         ];
