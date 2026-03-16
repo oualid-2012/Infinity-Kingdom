@@ -7,11 +7,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZG57M1725G"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-ZG57M1725G');
+        gtag('config', 'G-ZG57M1725G');
     </script>
     <title data-i18n="page_title">Infinity Kingdom - Le Jeu de Stratégie MMO</title>
     <meta name="description" data-i18n-attr="content" data-i18n="page_desc"
@@ -220,6 +220,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .btn-shine::after {
             content: '';
             position: absolute;
@@ -227,13 +228,20 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
             transform: rotate(30deg) translateX(-100%);
             animation: shine 3s infinite;
         }
+
         @keyframes shine {
-            0% { transform: rotate(30deg) translateX(-100%); }
-            20%, 100% { transform: rotate(30deg) translateX(100%); }
+            0% {
+                transform: rotate(30deg) translateX(-100%);
+            }
+
+            20%,
+            100% {
+                transform: rotate(30deg) translateX(100%);
+            }
         }
 
         /* Scroll Text */
@@ -678,9 +686,23 @@
 
         /* System Requirements */
         .requirements {
-            background: var(--bg-main);
+            background: url('https://shopghila.com/wp-content/uploads/2026/03/Section-1.webp') center/cover no-repeat;
+            background-attachment: fixed;
             position: relative;
             overflow: hidden;
+        }
+
+        .requirements::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(2, 6, 23, 0.65);
+            z-index: 0;
+        }
+
+        .requirements > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .requirements::after {
@@ -717,9 +739,11 @@
         }
 
         .req-table-wrapper {
-            background: #1E293B;
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 16px;
-            border: 3px solid #334155;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow-x: auto;
             position: relative;
             z-index: 2;
@@ -732,12 +756,12 @@
         }
 
         .req-table th {
-            background: #0F172A;
+            background: rgba(15, 23, 42, 0.4);
             padding: 25px 20px;
             font-size: 1.4rem;
             color: var(--primary);
             text-align: left;
-            border-bottom: 2px solid #334155;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .req-table td {
@@ -765,11 +789,11 @@
         }
 
         .faq-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 40px auto 0;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .faq-item {
@@ -827,25 +851,30 @@
 
         /* Download Section (Bottom) */
         .download-section {
-            background: linear-gradient(to bottom, var(--bg-alt) 0%, var(--bg-main) 100%);
+            background: #020617;
             padding: 120px 0;
             border-top: 4px solid #334155;
+            position: relative;
+            overflow: hidden;
         }
 
         .download-logo {
             width: 200px;
             margin: 0 auto 30px;
             filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            opacity: 0.9;
         }
 
         .download-box {
-            background: rgba(15, 23, 42, 0.9);
-            border: 4px solid var(--primary);
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
             padding: 60px 40px;
             max-width: 800px;
             margin: 40px auto 0;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(255, 184, 0, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(255, 184, 0, 0.05);
         }
 
         .download-info {
@@ -948,27 +977,136 @@
         /* Footer */
         footer {
             background: #020617;
-            padding: 60px 0 40px;
+            padding: 70px 0 30px;
             border-top: 2px solid #1E293B;
-            text-align: center;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 50px;
         }
 
         .footer-logo {
-            width: 150px;
-            margin: 0 auto 20px;
-            opacity: 0.8;
+            width: 140px;
+            margin-bottom: 15px;
+            opacity: 0.9;
         }
 
         .footer-brand p {
             color: #64748B;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
-        .footer-links p {
-            color: #475569;
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            color: #4A2E00;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #64748B;
             font-size: 0.95rem;
-            line-height: 1.8;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .footer-col ul li a i {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1E293B;
+            padding-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-bottom p {
+            color: #334155;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #334155;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-badge i {
+            color: #3b82f6;
+        }
+
+        @media (max-width: 900px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
         /* Language Switcher */
@@ -1394,327 +1532,355 @@
                 font-size: 1rem;
             }
         }
-    
 
-/* Interactive Gameplay Section */
-.gameplay-interactive {
-    padding: 100px 0;
-    background: #060510; /* Very dark background to pop the window */
-    position: relative;
-}
 
-.gameplay-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 50px;
-    align-items: center;
-}
+        /* Interactive Gameplay Section */
+        .gameplay-interactive {
+            padding: 100px 0;
+            background: #060510;
+            /* Very dark background to pop the window */
+            position: relative;
+        }
 
-/* Sidebar */
-.gameplay-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        .gameplay-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
 
-.tab-item {
-    cursor: pointer;
-    padding: 20px;
-    border-left: 4px solid transparent;
-    transition: all 0.3s ease;
-    border-radius: 0 10px 10px 0;
-}
+        /* Sidebar */
+        .gameplay-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-.tab-item .tab-title {
-    font-family: 'Fredoka', sans-serif;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .tab-item {
+            cursor: pointer;
+            padding: 20px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            border-radius: 0 10px 10px 0;
+        }
 
-.tab-item .tab-desc {
-    color: #e0e0e0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    margin: 0;
-    transition: all 0.4s ease;
-}
+        .tab-item .tab-title {
+            font-family: 'Fredoka', sans-serif;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* Active State */
-.tab-item.active {
-    border-left: 4px solid #ffd700;
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(0,0,0,0) 100%);
-}
+        .tab-item .tab-desc {
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin: 0;
+            transition: all 0.4s ease;
+        }
 
-.tab-item.active .tab-title {
-    color: #ffd700;
-}
+        /* Active State */
+        .tab-item.active {
+            border-left: 4px solid #ffd700;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+        }
 
-.tab-item.active .tab-desc {
-    height: auto;
-    opacity: 1;
-    margin-top: 10px;
-    padding-bottom: 5px;
-}
+        .tab-item.active .tab-title {
+            color: #ffd700;
+        }
 
-.btn-block {
-    display: block;
-    width: 100%;
-    text-align: center;
-}
+        .tab-item.active .tab-desc {
+            height: auto;
+            opacity: 1;
+            margin-top: 10px;
+            padding-bottom: 5px;
+        }
 
-.mt-4 { margin-top: 30px; }
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
 
-/* Mockup Window - Fantasy Game Frame */
-.mockup-window {
-    background: #0B192C;
-    border-radius: 8px;
-    border: 6px solid #2C1A14;
-    box-shadow: 0 0 0 4px #DAA520, 0 0 0 8px #1A0F0C, 0 30px 60px rgba(0, 0, 0, 0.8);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    margin: 10px;
-}
+        .mt-4 {
+            margin-top: 30px;
+        }
 
-.mockup-window::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
-    pointer-events: none;
-    z-index: 10;
-}
+        /* Mockup Window - Fantasy Game Frame */
+        .mockup-window {
+            background: #0B192C;
+            border-radius: 8px;
+            border: 6px solid #2C1A14;
+            box-shadow: 0 0 0 4px #DAA520, 0 0 0 8px #1A0F0C, 0 30px 60px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: 10px;
+        }
 
-.mockup-header {
-    background: linear-gradient(to bottom, #4A2E00, #2C1A14);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 3px solid #DAA520;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    z-index: 5;
-}
+        .mockup-window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9);
+            pointer-events: none;
+            z-index: 10;
+        }
 
-.mockup-header::before {
-    content: '';
-    position: absolute;
-    top: 4px; bottom: 4px; left: 4px; right: 4px;
-    border: 1px dashed rgba(218, 165, 32, 0.3);
-    pointer-events: none;
-}
+        .mockup-header {
+            background: linear-gradient(to bottom, #4A2E00, #2C1A14);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid #DAA520;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            z-index: 5;
+        }
 
-.dot {
-    display: none;
-}
+        .mockup-header::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            border: 1px dashed rgba(218, 165, 32, 0.3);
+            pointer-events: none;
+        }
 
-.dot.red { display: none; }
-.dot.yellow { display: none; }
-.dot.green { display: none; }
+        .dot {
+            display: none;
+        }
 
-.mockup-title {
-    margin: 0;
-    color: #FBBF24;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
-}
+        .dot.red {
+            display: none;
+        }
 
-.mockup-content {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .dot.yellow {
+            display: none;
+        }
 
-#main-gp-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: opacity 0.3s ease;
-}
+        .dot.green {
+            display: none;
+        }
 
-.play-overlay {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: #ffd700;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-    transition: transform 0.2s ease;
-}
+        .mockup-title {
+            margin: 0;
+            color: #FBBF24;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
 
-.play-overlay:hover {
-    transform: scale(1.1);
-}
+        .mockup-content {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.play-overlay i {
-    color: #000;
-    font-size: 2rem;
-    margin-left: 5px; /* optical center */
-}
+        #main-gp-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
 
-/* Thumbs Carousel */
-.thumb-carousel {
-    display: flex;
-    padding: 15px;
-    gap: 10px;
-    background: #161616;
-    overflow-x: auto;
-}
+        .play-overlay {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            transition: transform 0.2s ease;
+        }
 
-/* Hide scrollbar for thumbs */
-.thumb-carousel::-webkit-scrollbar { display: none; }
-.thumb-carousel { -ms-overflow-style: none; scrollbar-width: none; }
+        .play-overlay:hover {
+            transform: scale(1.1);
+        }
 
-.thumb-item {
-    width: 120px;
-    height: 68px; /* 16:9 ratio */
-    min-width: 120px;
-    border-radius: 6px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid transparent;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-}
+        .play-overlay i {
+            color: #000;
+            font-size: 2rem;
+            margin-left: 5px;
+            /* optical center */
+        }
 
-.thumb-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        /* Thumbs Carousel */
+        .thumb-carousel {
+            display: flex;
+            padding: 15px;
+            gap: 10px;
+            background: #161616;
+            overflow-x: auto;
+        }
 
-.thumb-item:hover, .thumb-item.active {
-    opacity: 1;
-}
+        /* Hide scrollbar for thumbs */
+        .thumb-carousel::-webkit-scrollbar {
+            display: none;
+        }
 
-.thumb-item.active {
-    border-color: #ffd700;
-}
+        .thumb-carousel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .gameplay-grid {
-        grid-template-columns: 1fr;
-    }
-    .gameplay-sidebar {
-        order: 2;
-    }
-    .gameplay-visuals {
-        order: 1;
-    }
-}
+        .thumb-item {
+            width: 120px;
+            height: 68px;
+            /* 16:9 ratio */
+            min-width: 120px;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
 
-/* Testimonials Section */
-.testimonials {
-    padding: 100px 0;
-    background: linear-gradient(to bottom, #0a0a1a, #1a0f2e);
-    position: relative;
-    overflow: hidden;
-}
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.testimonials .section-title {
-    margin-bottom: 50px;
-}
+        .thumb-item:hover,
+        .thumb-item.active {
+            opacity: 1;
+        }
 
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    position: relative;
-    z-index: 2;
-}
+        .thumb-item.active {
+            border-color: #ffd700;
+        }
 
-.testimonial-card {
-    background: rgba(30, 20, 50, 0.7);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .gameplay-grid {
+                grid-template-columns: 1fr;
+            }
 
-.testimonial-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 215, 0, 0.8);
-    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
-}
+            .gameplay-sidebar {
+                order: 2;
+            }
 
-.testi-stars {
-    color: #ffd700;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-}
+            .gameplay-visuals {
+                order: 1;
+            }
+        }
 
-.testi-text {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #e0e0e0;
-    margin-bottom: 25px;
-    line-height: 1.6;
-    flex-grow: 1;
-}
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, #0a0a1a, #1a0f2e);
+            position: relative;
+            overflow: hidden;
+        }
 
-.testi-user {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-}
+        .testimonials .section-title {
+            margin-bottom: 50px;
+        }
 
-.testi-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ffd700;
-}
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
 
-.testi-info {
-    text-align: left;
-}
+        .testimonial-card {
+            background: rgba(30, 20, 50, 0.7);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-.testi-name {
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 600;
-    color: #fff;
-    margin: 0;
-    font-size: 1.1rem;
-}
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.8);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+        }
 
-.testi-level {
-    color: #ffd700;
-    font-size: 0.9rem;
-    margin: 0;
-    opacity: 0.8;
-}
+        .testi-stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .testi-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .testi-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .testi-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffd700;
+        }
+
+        .testi-info {
+            text-align: left;
+        }
+
+        .testi-name {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .testi-level {
+            color: #ffd700;
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.8;
+        }
 
         /* Header Sound Controls */
         .header-sound-controls {
@@ -1750,7 +1916,7 @@
         .sound-btn.active-muted {
             color: var(--accent);
         }
-</style>
+    </style>
     <link rel="icon" type="image/png" href="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png">
 </head>
 
@@ -1763,15 +1929,17 @@
                     class="brand-logo">
             </div>
             <nav class="nav-links">
-                <a href="#features" data-i18n="nav_features">Caractéristiques</a>
                 <a href="#heroes" data-i18n="nav_heroes">Héros</a>
                 <a href="#gameplay" data-i18n="nav_gameplay">Gameplay</a>
                 <a href="#requirements" data-i18n="nav_requirements">Configuration</a>
+                <a href="#testimonials" data-i18n="nav_testimonials">Avis</a>
+                <a href="#faq" data-i18n="nav_faq">FAQ</a>
             </nav>
             <div class="nav-actions">
                 <!-- Header Sound Controls -->
                 <div class="header-sound-controls" style="margin-right: 15px;">
-                    <button id="header-sound-toggle" class="sound-btn" title="Activer/Désactiver le son"><i class="fa-solid fa-volume-xmark"></i></button>
+                    <button id="header-sound-toggle" class="sound-btn" title="Activer/Désactiver le son"><i
+                            class="fa-solid fa-volume-xmark"></i></button>
                 </div>
                 <div class="lang-switcher">
                     <i class="fa-solid fa-globe lang-icon"></i>
@@ -1788,7 +1956,8 @@
                     </div>
                 </div>
                 <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
-                    class="btn btn-small btn-primary" target="_blank" rel="noopener" data-i18n="nav_play">Jouer Gratuitement</a>
+                    class="btn btn-small btn-primary" target="_blank" rel="noopener" data-i18n="nav_play">Jouer
+                    Gratuitement</a>
             </div>
         </div>
     </header>
@@ -1796,8 +1965,8 @@
     <!-- SECTION 1: HERO -->
     <section class="hero" id="hero">
         <div class="hero-bg">
-            <video autoplay loop muted playsinline class="hero-bg-video">
-                <source src="https://shopghila.com/wp-content/uploads/2026/03/Hero-Section-anime.mp4" type="video/mp4">
+            <video id="hero-bg-video" autoplay muted playsinline class="hero-bg-video">
+                <source src="https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4" type="video/mp4">
             </video>
             <div class="overlay"></div>
         </div>
@@ -1813,44 +1982,50 @@
 
             <div class="cta-container">
                 <div style="position:relative;">
-                    <div style="position:absolute; top:-15px; right:-10px; background:var(--accent); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; transform:rotate(10deg); z-index:10; box-shadow:0 4px 10px rgba(0,0,0,0.5); pointer-events:none;">
-                        🎁 Starter Pack Inclus !
-                    </div>
-                <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
-                    class="btn btn-massive btn-primary bounce btn-shine" id="hero-cta" target="_blank" rel="noopener">
-                    <span class="btn-text" data-i18n="hero_btn">TÉLÉCHARGER POUR WINDOWS</span>
-                    <i class="fa-brands fa-windows"></i>
-                </a>
+                    <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931"
+                        class="btn btn-massive btn-primary bounce btn-shine" id="hero-cta" target="_blank"
+                        rel="noopener">
+                        <span class="btn-text" data-i18n="hero_btn">TÉLÉCHARGER POUR WINDOWS</span>
+                        <i class="fa-brands fa-windows"></i>
+                    </a>
                 </div>
                 <!-- Unified Live Stats & Platform Block -->
-                <div style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
-                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(10, 14, 23, 0.85); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 8px 18px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.5); backdrop-filter: blur(4px);">
-                        
+                <div
+                    style="display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                    <div
+                        style="display: flex; align-items: center; gap: 15px; background: rgba(10, 14, 23, 0.85); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 8px 18px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.5); backdrop-filter: blur(4px);">
+
                         <!-- Platform Icon -->
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <i class="fa-brands fa-windows" style="font-size: 1.1rem; color: #3b82f6;"></i>
-                            <span style="font-weight: 700; color: #f8fafc;" data-i18n="hero_badge">Windows PC Exclusive</span>
+                            <span style="font-weight: 700; color: #f8fafc;" data-i18n="hero_badge">Windows PC
+                                Exclusive</span>
                         </div>
-                        
+
                         <!-- Divider -->
                         <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
 
                         <!-- Rating -->
                         <div style="display: flex; align-items: center; gap: 5px;">
                             <div style="color: #F59E0B; display: flex; gap: 2px; font-size: 0.85rem;">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i>
                             </div>
-                            <span style="color: #F59E0B; font-weight: 800; font-size: 0.95rem; margin-left: 2px;">4.8</span>
+                            <span
+                                style="color: #F59E0B; font-weight: 800; font-size: 0.95rem; margin-left: 2px;">4.8</span>
                         </div>
-                        
+
                         <!-- Divider -->
                         <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
 
                         <!-- Online Now -->
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 8px; height: 8px; background: #10B981; border-radius: 50%; box-shadow: 0 0 8px #10B981; display: inline-block;"></span>
+                            <span
+                                style="width: 8px; height: 8px; background: #10B981; border-radius: 50%; box-shadow: 0 0 8px #10B981; display: inline-block;"></span>
                             <span style="font-weight: 700; color: #f8fafc;">138,402</span>
-                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;" data-i18n="stats_online">Online Now</span>
+                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;"
+                                data-i18n="stats_online">Online Now</span>
                         </div>
 
                         <!-- Divider -->
@@ -1859,15 +2034,16 @@
                         <!-- Total Players -->
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <span style="color: #F59E0B; font-weight: 700;">38M+</span>
-                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;" data-i18n="stats_total">Players</span>
+                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;"
+                                data-i18n="stats_total">Players</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-        <div class="scroll-indicator">
-            <i class="fa-solid fa-chevron-down animated-bounce"></i>
-        </div>
+            <div class="scroll-indicator">
+                <i class="fa-solid fa-chevron-down animated-bounce"></i>
+            </div>
     </section>
 
     <!-- SECTION 2: HOOK / PROMISE -->
@@ -1881,7 +2057,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: HEROES SHOWCASE (Characters) -->
+    <!-- SECTION 3: HEROES SHOWCASE -->
     <section class="heroes-section" id="heroes">
         <div class="container">
             <div class="text-center" data-aos="fade-down">
@@ -1951,38 +2127,43 @@
         </div>
     </section>
 
-    
 
-    <!-- SECTION 5: INTERACTIVE GAMEPLAY SHOWCASE -->
+
+    <!-- SECTION 4: INTERACTIVE GAMEPLAY SHOWCASE -->
     <section class="gameplay-interactive" id="gameplay">
         <div class="container" style="max-width: 1400px; width: 95%;">
             <div class="gameplay-grid" data-aos="fade-up">
-                
+
                 <!-- Left Sidebar: Descriptions and Tabs -->
                 <div class="gameplay-sidebar">
                     <div class="tab-item active" data-tab="0" onclick="changeGameplay(0)">
                         <h3 class="tab-title" data-i18n="gp_tab1_title">EXPLORATION INFINIE</h3>
-                        <p class="tab-desc" data-i18n="gp_tab1_desc">Découvrez un monde ouvert massif rempli de secrets, de ressources et de donjons épiques prêts à être conquis avec vos alliés.</p>
+                        <p class="tab-desc" data-i18n="gp_tab1_desc">Découvrez un monde ouvert massif rempli de secrets,
+                            de ressources et de donjons épiques prêts à être conquis avec vos alliés.</p>
                     </div>
-                    
+
                     <div class="tab-item" data-tab="1" onclick="changeGameplay(1)">
                         <h3 class="tab-title" data-i18n="gp_tab2_title">COMBATS STRATÉGIQUES</h3>
-                        <p class="tab-desc" data-i18n="gp_tab2_desc">Prenez le contrôle de vos troupes en temps réel. Utilisez le terrain et les compétences des Héros pour renverser le cours de la bataille.</p>
+                        <p class="tab-desc" data-i18n="gp_tab2_desc">Prenez le contrôle de vos troupes en temps réel.
+                            Utilisez le terrain et les compétences des Héros pour renverser le cours de la bataille.</p>
                     </div>
 
                     <div class="tab-item" data-tab="2" onclick="changeGameplay(2)">
                         <h3 class="tab-title" data-i18n="gp_tab3_title">CONSTRUCTION DE ROYAUME</h3>
-                        <p class="tab-desc" data-i18n="gp_tab3_desc">Bâtissez et développez votre ville. Améliorez vos défenses, recherchez de nouvelles technologies et entraînez une armée invincible.</p>
+                        <p class="tab-desc" data-i18n="gp_tab3_desc">Bâtissez et développez votre ville. Améliorez vos
+                            défenses, recherchez de nouvelles technologies et entraînez une armée invincible.</p>
                     </div>
 
                     <div class="tab-item" data-tab="3" onclick="changeGameplay(3)">
                         <h3 class="tab-title" data-i18n="gp_tab4_title">SYNERGIES ÉLÉMENTAIRES</h3>
-                        <p class="tab-desc" data-i18n="gp_tab4_desc">Maîtrisez les 7 éléments du jeu. Créez des compositions d'équipe redoutables en combinant l'Eau, le Feu, le Vent et bien plus encore.</p>
+                        <p class="tab-desc" data-i18n="gp_tab4_desc">Maîtrisez les 7 éléments du jeu. Créez des
+                            compositions d'équipe redoutables en combinant l'Eau, le Feu, le Vent et bien plus encore.
+                        </p>
                     </div>
 
-                    <a href="https://dl.gtarcade.com/download/channel?appid=265&source=ikpc1" 
-                       class="btn btn-primary btn-large btn-block mt-4" 
-                       target="_blank" rel="noopener" data-i18n="gp_join_btn">
+                    <a href="https://dl.gtarcade.com/download/channel?appid=265&source=ikpc1"
+                        class="btn btn-primary btn-large btn-block mt-4" target="_blank" rel="noopener"
+                        data-i18n="gp_join_btn">
                         REJOINDRE LA BATAILLE
                     </a>
                 </div>
@@ -1998,8 +2179,11 @@
                         </div>
                         <div class="mockup-content">
                             <!-- Main Large Video -->
-                            <video id="main-gp-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
-                                <source src="https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-Free-download-and-play-on-Windows-Microsoft-Store.mp4" type="video/mp4">
+                            <video id="main-gp-video" autoplay loop muted playsinline
+                                style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                                <source
+                                    src="https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-Free-download-and-play-on-Windows-Microsoft-Store.mp4"
+                                    type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -2009,7 +2193,7 @@
         </div>
     </section>
 
-    <!-- SECTION 6: SYSTEM REQUIREMENTS -->
+    <!-- SECTION 5: SYSTEM REQUIREMENTS -->
     <section class="requirements" id="requirements">
         <div class="container" data-aos="fade-up">
             <div class="windows-only-banner">
@@ -2062,21 +2246,27 @@
         </div>
     </section>
 
-    
+
     <!-- SECTION 6: TESTIMONIALS -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up" data-i18n="testi_title">Ce que disent nos Commandants</h2>
-            
+            <h2 class="section-title text-center" data-aos="fade-up" data-i18n="testi_title">Ce que disent nos
+                Commandants</h2>
+
             <div class="testimonials-grid">
                 <!-- Testimonial 1 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="testi-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
                     </div>
-                    <p class="testi-text" data-i18n="testi_1">"Le meilleur jeu de stratégie auquel j'ai pu jouer. Les graphismes sont magnifiques et les batailles de dragons sont épiques ! Je recommande vivement."</p>
+                    <p class="testi-text" data-i18n="testi_1">"Le meilleur jeu de stratégie auquel j'ai pu jouer. Les
+                        graphismes sont magnifiques et les batailles de dragons sont épiques ! Je recommande vivement."
+                    </p>
                     <div class="testi-user">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="User 1" class="testi-avatar">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="User 1"
+                            class="testi-avatar">
                         <div class="testi-info">
                             <h4 class="testi-name">Alexandre M.</h4>
                             <p class="testi-level" data-i18n="testi_level1">Seigneur Lvl 45</p>
@@ -2087,11 +2277,15 @@
                 <!-- Testimonial 2 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="testi-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <p class="testi-text" data-i18n="testi_2">"Très addictif et la communauté est super active. Le système d'alliances rend le jeu vraiment intéressant sur le long terme."</p>
+                    <p class="testi-text" data-i18n="testi_2">"Très addictif et la communauté est super active. Le
+                        système d'alliances rend le jeu vraiment intéressant sur le long terme."</p>
                     <div class="testi-user">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image6.webp.webp" alt="User 2" class="testi-avatar">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image6.webp.webp" alt="User 2"
+                            class="testi-avatar">
                         <div class="testi-info">
                             <h4 class="testi-name">Sarah K.</h4>
                             <p class="testi-level" data-i18n="testi_level2">Commandant Lvl 38</p>
@@ -2102,11 +2296,15 @@
                 <!-- Testimonial 3 -->
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="testi-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
                     </div>
-                    <p class="testi-text" data-i18n="testi_3">"Jouer sur PC change tout ! Pas de lags, graphismes au top et on peut vraiment affiner ses stratégies. Un vrai plaisir."</p>
+                    <p class="testi-text" data-i18n="testi_3">"Jouer sur PC change tout ! Pas de lags, graphismes au top
+                        et on peut vraiment affiner ses stratégies. Un vrai plaisir."</p>
                     <div class="testi-user">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image2.webp.webp" alt="User 3" class="testi-avatar">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image2.webp.webp" alt="User 3"
+                            class="testi-avatar">
                         <div class="testi-info">
                             <h4 class="testi-name">David L.</h4>
                             <p class="testi-level" data-i18n="testi_level3">Maître Dragon Lvl 50</p>
@@ -2117,48 +2315,80 @@
         </div>
     </section>
 
-<!-- SECTION 6.5: FAQ (Friction Reduction) -->
+    <!-- SECTION 7: FAQ -->
     <section class="faq" id="faq">
         <div class="container" data-aos="fade-up">
             <h2 class="section-title text-center" data-i18n="faq_title">Questions Fréquentes</h2>
             <div class="faq-container">
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span data-i18n="faq_q1">Le jeu est-il vraiment 100% gratuit ?</span>
+                        <span data-i18n="faq_q1">What kind of game is Infinity Kingdom?</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a1">Oui, Infinity Kingdom est un jeu Free-to-Play. Vous pouvez télécharger et
-                            jouer au client complet gratuitement.</p>
+                        <p data-i18n="faq_a1">Infinity Kingdom is a colorful MMO strategy game where players build cities, collect powerful heroes called Immortals, and battle enemies on a shared world map.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span data-i18n="faq_q2">Mon PC est-il compatible ?</span>
+                        <span data-i18n="faq_q2">Is Infinity Kingdom free to play?</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a2">S'il tourne sous Windows 10/11 et dispose d'au moins 8 Go de RAM, vous
-                            êtes prêt Ã  jouer avec des performances optimales.</p>
+                        <p data-i18n="faq_a2">Yes. Infinity Kingdom is free to download and play, with optional in-game purchases for players who want faster progress.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span data-i18n="faq_q3">L'installation est-elle sécurisée ?</span>
+                        <span data-i18n="faq_q3">Can beginners enjoy Infinity Kingdom?</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p data-i18n="faq_a3">Absolument. Le client officiel garantit une installation sûre, optimisée
-                            pour Windows.</p>
+                        <p data-i18n="faq_a3">Yes. The game includes tutorials, beginner protection, and easy early progression, making it friendly for new players.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q4">What makes Infinity Kingdom different from other strategy games?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a4">The game stands out because of its unique Immortal heroes, elemental dragon system, and colorful 3D world, which adds depth to battles and strategy.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q5">Can I play Infinity Kingdom with friends?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a5">Yes. You can join alliances, work together in events, help each other grow faster, and fight large battles against other alliances.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q6">On which devices can I play Infinity Kingdom?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq_a6">The game is available on mobile through the Google Play Store and Apple App Store.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 7: DOWNLOAD -->
+    <!-- SECTION 8: DOWNLOAD -->
     <section class="download-section" id="download">
-        <div class="container text-center" data-aos="zoom-in">
+        <!-- Download Background Video -->
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:0;">
+            <video autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
+                <source src="https://shopghila.com/wp-content/uploads/2026/03/Hero-Section-anime.mp4" type="video/mp4">
+            </video>
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(2,6,23,0.8), rgba(2,6,23,0.4));"></div>
+        </div>
+
+        <div class="container text-center" data-aos="zoom-in" style="position:relative; z-index:1;">
             <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo" class="download-logo">
             <h2 class="section-title text-white" data-i18n="download_title">Prêt Ã  régner sur Norheim ?</h2>
             <p class="download-subtitle" data-i18n="download_subtitle">Rejoignez la plus grande communauté stratégique
@@ -2201,14 +2431,57 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo" class="footer-logo">
-                <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC.</p>
+        <div class="container">
+            <div class="footer-container">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <img src="https://shopghila.com/wp-content/uploads/2026/03/logo.png.png" alt="Logo" class="footer-logo">
+                    <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC. Bâtissez votre empire, recrutez des Immortels et dominez Norheim.</p>
+                    <div class="footer-social">
+                        <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" target="_blank" rel="noopener" title="Télécharger"><i class="fa-solid fa-download"></i></a>
+                        <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h4 data-i18n="footer_links_title">Navigation</h4>
+                    <ul>
+                        <li><a href="#hero"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_link_home">Accueil</span></a></li>
+                        <li><a href="#heroes"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_heroes">Héros</span></a></li>
+                        <li><a href="#gameplay"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_gameplay">Gameplay</span></a></li>
+                        <li><a href="#requirements"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_requirements">Configuration</span></a></li>
+                        <li><a href="#testimonials"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="nav_testimonials">Avis</span></a></li>
+                        <li><a href="#faq"><i class="fa-solid fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Download CTA -->
+                <div class="footer-col">
+                    <h4 data-i18n="footer_play_title">Jouer</h4>
+                    <ul>
+                        <li><a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_download">Télécharger gratuitement</span></a></li>
+                        <li><a href="#download"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_client">Client PC Windows</span></a></li>
+                    </ul>
+                    <div style="margin-top:25px; padding:15px; background:rgba(255,184,0,0.08); border:1px solid rgba(255,184,0,0.2); border-radius:12px;">
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                            <i class="fa-brands fa-windows" style="color:#3b82f6; font-size:1.3rem;"></i>
+                            <span style="font-family:var(--font-heading); font-weight:700; color:#fff; font-size:1rem;" data-i18n="hero_badge">Exclusivité Windows PC</span>
+                        </div>
+                        <p style="color:#64748B; font-size:0.85rem; margin:0;" data-i18n="footer_free">Gratuit à télécharger et à jouer.</p>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <p data-i18n="footer_copy">&copy; 2026 Infinity Kingdom. Exclusif Windows PC.<br>Tous droits réservés,
-                    développé spécialement pour l'écosystème Microsoft Windows.</p>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p data-i18n="footer_copy">&copy; 2026 Infinity Kingdom. Tous droits réservés.</p>
+                <div class="footer-bottom-badge">
+                    <i class="fa-brands fa-windows"></i>
+                    <span data-i18n="footer_exclusive">Développé exclusivement pour Microsoft Windows</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -2236,7 +2509,7 @@
         <div class="modal-content">
             <button class="modal-close" id="close-popup"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-img">
-                <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="Commander">
+                <img src="https://shopghila.com/wp-content/uploads/2026/03/Pop-Up.webp" alt="Commander">
             </div>
             <div class="modal-text">
                 <h3 data-i18n="popup_title">Ne partez pas si vite !</h3>
@@ -2271,6 +2544,19 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- Custom Script -->
     <script>
+        // Hero background video: stop at 1m2s and replay
+        (function () {
+            const heroVid = document.getElementById('hero-bg-video');
+            if (heroVid) {
+                heroVid.addEventListener('timeupdate', function () {
+                    if (heroVid.currentTime >= 62) {
+                        heroVid.currentTime = 0;
+                        heroVid.play();
+                    }
+                });
+            }
+        })();
+
         document.addEventListener('DOMContentLoaded', () => {
             // --- Setup Translations ---
             const i18n = {
@@ -2336,14 +2622,14 @@
                     total_commanders: "commandants totaux",
                     popup_title: "Ne partez pas si vite !",
                     popup_desc: "Votre royaume a besoin d'un commandant. Téléchargez maintenant et obtenez un pack de démarrage exclusif.",
-                                        faq_title: "Questions Fréquentes",
+                    faq_title: "Questions Fréquentes",
                     testi_title: "Ce que disent nos Commandants",
                     testi_1: "Le meilleur jeu de stratégie auquel j'ai pu jouer. Les graphismes sont magnifiques et les batailles de dragons sont épiques ! Je recommande vivement.",
                     testi_level1: "Seigneur Lvl 45",
                     testi_2: "Très addictif et la communauté est super active. Le système d'alliances rend le jeu vraiment intéressant sur le long terme.",
                     testi_level2: "Commandant Lvl 38",
                     testi_3: "Jouer sur PC change tout ! Pas de lags, graphismes au top et on peut vraiment affiner ses stratégies. Un vrai plaisir.",
-                                        testi_level3: "Maître Dragon Lvl 50",
+                    testi_level3: "Maître Dragon Lvl 50",
                     gp_tab1_title: "EXPLORATION INFINIE",
                     gp_tab1_desc: "Découvrez un monde ouvert massif rempli de secrets, de ressources et de donjons épiques prêts à être conquis avec vos alliés.",
                     gp_tab2_title: "COMBATS STRATÉGIQUES",
@@ -2360,7 +2646,16 @@
                     faq_q2: "Mon PC est-il compatible ?",
                     faq_a2: "S'il tourne sous Windows 10/11 et dispose d'au moins 8 Go de RAM, vous êtes prêt Ã  jouer avec des performances optimales.",
                     faq_q3: "L'installation est-elle sécurisée ?",
-                    faq_a3: "Absolument. Le client officiel garantit une installation sûre, optimisée pour Windows."
+                    faq_a3: "Absolument. Le client officiel garantit une installation sûre, optimisée pour Windows.",
+                    nav_faq: "FAQ",
+                    nav_testimonials: "Avis",
+                    footer_links_title: "Navigation",
+                    footer_link_home: "Accueil",
+                    footer_play_title: "Jouer",
+                    footer_download: "Télécharger gratuitement",
+                    footer_client: "Client PC Windows",
+                    footer_free: "Gratuit à télécharger et à jouer.",
+                    footer_exclusive: "Développé exclusivement pour Microsoft Windows"
                 },
                 en: {
                     page_title: "Infinity Kingdom - MMO Strategy Game",
@@ -2424,14 +2719,14 @@
                     total_commanders: "total commanders",
                     popup_title: "Don't leave so soon!",
                     popup_desc: "Your kingdom needs a commander. Download now and get an exclusive starter pack.",
-                                        faq_title: "Frequently Asked Questions",
+                    faq_title: "Frequently Asked Questions",
                     testi_title: "What Our Commanders Say",
                     testi_1: "The best strategy game I've played. The graphics are beautiful and the dragon battles are epic! Highly recommended.",
                     testi_level1: "Lord Lvl 45",
                     testi_2: "Very addictive and the community is super active. The alliance system makes the game really interesting long term.",
                     testi_level2: "Commander Lvl 38",
                     testi_3: "Playing on PC changes everything! No lags, top graphics, and you can really refine your strategies. A real pleasure.",
-                                        testi_level3: "Dragon Master Lvl 50",
+                    testi_level3: "Dragon Master Lvl 50",
                     gp_tab1_title: "INFINITE EXPLORATION",
                     gp_tab1_desc: "Discover a massive open world filled with secrets, resources, and epic dungeons ready to be conquered with your allies.",
                     gp_tab2_title: "STRATEGIC COMBAT",
@@ -2448,7 +2743,18 @@
                     faq_q2: "Is my PC compatible?",
                     faq_a2: "If it runs on Windows 10/11 and has at least 8 GB of RAM, you are ready to play with optimal performance.",
                     faq_q3: "Is the installation secure?",
-                    faq_a3: "Absolutely. The official client guarantees a safe installation, optimized for Windows."
+                    faq_a3: "Absolutely. The official client guarantees a safe installation, optimized for Windows.",
+                    nav_faq: "FAQ",
+                    nav_testimonials: "Reviews",
+                    footer_links_title: "Navigation",
+                    footer_link_home: "Home",
+                    footer_play_title: "Play",
+                    footer_download: "Download for free",
+                    footer_client: "Windows PC Client",
+                    footer_free: "Free to download and play.",
+                    footer_exclusive: "Developed exclusively for Microsoft Windows",
+                    footer_copy: "© 2026 Infinity Kingdom. All rights reserved.",
+                    footer_desc: "The most ambitious cartoon MMO strategy game on PC. Build your empire, recruit Immortals and dominate Norheim."
                 },
                 es: {
                     page_title: "Infinity Kingdom - Juego de Estrategia MMO",
@@ -2512,14 +2818,14 @@
                     total_commanders: "comandantes totales",
                     popup_title: "Â¡No te vayas tan pronto!",
                     popup_desc: "Tu reino necesita un comandante. Descarga ahora y obtén un paquete de inicio exclusivo.",
-                                        faq_title: "Preguntas Frecuentes",
+                    faq_title: "Preguntas Frecuentes",
                     testi_title: "Lo que dicen nuestros Comandantes",
                     testi_1: "El mejor juego de estrategia que he jugado. ¡Los gráficos son hermosos y las batallas de dragones son épicas! Muy recomendable.",
                     testi_level1: "Señor Lvl 45",
                     testi_2: "Muy adictivo y la comunidad es súper activa. El sistema de alianzas hace que el juego sea realmente interesante a largo plazo.",
                     testi_level2: "Comandante Lvl 38",
                     testi_3: "¡Jugar en PC lo cambia todo! Sin lags, gráficos de primera, y realmente puedes refinar tus estrategias. Un verdadero placer.",
-                                        testi_level3: "Maestro Dragón Lvl 50",
+                    testi_level3: "Maestro Dragón Lvl 50",
                     gp_tab1_title: "EXPLORACIÓN INFINITA",
                     gp_tab1_desc: "Descubre un mundo abierto masivo lleno de secretos, recursos y mazmorras épicas listas para ser conquistadas con tus aliados.",
                     gp_tab2_title: "COMBATE ESTRATÉGICO",
@@ -2536,7 +2842,18 @@
                     faq_q2: "Â¿Es mi PC compatible?",
                     faq_a2: "Si funciona con Windows 10/11 y tiene al menos 8 GB de RAM, estÃ¡s listo para jugar con un rendimiento Ã³ptimo.",
                     faq_q3: "Â¿La instalaciÃ³n es segura?",
-                    faq_a3: "Absolutamente. El cliente oficial garantiza una instalaciÃ³n segura, optimizada para Windows."
+                    faq_a3: "Absolutamente. El cliente oficial garantiza una instalaciÃ³n segura, optimizada para Windows.",
+                    nav_faq: "FAQ",
+                    nav_testimonials: "Opiniones",
+                    footer_links_title: "Navegación",
+                    footer_link_home: "Inicio",
+                    footer_play_title: "Jugar",
+                    footer_download: "Descargar gratis",
+                    footer_client: "Cliente PC Windows",
+                    footer_free: "Gratis para descargar y jugar.",
+                    footer_exclusive: "Desarrollado exclusivamente para Microsoft Windows",
+                    footer_copy: "© 2026 Infinity Kingdom. Todos los derechos reservados.",
+                    footer_desc: "El juego de estrategia MMO de dibujos animados más ambicioso para PC."
                 },
                 de: {
                     page_title: "Infinity Kingdom - MMO-Strategiespiel",
@@ -2595,7 +2912,16 @@
                     dl_trust2: "FÃ¼r Windows optimiert",
                     dl_trust3: "Schneller Download",
                     footer_desc: "Das ehrgeizigste Cartoon-MMO-Strategiespiel auf dem PC.",
-                    footer_copy: "&copy; 2026 Infinity Kingdom. Exklusiv fÃ¼r Windows PC.<br>Alle Rechte vorbehalten, speziell fÃ¼r das Microsoft Windows-Ã–kosystem entwickelt."
+                    footer_copy: "© 2026 Infinity Kingdom. Alle Rechte vorbehalten.",
+                    nav_faq: "FAQ",
+                    nav_testimonials: "Bewertungen",
+                    footer_links_title: "Navigation",
+                    footer_link_home: "Startseite",
+                    footer_play_title: "Spielen",
+                    footer_download: "Kostenlos herunterladen",
+                    footer_client: "Windows PC Client",
+                    footer_free: "Kostenlos herunterladen und spielen.",
+                    footer_exclusive: "Ausschließlich für Microsoft Windows entwickelt"
                 },
                 pt: {
                     page_title: "Infinity Kingdom - Jogo de Estratégia MMO",
@@ -2659,14 +2985,14 @@
                     total_commanders: "comandantes totais",
                     popup_title: "NÃ£o vÃ¡ tÃ£o cedo!",
                     popup_desc: "Seu reino precisa de um comandante. Baixe agora e ganhe um pacote inicial exclusivo.",
-                                        faq_title: "Perguntas Frequentes",
+                    faq_title: "Perguntas Frequentes",
                     testi_title: "O que dizem nossos Comandantes",
                     testi_1: "O melhor jogo de estratégia que já joguei. Os gráficos são lindos e as batalhas de dragões são épicas! Altamente recomendado.",
                     testi_level1: "Senhor Lvl 45",
                     testi_2: "Muito viciante e a comunidade é super ativa. O sistema de alianças torna o jogo realmente interessante a longo prazo.",
                     testi_level2: "Comandante Lvl 38",
                     testi_3: "Jogar no PC muda tudo! Sem lags, gráficos de ponta e você pode realmente refinar suas estratégias. Um verdadeiro prazer.",
-                                        testi_level3: "Mestre Dragão Lvl 50",
+                    testi_level3: "Mestre Dragão Lvl 50",
                     gp_tab1_title: "EXPLORAÇÃO INFINITA",
                     gp_tab1_desc: "Descubra um mundo aberto massivo cheio de segredos, recursos e masmorras épicas prontas para serem conquistadas com seus aliados.",
                     gp_tab2_title: "COMBATE ESTRATÉGICO",
@@ -2683,7 +3009,18 @@
                     faq_q2: "Meu PC é compatÃ­vel?",
                     faq_a2: "Se rodar no Windows 10/11 e tiver pelo menos 8 GB de RAM, você estÃ¡ pronto para jogar com desempenho ideal.",
                     faq_q3: "A instalaçÃ£o é segura?",
-                    faq_a3: "Absolutamente. O cliente oficial garante uma instalaçÃ£o segura, otimizada para Windows."
+                    faq_a3: "Absolutamente. O cliente oficial garante uma instalaçÃ£o segura, otimizada para Windows.",
+                    nav_faq: "FAQ",
+                    nav_testimonials: "Avaliações",
+                    footer_links_title: "Navegação",
+                    footer_link_home: "Início",
+                    footer_play_title: "Jogar",
+                    footer_download: "Baixar gratuitamente",
+                    footer_client: "Cliente PC Windows",
+                    footer_free: "Grátis para baixar e jogar.",
+                    footer_exclusive: "Desenvolvido exclusivamente para Microsoft Windows",
+                    footer_copy: "© 2026 Infinity Kingdom. Todos os direitos reservados.",
+                    footer_desc: "O jogo de estratégia MMO de desenho animado mais ambicioso no PC."
                 }
             };
 
@@ -2972,10 +3309,10 @@
             // ==========================================
 
             // 1. Background Music 
-            const bgMusic = new Audio('https://shopghila.com/wp-content/uploads/2026/03/Complexities-of-Sound-Incantation-SPOTISAVER.mp3'); 
+            const bgMusic = new Audio('https://shopghila.com/wp-content/uploads/2026/03/Complexities-of-Sound-Incantation-SPOTISAVER.mp3');
             bgMusic.loop = true;
             bgMusic.volume = 0.2; // 20% volume for subtle background music
-            
+
             let isMusicPlaying = false;
             let userMuted = false;
 
@@ -2998,7 +3335,7 @@
 
             // Play background music
             const startBackgroundMusic = () => {
-                if(userMuted || isMusicPlaying) return;
+                if (userMuted || isMusicPlaying) return;
                 bgMusic.play().then(() => {
                     isMusicPlaying = true;
                     updateSoundUI();
@@ -3036,7 +3373,7 @@
 
             // Function to play click sound
             const playClickSound = () => {
-                if(userMuted) return;
+                if (userMuted) return;
                 const sound = new Audio(clickSoundUrl);
                 sound.volume = 0.6;
                 sound.play().catch(e => console.log("Click sound prevented:", e));
@@ -3052,41 +3389,41 @@
 
         });
 
-    
-    // Gameplay Interactive Tabs Logic
-    const gpVideos = [
-        "https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-Free-download-and-play-on-Windows-Microsoft-Store.mp4",
-        "https://shopghila.com/wp-content/uploads/2026/03/Video-0.45.mp4",
-        "https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4",
-        "https://shopghila.com/wp-content/uploads/2026/03/Video-1.22.mp4"
-    ];
 
-    window.changeGameplay = function(index) {
-        // Play click sound if initialized
-        if(window.playClickSound) window.playClickSound();
+        // Gameplay Interactive Tabs Logic
+        const gpVideos = [
+            "https://shopghila.com/wp-content/uploads/2026/03/Infinity-Kingdom-Free-download-and-play-on-Windows-Microsoft-Store.mp4",
+            "https://shopghila.com/wp-content/uploads/2026/03/Video-0.45.mp4",
+            "https://shopghila.com/wp-content/uploads/2026/03/Video-1.07.mp4",
+            "https://shopghila.com/wp-content/uploads/2026/03/Video-1.22.mp4"
+        ];
 
-        // Ensure index wraps correctly for the sidebar which only has 4 tabs
-        const sidebarIndex = index % 4; 
+        window.changeGameplay = function (index) {
+            // Play click sound if initialized
+            if (window.playClickSound) window.playClickSound();
 
-        // Update active class on sidebar
-        document.querySelectorAll('.tab-item').forEach((tab, i) => {
-            if(i === sidebarIndex) tab.classList.add('active');
-            else tab.classList.remove('active');
-        });
+            // Ensure index wraps correctly for the sidebar which only has 4 tabs
+            const sidebarIndex = index % 4;
 
-        // Fade video transition
-        const mainVid = document.getElementById('main-gp-video');
-        if(mainVid) {
-            mainVid.style.opacity = 0;
-            setTimeout(() => {
-                mainVid.src = gpVideos[sidebarIndex];
-                mainVid.play().catch(e => console.log(e));
-                mainVid.style.opacity = 1;
-            }, 300);
-        }
-    };
+            // Update active class on sidebar
+            document.querySelectorAll('.tab-item').forEach((tab, i) => {
+                if (i === sidebarIndex) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
 
-</script>
+            // Fade video transition
+            const mainVid = document.getElementById('main-gp-video');
+            if (mainVid) {
+                mainVid.style.opacity = 0;
+                setTimeout(() => {
+                    mainVid.src = gpVideos[sidebarIndex];
+                    mainVid.play().catch(e => console.log(e));
+                    mainVid.style.opacity = 1;
+                }, 300);
+            }
+        };
+
+    </script>
 </body>
 
 </html>
