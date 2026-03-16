@@ -1980,18 +1980,48 @@
         .testi-user {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
             width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
+            padding-top: 25px;
+            margin-top: auto;
+        }
+
+        /* Better way to do gradient border for circles */
+        .testi-avatar-container {
+            position: relative;
+            width: 76px;
+            height: 76px;
+            padding: 3px;
+            background: linear-gradient(135deg, #FFB800, #CC9200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden; /* Ensure avatar zoom stays inside */
         }
 
         .testi-avatar {
-            width: 60px;
-            height: 60px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ffd700;
+            border: 2px solid #0a0a1a;
+            transform: scale(1.6); /* Zoom in on face */
+            object-position: center 20%; /* Top-center focus */
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-card:hover .testi-avatar {
+            transform: scale(1.8); /* Slight extra zoom on hover */
+        }
+
+        .testimonial-card:hover .testi-avatar-container {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(255, 184, 0, 0.4);
+            background: linear-gradient(135deg, #FFD700, #FFB800);
         }
 
         .testi-info {
@@ -2343,10 +2373,12 @@
                         graphismes sont magnifiques et les batailles de dragons sont épiques ! Je recommande vivement."
                     </p>
                     <div class="testi-user">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp" alt="User 1"
-                            class="testi-avatar">
+                        <div class="testi-avatar-container">
+                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-dir3.webp" alt="Champion Royal"
+                                class="testi-avatar">
+                        </div>
                         <div class="testi-info">
-                            <h4 class="testi-name">Alexandre M.</h4>
+                            <h4 class="testi-name">Champion Royal</h4>
                             <p class="testi-level" data-i18n="testi_level1">Seigneur Lvl 45</p>
                         </div>
                     </div>
@@ -2362,10 +2394,12 @@
                     <p class="testi-text" data-i18n="testi_2">"Très addictif et la communauté est super active. Le
                         système d'alliances rend le jeu vraiment intéressant sur le long terme."</p>
                     <div class="testi-user">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image6.webp" alt="User 2"
-                            class="testi-avatar">
+                        <div class="testi-avatar-container">
+                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-fass.webp" alt="Mage Ancestral"
+                                class="testi-avatar">
+                        </div>
                         <div class="testi-info">
-                            <h4 class="testi-name">Sarah K.</h4>
+                            <h4 class="testi-name">Mage Ancestral</h4>
                             <p class="testi-level" data-i18n="testi_level2">Commandant Lvl 38</p>
                         </div>
                     </div>
@@ -2381,10 +2415,12 @@
                     <p class="testi-text" data-i18n="testi_3">"Jouer sur PC change tout ! Pas de lags, graphismes au top
                         et on peut vraiment affiner ses stratégies. Un vrai plaisir."</p>
                     <div class="testi-user">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image2.webp" alt="User 3"
-                            class="testi-avatar">
+                        <div class="testi-avatar-container">
+                            <img src="https://shopghila.com/wp-content/uploads/2026/03/character-fill.webp" alt="Archer Céleste"
+                                class="testi-avatar">
+                        </div>
                         <div class="testi-info">
-                            <h4 class="testi-name">David L.</h4>
+                            <h4 class="testi-name">Archer Céleste</h4>
                             <p class="testi-level" data-i18n="testi_level3">Maître Dragon Lvl 50</p>
                         </div>
                     </div>
@@ -2514,7 +2550,7 @@
     <section class="download-section" id="download">
         <!-- Download Background Video -->
         <div style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:0;">
-            <video autoplay loop controls playsinline style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
+            <video autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
                 <source src="https://shopghila.com/wp-content/uploads/2026/03/Hero-Section-anime.mp4" type="video/mp4">
             </video>
             <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(2,6,23,0.8), rgba(2,6,23,0.4));"></div>
@@ -3283,7 +3319,7 @@
             });
 
             // Play video on scroll intersection (starts on its own upon arrival)
-            const video = document.getElementById('inline-video');
+            const video = document.getElementById('main-gp-video');
             if (video) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
