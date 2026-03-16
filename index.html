@@ -503,7 +503,7 @@
 
         /* Heroes Swiper Section */
         .heroes-section {
-            background: url('https://shopghila.com/wp-content/uploads/2026/03/image.webp.webp') center/cover fixed;
+            background: url('https://shopghila.com/wp-content/uploads/2026/03/Section-2.webp') center/cover fixed;
             position: relative;
         }
 
@@ -1403,15 +1403,17 @@
 
         .modal-img {
             flex: 1;
-            background: url('https://shopghila.com/wp-content/uploads/2026/03/image.webp.webp') center/cover;
             position: relative;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .modal-img img {
-            width: 130%;
-            margin-left: -15%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
         }
 
@@ -1929,10 +1931,10 @@
                     class="brand-logo">
             </div>
             <nav class="nav-links">
-                <a href="#heroes" data-i18n="nav_heroes">Héros</a>
                 <a href="#gameplay" data-i18n="nav_gameplay">Gameplay</a>
-                <a href="#requirements" data-i18n="nav_requirements">Configuration</a>
+                <a href="#heroes" data-i18n="nav_heroes">Héros</a>
                 <a href="#testimonials" data-i18n="nav_testimonials">Avis</a>
+                <a href="#requirements" data-i18n="nav_requirements">Configuration</a>
                 <a href="#faq" data-i18n="nav_faq">FAQ</a>
             </nav>
             <div class="nav-actions">
@@ -2046,7 +2048,7 @@
             </div>
     </section>
 
-    <!-- SECTION 2: HOOK / PROMISE -->
+    <!-- SECTION 2: TRUST BADGES (HOOK) -->
     <section class="hook-promise">
         <div class="container" data-aos="fade-up">
             <h2 class="section-title text-center" data-i18n="hook_title">Pourquoi plonger dans <span
@@ -2057,79 +2059,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: HEROES SHOWCASE -->
-    <section class="heroes-section" id="heroes">
-        <div class="container">
-            <div class="text-center" data-aos="fade-down">
-                <h2 class="section-title" data-i18n="heroes_title">Invoquez des <span
-                        class="text-highlight">Légendes</span></h2>
-                <p class="section-subtitle mb-4" data-i18n="heroes_desc">Commandez des Immortels historiques aux
-                    pouvoirs dévastateurs.</p>
-            </div>
-
-            <!-- Swiper Carousel -->
-            <div class="swiper heroes-slider" data-aos="fade-up" data-aos-delay="200">
-                <div class="swiper-wrapper">
-                    <!-- Hero 1 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image3.webp.webp" alt="Hero 1">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero1_name">Champion Royal</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
-                        </div>
-                    </div>
-                    <!-- Hero 2 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image6.webp.webp" alt="Hero 2">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero2_name">Mage Ancestral</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
-                        </div>
-                    </div>
-                    <!-- Hero 3 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image2.webp.webp" alt="Hero 3">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero3_name">Archer Céleste</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
-                        </div>
-                    </div>
-                    <!-- Hero 4 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image5.webp.webp" alt="Hero 4">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero4_name">Chevalier d'Acier</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
-                        </div>
-                    </div>
-                    <!-- Hero 5 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image1.webp.webp" alt="Hero 5">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero5_name">Guerrier de l'Ombre</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
-                        </div>
-                    </div>
-                    <!-- Hero 6 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/image4.webp.webp" alt="Hero 6">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero6_name">Paladin de Lumière</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Pagination & Navigation -->
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- SECTION 4: INTERACTIVE GAMEPLAY SHOWCASE -->
+    <!-- SECTION 3: GAMEPLAY -->
     <section class="gameplay-interactive" id="gameplay">
         <div class="container" style="max-width: 1400px; width: 95%;">
             <div class="gameplay-grid" data-aos="fade-up">
@@ -2193,61 +2123,79 @@
         </div>
     </section>
 
-    <!-- SECTION 5: SYSTEM REQUIREMENTS -->
-    <section class="requirements" id="requirements">
-        <div class="container" data-aos="fade-up">
-            <div class="windows-only-banner">
-                <i class="fa-brands fa-windows"></i>
-                <span data-i18n="req_banner">Ce jeu est conçu nativement et exclusivement pour les joueurs Windows
-                    PC.</span>
+    <!-- SECTION 4: HEROES SHOWCASE -->
+    <section class="heroes-section" id="heroes">
+        <div class="container">
+            <div class="text-center" data-aos="fade-down">
+                <h2 class="section-title" data-i18n="heroes_title">Invoquez des <span
+                        class="text-highlight">Légendes</span></h2>
+                <p class="section-subtitle mb-4" data-i18n="heroes_desc">Commandez des Immortels historiques aux
+                    pouvoirs dévastateurs.</p>
             </div>
 
-            <h2 class="section-title text-center" data-i18n="req_title">Configuration Windows</h2>
-            <div class="req-table-wrapper">
-                <table class="req-table">
-                    <thead>
-                        <tr>
-                            <th data-i18n="req_comp">Composant</th>
-                            <th data-i18n="req_min">Minimum</th>
-                            <th data-i18n="req_rec">Recommandé</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><i class="fa-brands fa-windows"></i> <span data-i18n="req_os">OS</span></td>
-                            <td>Windows 10 (64-bit)</td>
-                            <td>Windows 10 / 11 (64-bit)</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-microchip"></i> <span data-i18n="req_proc">Processeur</span></td>
-                            <td>Intel Core i3 / AMD Ryzen 3</td>
-                            <td>Intel Core i5 / AMD Ryzen 5</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-memory"></i> <span data-i18n="req_ram">Mémoire RAM</span></td>
-                            <td>8 Go</td>
-                            <td>16 Go</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-vr-cardboard"></i> <span data-i18n="req_gpu">Carte
-                                    Graphique</span></td>
-                            <td>Intel HD 4000 ou équivalent</td>
-                            <td>Geforce GTX 1050 / Radeon RX 560</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-hard-drive"></i> <span data-i18n="req_storage">Stockage</span>
-                            </td>
-                            <td data-i18n="req_storage_min">5 Go d'espace disponible</td>
-                            <td data-i18n="req_storage_rec">10 Go d'espace disponible (SSD)</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Swiper Carousel -->
+            <div class="swiper heroes-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <!-- Hero 1 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/6.webp" alt="Hero 1">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero1_name">Champion Royal</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 2 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/4.webp" alt="Hero 2">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero2_name">Mage Ancestral</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 3 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/5.webp" alt="Hero 3">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero3_name">Archer Céleste</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 4 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/3.webp" alt="Hero 4">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero4_name">Chevalier d'Acier</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 5 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/1.webp" alt="Hero 5">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero5_name">Guerrier de l'Ombre</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                    <!-- Hero 6 -->
+                    <div class="swiper-slide hero-card">
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/2.webp" alt="Hero 6">
+                        <div class="hero-info">
+                            <h3 data-i18n="hero6_name">Paladin de Lumière</h3>
+                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination & Navigation -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
 
 
-    <!-- SECTION 6: TESTIMONIALS -->
+
+    <!-- SECTION 5: REVIEWS (TESTIMONIALS) -->
     <section class="testimonials" id="testimonials">
         <div class="container">
             <h2 class="section-title text-center" data-aos="fade-up" data-i18n="testi_title">Ce que disent nos
@@ -2315,6 +2263,60 @@
         </div>
     </section>
 
+    <!-- SECTION 6: SYSTEM REQUIREMENTS -->
+    <section class="requirements" id="requirements">
+        <div class="container" data-aos="fade-up">
+            <div class="windows-only-banner">
+                <i class="fa-brands fa-windows"></i>
+                <span data-i18n="req_banner">Ce jeu est conçu nativement et exclusivement pour les joueurs Windows
+                    PC.</span>
+            </div>
+
+            <h2 class="section-title text-center" data-i18n="req_title">Configuration Windows</h2>
+            <div class="req-table-wrapper">
+                <table class="req-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="req_comp">Composant</th>
+                            <th data-i18n="req_min">Minimum</th>
+                            <th data-i18n="req_rec">Recommandé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fa-brands fa-windows"></i> <span data-i18n="req_os">OS</span></td>
+                            <td>Windows 10 (64-bit)</td>
+                            <td>Windows 10 / 11 (64-bit)</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-microchip"></i> <span data-i18n="req_proc">Processeur</span></td>
+                            <td>Intel Core i3 / AMD Ryzen 3</td>
+                            <td>Intel Core i5 / AMD Ryzen 5</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-memory"></i> <span data-i18n="req_ram">Mémoire RAM</span></td>
+                            <td>8 Go</td>
+                            <td>16 Go</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-vr-cardboard"></i> <span data-i18n="req_gpu">Carte
+                                    Graphique</span></td>
+                            <td>Intel HD 4000 ou équivalent</td>
+                            <td>Geforce GTX 1050 / Radeon RX 560</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-hard-drive"></i> <span data-i18n="req_storage">Stockage</span>
+                            </td>
+                            <td data-i18n="req_storage_min">5 Go d'espace disponible</td>
+                            <td data-i18n="req_storage_rec">10 Go d'espace disponible (SSD)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
     <!-- SECTION 7: FAQ -->
     <section class="faq" id="faq">
         <div class="container" data-aos="fade-up">
@@ -2378,7 +2380,7 @@
         </div>
     </section>
 
-    <!-- SECTION 8: DOWNLOAD -->
+    <!-- SECTION 8: FINAL CTA (DOWNLOAD) -->
     <section class="download-section" id="download">
         <!-- Download Background Video -->
         <div style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:0;">
@@ -2439,9 +2441,6 @@
                     <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC. Bâtissez votre empire, recrutez des Immortels et dominez Norheim.</p>
                     <div class="footer-social">
                         <a href="https://to.wendiro.com/u?k=9796a9a20d7f422080edbf4f9ee156e2&via=8931" target="_blank" rel="noopener" title="Télécharger"><i class="fa-solid fa-download"></i></a>
-                        <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" title="Discord"><i class="fa-brands fa-discord"></i></a>
-                        <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
 
@@ -2500,6 +2499,27 @@
             <div class="live-number-group small">
                 <span class="live-number-small" id="total-commanders">52395</span>
                 <span class="live-label-small" data-i18n="total_commanders">total commanders</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Details Popup Modal -->
+    <div class="hero-modal-overlay" id="hero-modal">
+        <div class="hero-modal-content">
+            <button class="hero-modal-close" id="close-hero-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="hero-modal-image-container">
+                <img src="" alt="Hero Full Image" class="hero-modal-image" id="hm-image">
+            </div>
+            <div class="hero-modal-details">
+                <div class="hero-type-badge" id="hm-type">Classe</div>
+                <h3 class="hero-modal-title" id="hm-title">Nom du Héros</h3>
+                <p class="hero-modal-desc" id="hm-desc">Description du héros ici.</p>
+                <div class="stats-bar" style="margin-bottom:15px;">
+                    <span style="color:var(--text-muted); font-size:0.9rem;">Power</span>
+                    <div style="background:rgba(255,255,255,0.1); height:8px; border-radius:4px; overflow:hidden; margin-top:5px;">
+                        <div id="hm-power-bar" style="background:#10B981; height:100%; width:80%;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -3368,6 +3388,13 @@
             document.addEventListener('keydown', startBackgroundMusic, { once: true });
             document.addEventListener('scroll', startBackgroundMusic, { once: true });
 
+            // Attempt to start music after 2 seconds automatically
+            setTimeout(() => {
+                if (!isMusicPlaying && !userMuted) {
+                    startBackgroundMusic();
+                }
+            }, 2000);
+
             // Initially set it as muted UI if it hasn't interacted yet
             updateSoundUI();
 
@@ -3388,6 +3415,117 @@
             });
 
         });
+
+
+        // Hero Modal Logic
+        const hmOverlay = document.getElementById('hero-modal');
+        const hmCloseBtn = document.getElementById('close-hero-modal');
+        const hmImage = document.getElementById('hm-image');
+        const hmType = document.getElementById('hm-type');
+        const hmTitle = document.getElementById('hm-title');
+        const hmDesc = document.getElementById('hm-desc');
+        const hmPowerBar = document.getElementById('hm-power-bar');
+
+        const heroData = [
+            {
+                name: "Champion Royal",
+                type: "Guerrier Physiques",
+                power: 90,
+                desc: "Un combattant au corps à corps redoutable, spécialisé dans la défense de première ligne et capable de briser les formations ennemies avec sa puissance brute.",
+                image: "https://shopghila.com/wp-content/uploads/2026/03/character-dir3.webp"
+            },
+            {
+                name: "Mage Ancestral",
+                type: "Dégâts Magiques",
+                power: 95,
+                desc: "Maître des arcanes anciennes. Il déploie des tempêtes dévastatrices sur le champ de bataille, sacrifiant sa défense pour un contrôle de zone absolu.",
+                image: "https://shopghila.com/wp-content/uploads/2026/03/character-fass.webp"
+            },
+            {
+                name: "Archer Céleste",
+                type: "Dégâts à Distance",
+                power: 85,
+                desc: "D'une précision mortelle, cet archer attaque depuis les cieux étoilés pour assassiner les cibles prioritaires avant même qu'elles ne puissent riposter.",
+                image: "https://shopghila.com/wp-content/uploads/2026/03/character-fill.webp"
+            },
+            {
+                name: "Chevalier d'Acier",
+                type: "Tank Lourd",
+                power: 88,
+                desc: "Véritable forteresse ambulante recouverte d'un métal impénétrable. Il encaisse d'énormes quantités de dégâts pour protéger ses alliés.",
+                image: "https://shopghila.com/wp-content/uploads/2026/03/character-jbad.webp"
+            },
+            {
+                name: "Guerrier de l'Ombre",
+                type: "Assassin Vif",
+                power: 92,
+                desc: "Frappant depuis les ténèbres absolues, il s'infiltre derrière les lignes ennemies pour neutraliser les menaces clés en un instant.",
+                image: "https://shopghila.com/wp-content/uploads/2026/03/character-ice-queen.webp"
+            },
+            {
+                name: "Paladin de Lumière",
+                type: "Soutien Sacré",
+                power: 80,
+                desc: "Béni par les esprits primordiaux, il soigne les troupes alliées et purifie toutes les afflictions tout en servant de rempart brillant.",
+                image: "https://shopghila.com/wp-content/uploads/2026/03/character-klio.webp"
+            }
+        ];
+
+        if (hmOverlay && hmCloseBtn) {
+            const discoverBtns = document.querySelectorAll('.hero-card .btn-secondary');
+            
+            discoverBtns.forEach((btn, index) => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Fetch data
+                    const idx = index % heroData.length; // Ensure index is safe
+                    const data = heroData[idx];
+
+                    // Populate modal
+                    hmImage.src = data.image;
+                    hmType.textContent = window.currentLang === 'fr' ? data.type : "Class Type"; // Simplify i18n for now or just display string
+                    hmTitle.textContent = data.name;
+                    hmDesc.textContent = data.desc;
+                    hmPowerBar.style.width = data.power + '%';
+
+                    // Determine color based on type keyword optionally, but keeping styling simple
+                    if(data.type.includes('Magiques') || data.type.includes('Soutien')){
+                        hmType.style.color = "#C084FC";
+                        hmType.style.borderColor = "rgba(192, 132, 252, 0.4)";
+                        hmType.style.background = "rgba(192, 132, 252, 0.2)";
+                    } else if(data.type.includes('Tank') || data.type.includes('Guerrier')) {
+                        hmType.style.color = "#F87171";
+                        hmType.style.borderColor = "rgba(248, 113, 113, 0.4)";
+                        hmType.style.background = "rgba(248, 113, 113, 0.2)";
+                    } else {
+                        hmType.style.color = "#38BDF8";
+                        hmType.style.borderColor = "rgba(56, 189, 248, 0.4)";
+                        hmType.style.background = "rgba(56, 189, 248, 0.2)";
+                    }
+
+                    // Show Modal
+                    hmOverlay.classList.add('active');
+                });
+            });
+
+            hmCloseBtn.addEventListener('click', () => {
+                hmOverlay.classList.remove('active');
+            });
+
+            // Close on outside click
+            hmOverlay.addEventListener('click', (e) => {
+                if (e.target === hmOverlay) {
+                    hmOverlay.classList.remove('active');
+                }
+            });
+            // Close on escape
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape' && hmOverlay.classList.contains('active')) {
+                    hmOverlay.classList.remove('active');
+                }
+            });
+        }
 
 
         // Gameplay Interactive Tabs Logic
