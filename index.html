@@ -522,6 +522,22 @@
             padding-top: 40px;
             padding-bottom: 60px;
             perspective: 1200px;
+            overflow: visible !important;
+        }
+
+        .swiper-wrapper {
+            transform-style: preserve-3d;
+        }
+
+        .swiper-slide {
+            transform-style: preserve-3d;
+            overflow: visible !important;
+            transition: z-index 0.1s;
+        }
+
+        .swiper-slide:hover, 
+        .swiper-slide:has(.hero-card.is-flipped) {
+            z-index: 100 !important;
         }
 
         .hero-card {
@@ -3571,6 +3587,7 @@
                         modifier: 1,
                         slideShadows: false,
                     },
+                    watchSlidesProgress: true,
                     loop: true,
                     autoplay: {
                         delay: 3000,
@@ -3802,7 +3819,7 @@
             // 1. Background Music 
             const bgMusic = new Audio('https://shopghila.com/wp-content/uploads/2026/03/Complexities-of-Sound-Incantation-SPOTISAVER.mp3');
             bgMusic.loop = true;
-            bgMusic.volume = 0.2; // 20% volume for subtle background music
+            bgMusic.volume = 0.25; // Slightly increased for impact
 
             let isMusicPlaying = false;
             let userMuted = false;
@@ -3810,8 +3827,9 @@
             const soundToggleBtn = document.getElementById('header-sound-toggle');
             const soundIcon = soundToggleBtn.querySelector('i');
 
-            // 2. Button Click Sound
+            // 2. Sound URLs
             const clickSoundUrl = 'https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3';
+            const tacticalClickUrl = 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a14050.mp3';
 
             // Update icon UI
             const updateSoundUI = () => {
@@ -3827,14 +3845,58 @@
             // Play background music
             const startBackgroundMusic = () => {
                 if (userMuted || isMusicPlaying) return;
-                bgMusic.play().then(() => {
-                    isMusicPlaying = true;
+                
+                // Set to muted for initial autoplay bridge
+                bgMusic.muted = true;
+                
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isMusicPlaying = true;
+                        updateSoundUI();
+                        // If it's playing (even muted), we add unmute triggers
+                        addUnmuteTriggers();
+                    }).catch(e => {
+                        console.log("Stealth autoplay blocked, waiting for high-sensitivity triggers...");
+                        addUnmuteTriggers();
+                    });
+                }
+            };
+
+            const unmuteMusic = () => {
+                if (userMuted) return;
+                
+                if (!isMusicPlaying) {
+                    // Force start if it wasn't already playing muted
+                    bgMusic.muted = false;
+                    bgMusic.play().then(() => {
+                        isMusicPlaying = true;
+                        updateSoundUI();
+                    }).catch(err => console.log(err));
+                } else {
+                    bgMusic.muted = false;
                     updateSoundUI();
-                }).catch(e => console.log("Bg music playback prevented:", e));
-                // Remove initial interaction listeners
-                document.removeEventListener('click', startBackgroundMusic);
-                document.removeEventListener('keydown', startBackgroundMusic);
-                document.removeEventListener('scroll', startBackgroundMusic);
+                }
+                cleanupListeners();
+            };
+
+            const addUnmuteTriggers = () => {
+                window.addEventListener('scroll', unmuteMusic, { once: true, passive: true });
+                window.addEventListener('mousemove', unmuteMusic, { once: true });
+                window.addEventListener('wheel', unmuteMusic, { once: true, passive: true });
+                document.addEventListener('click', unmuteMusic, { once: true });
+                document.addEventListener('keydown', unmuteMusic, { once: true });
+                document.addEventListener('touchstart', unmuteMusic, { once: true });
+            };
+
+            const cleanupListeners = () => {
+                window.removeEventListener('scroll', unmuteMusic);
+                window.removeEventListener('mousemove', unmuteMusic);
+                window.removeEventListener('wheel', unmuteMusic);
+                document.removeEventListener('click', unmuteMusic);
+                document.removeEventListener('keydown', unmuteMusic);
+                document.removeEventListener('touchstart', unmuteMusic);
             };
 
             // Toggle functionality
@@ -3852,19 +3914,14 @@
                     isMusicPlaying = false;
                 }
                 updateSoundUI();
+                cleanupListeners(); // Remove sensitivity triggers if manually toggled
             });
 
-            // Listen for any interaction to start music
-            document.addEventListener('click', startBackgroundMusic, { once: true });
-            document.addEventListener('keydown', startBackgroundMusic, { once: true });
-            document.addEventListener('scroll', startBackgroundMusic, { once: true });
+            // Immediate muted attempt
+            startBackgroundMusic();
 
-            // Attempt to start music after 2 seconds automatically
-            setTimeout(() => {
-                if (!isMusicPlaying && !userMuted) {
-                    startBackgroundMusic();
-                }
-            }, 2000);
+            // Attempt unmuted play after 1 second (1sec trigger requirement)
+            setTimeout(unmuteMusic, 1000);
 
             // Initially set it as muted UI if it hasn't interacted yet
             updateSoundUI();
@@ -3873,8 +3930,16 @@
             window.playClickSound = () => {
                 if (userMuted) return;
                 const sound = new Audio(clickSoundUrl);
-                sound.volume = 0.6;
-                sound.play().catch(e => console.log("Click sound prevented:", e));
+                sound.volume = 0.5;
+                sound.play().catch(e => {});
+            };
+
+            // Special Tactical Click for Gameplay
+            window.playTacticalClick = () => {
+                if (userMuted) return;
+                const sound = new Audio(tacticalClickUrl);
+                sound.volume = 0.7; // Higher volume for priority UI
+                sound.play().catch(e => {});
             };
 
             // Attach click sound to all buttons, links, and actionable elements
@@ -3900,8 +3965,8 @@
         ];
 
         window.changeGameplay = function (index) {
-            // Play click sound if initialized
-            if (window.playClickSound) window.playClickSound();
+            // Play premium tactical click
+            if (window.playTacticalClick) window.playTacticalClick();
 
             // Ensure index wraps correctly for the sidebar which only has 4 tabs
             const sidebarIndex = index % 4;
