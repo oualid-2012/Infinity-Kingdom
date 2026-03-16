@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Cinzel:wght@700&family=Inter:wght@400;700&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
 
     <!-- FontAwesome Library (Icons) -->
@@ -501,7 +501,7 @@
             background-image: radial-gradient(circle at 50% 50%, rgba(255, 184, 0, 0.05) 0%, transparent 60%);
         }
 
-        /* Heroes Swiper Section */
+        /* Heroes Swiper Section - 3D UPGRADE */
         .heroes-section {
             background: url('https://shopghila.com/wp-content/uploads/2026/03/Section-2.webp') center/cover fixed;
             position: relative;
@@ -515,53 +515,194 @@
             width: 100%;
             height: 100%;
             background: rgba(11, 25, 44, 0.85);
-            /* Darken bg a bit */
         }
 
         .swiper {
             width: 100%;
             padding-top: 40px;
             padding-bottom: 60px;
+            perspective: 1200px;
         }
 
         .hero-card {
-            background: linear-gradient(145deg, #1E3A8A, #0F172A);
-            border: 4px solid #38BDF8;
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            height: 520px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .hero-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .hero-card:hover .hero-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .hero-card-front, .hero-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border-radius: 20px;
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            height: 480px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Front Face Styles */
+        .hero-card-front {
+            background: linear-gradient(145deg, #1E3A8A, #0F172A);
+            border-color: #38BDF8;
             display: flex;
             flex-direction: column;
+            z-index: 2;
         }
 
-        .hero-card img {
+        .hero-card-front img {
             flex: 1;
             width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center top;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
-        .hero-card:hover img {
-            transform: scale(1.1);
+        /* 3D Depth Breakthrough Effect */
+        .hero-card:hover .hero-card-front img {
+            transform: translateZ(50px) scale(1.05);
         }
 
-        .hero-info {
+        .hero-card-front .hero-info {
             position: absolute;
             bottom: 0;
             width: 100%;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
             padding: 40px 20px 20px;
-            text-align: center;
         }
 
-        .hero-info h3 {
+        .hero-card-front h3 {
             font-size: 1.8rem;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 184, 0, 0.5);
         }
+
+        /* Back Face Styles - Tactical Panel */
+        .hero-card-back {
+            background: #0F172A;
+            transform: rotateY(180deg);
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: left;
+            z-index: 1;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            border: 3px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .hero-card-back::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Elemental Themes */
+        .card-water .hero-card-back { background: linear-gradient(135deg, #072E33, #0F172A); border-color: #00D2FF; }
+        .card-water .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.2), transparent 70%); }
+        .card-water .stat-value { background: #00D2FF; box-shadow: 0 0 10px #00D2FF; }
+
+        .card-wind .hero-card-back { background: linear-gradient(135deg, #1E1B4B, #064E3B); border-color: #10B981; }
+        .card-wind .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.2), transparent 70%); }
+        .card-wind .stat-value { background: #10B981; box-shadow: 0 0 10px #10B981; }
+
+        .card-earth .hero-card-back { background: linear-gradient(135deg, #1E293B, #451A03); border-color: #B45309; }
+        .card-earth .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(180, 83, 9, 0.2), transparent 70%); }
+        .card-earth .stat-value { background: #B45309; box-shadow: 0 0 10px #B45309; }
+
+        .card-holy .hero-card-back { background: linear-gradient(135deg, #422006, #000000); border-color: #FBBF24; }
+        .card-holy .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.2), transparent 70%); }
+        .card-holy .stat-value { background: #FBBF24; box-shadow: 0 0 10px #FBBF24; }
+
+        .back-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #FFF;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-lore {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #CBD5E1;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-container {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .stat-bar {
+            height: 6px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat-value {
+            height: 100%;
+            width: 0;
+            transition: width 1s cubic-bezier(0.1, 0.5, 0.2, 1) 0.6s;
+        }
+
+        .hero-card:hover .stat-value {
+            width: var(--target-width);
+        }
+
+        /* Glowing Stat Text */
+        .stat-label { color: #94A3B4; }
+        .stat-percent { color: #FFF; }
 
         /* Swiper custom navigation */
         .swiper-button-next,
@@ -1232,121 +1373,7 @@
             }
         }
 
-        /* Hero Details Modal Styles */
-        .hero-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 25, 44, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
 
-        .hero-modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .hero-modal-content {
-            background: linear-gradient(135deg, #1E3A8A, #0F172A);
-            border: 3px solid var(--primary);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 850px;
-            display: flex;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 184, 0, 0.1);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .hero-modal-overlay.active .hero-modal-content {
-            transform: scale(1);
-        }
-
-        .hero-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .hero-modal-close:hover {
-            background: var(--accent);
-        }
-
-        .hero-modal-image-container {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-modal-details {
-            flex: 1.2;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-type-badge {
-            display: inline-block;
-            background: var(--primary);
-            color: #4A2E00;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            align-self: flex-start;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero-modal-title {
-            font-size: 2.8rem;
-            color: #FFF;
-            margin-bottom: 15px;
-            line-height: 1.1;
-        }
-
-        .hero-modal-desc {
-            color: #E2E8F0;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 25px;
-        }
 
         /* Premium Live Notification */
         .live-notification-premium {
@@ -1637,7 +1664,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
             color: #4A2E00;
             padding: 15px 30px;
             border-radius: 50px;
@@ -1648,15 +1675,16 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 0 3px #FFF8D6;
-            z-index: 1000;
-            transition: var(--transition);
-            animation: bounce-soft 3s infinite, glow 2s infinite alternate;
+            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: bounce-soft 3s infinite;
         }
 
         .floating-cta:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 0 3px #FFF;
+            background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+            box-shadow: 0 15px 40px rgba(255, 184, 0, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.4);
             color: #4A2E00;
         }
 
@@ -2319,52 +2347,183 @@
             <!-- Swiper Carousel -->
             <div class="swiper heroes-slider" data-aos="fade-up" data-aos-delay="200">
                 <div class="swiper-wrapper">
-                    <!-- Hero 1 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/6.webp" alt="Hero 1">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero1_name">Champion Royal</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+                    <!-- Hero 1: Cleopatra (Water) -->
+                    <div class="swiper-slide hero-card card-water">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-front">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/6.webp" alt="Cleopatra">
+                                <div class="hero-info">
+                                    <h3 data-i18n="hero1_name">Cleopatra</h3>
+                                </div>
+                            </div>
+                            <div class="hero-card-back">
+                                <h4 class="back-header">THE NILE’S VENOM</h4>
+                                <p class="back-lore">"Control is the ultimate power. Cleopatra doesn't just damage enemies; she freezes their heartbeat. Her Arcane Blizzard turns massive legions into statues of ice. Do you have the vision to freeze the world?"</p>
+                                <div class="stat-container">
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">ATK</span><span class="stat-percent">95%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 95%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">CTRL</span><span class="stat-percent">92%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 92%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">INTELLECT</span><span class="stat-percent">98%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 98%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Hero 2 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/4.webp" alt="Hero 2">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero2_name">Mage Ancestral</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+
+                    <!-- Hero 2: Genghis Khan (Wind) -->
+                    <div class="swiper-slide hero-card card-wind">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-front">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/4.webp" alt="Genghis Khan">
+                                <div class="hero-info">
+                                    <h3 data-i18n="hero2_name">Genghis Khan</h3>
+                                </div>
+                            </div>
+                            <div class="hero-card-back">
+                                <h4 class="back-header">THE STEPPE CONQUEROR</h4>
+                                <p class="back-lore">"Speed kills. Genghis Khan rains down purple-fire arrows that bleed out the strongest tanks before they can even draw their swords. Conquer the map with the world's most relentless backline DPS."</p>
+                                <div class="stat-container">
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">ATK</span><span class="stat-percent">98%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 98%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">SPD</span><span class="stat-percent">94%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 94%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">RANGE</span><span class="stat-percent">96%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 96%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Hero 3 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/5.webp" alt="Hero 3">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero3_name">Archer Céleste</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+
+                    <!-- Hero 3: D’Artagnan (Wind) -->
+                    <div class="swiper-slide hero-card card-wind">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-front">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/5.webp" alt="D’Artagnan">
+                                <div class="hero-info">
+                                    <h3 data-i18n="hero3_name">D’Artagnan</h3>
+                                </div>
+                            </div>
+                            <div class="hero-card-back">
+                                <h4 class="back-header">THE ROYAL BLADE</h4>
+                                <p class="back-lore">"Precision beats power. A high-speed executioner designed to pierce the thickest armor. When the enemy is weak, D’Artagnan finishes the job with one lightning-fast strike. One blade, one kill."</p>
+                                <div class="stat-container">
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">SPD</span><span class="stat-percent">97%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 97%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">CRIT</span><span class="stat-percent">92%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 92%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">PRECISION</span><span class="stat-percent">95%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 95%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Hero 4 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/3.webp" alt="Hero 4">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero4_name">Chevalier d'Acier</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+
+                    <!-- Hero 4: Harald III (Earth) -->
+                    <div class="swiper-slide hero-card card-earth">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-front">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/3.webp" alt="Harald III">
+                                <div class="hero-info">
+                                    <h3 data-i18n="hero4_name">Harald III</h3>
+                                </div>
+                            </div>
+                            <div class="hero-card-back">
+                                <h4 class="back-header">THE HARD RULER</h4>
+                                <p class="back-lore">"An immovable wall. Harald III stands where others fall. With his heavy soul-axe and indestructible earth armor, he absorbs the fury of gods. Command the frontlines. Be the shield Norheim needs."</p>
+                                <div class="stat-container">
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span class="stat-percent">99%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 99%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">HP</span><span class="stat-percent">95%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 95%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">STAMINA</span><span class="stat-percent">90%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 90%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Hero 5 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/1.webp" alt="Hero 5">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero5_name">Guerrier de l'Ombre</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+
+                    <!-- Hero 5: Siddhartha Gautama (Holy) -->
+                    <div class="swiper-slide hero-card card-holy">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-front">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/1.webp" alt="Siddhartha Gautama">
+                                <div class="hero-info">
+                                    <h3 data-i18n="hero5_name">Siddhartha Gautama</h3>
+                                </div>
+                            </div>
+                            <div class="hero-card-back">
+                                <h4 class="back-header">THE ENLIGHTENED ONE</h4>
+                                <p class="back-lore">"Invincibility is a strategy. Siddhartha cleanses the darkness and shields your army in divine light. He turns a losing battle into a legendary victory. A god on your side is the ultimate unfair advantage."</p>
+                                <div class="stat-container">
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">HEAL</span><span class="stat-percent">96%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 96%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">SUPPORT</span><span class="stat-percent">98%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 98%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span class="stat-percent">85%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 85%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Hero 6 -->
-                    <div class="swiper-slide hero-card">
-                        <img src="https://shopghila.com/wp-content/uploads/2026/03/2.webp" alt="Hero 6">
-                        <div class="hero-info">
-                            <h3 data-i18n="hero6_name">Paladin de Lumière</h3>
-                            <button class="btn btn-secondary btn-small" data-i18n="hero_btn_discover">Découvrir</button>
+
+                    <!-- Hero 6: Brynhild (Water) -->
+                    <div class="swiper-slide hero-card card-water">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-front">
+                                <img src="https://shopghila.com/wp-content/uploads/2026/03/2.webp" alt="Brynhild">
+                                <div class="hero-info">
+                                    <h3 data-i18n="hero6_name">Brynhild</h3>
+                                </div>
+                            </div>
+                            <div class="hero-card-back">
+                                <h4 class="back-header">THE CRYSTAL MAIDEN</h4>
+                                <p class="back-lore">"The cold embrace of death. Brynhild debuffs the enemy's speed while reinforcing your vanguard with glacial shields. She is the anchor of every elite Water formation. Freeze their momentum."</p>
+                                <div class="stat-container">
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span class="stat-percent">88%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 88%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">CTRL</span><span class="stat-percent">85%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 85%"></div></div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-label-row"><span class="stat-label">SUPPORT</span><span class="stat-percent">90%</span></div>
+                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 90%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2716,27 +2875,7 @@
 
 
 
-    <!-- Hero Details Popup Modal -->
-    <div class="hero-modal-overlay" id="hero-modal">
-        <div class="hero-modal-content">
-            <button class="hero-modal-close" id="close-hero-modal"><i class="fa-solid fa-xmark"></i></button>
-            <div class="hero-modal-image-container">
-                <img src="" alt="Hero Full Image" class="hero-modal-image" id="hm-image">
-            </div>
-            <div class="hero-modal-details">
-                <div class="hero-type-badge" id="hm-type">Classe</div>
-                <h3 class="hero-modal-title" id="hm-title">Nom du Héros</h3>
-                <p class="hero-modal-desc" id="hm-desc">Description du héros ici.</p>
-                <div class="stats-bar" style="margin-bottom:15px;">
-                    <span style="color:var(--text-muted); font-size:0.9rem;">Power</span>
-                    <div
-                        style="background:rgba(255,255,255,0.1); height:8px; border-radius:4px; overflow:hidden; margin-top:5px;">
-                        <div id="hm-power-bar" style="background:#10B981; height:100%; width:80%;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Exit-Intent / Timer Popup -->
     <div class="modal-overlay" id="cta-popup">
@@ -2815,12 +2954,12 @@
                     hook_desc: "Découvrez un univers fantastique vibrant au style cartoon unique. Formez la meilleure équipe d'Immortels, repoussez l'invasion des Nains et participez Ã  d'incroyables batailles de faction !",
                     heroes_title: "Invoquez des <span class='text-highlight'>Légendes</span>",
                     heroes_desc: "Commandez des Immortels historiques aux pouvoirs dévastateurs.",
-                    hero1_name: "Champion Royal",
-                    hero2_name: "Mage Ancestral",
-                    hero3_name: "Archer Céleste",
-                    hero4_name: "Chevalier d'Acier",
-                    hero5_name: "Guerrier de l'Ombre",
-                    hero6_name: "Paladin de Lumière",
+                    hero1_name: "Cleopatra",
+                    hero2_name: "Genghis Khan",
+                    hero3_name: "D’Artagnan",
+                    hero4_name: "Harald III",
+                    hero5_name: "Siddhartha Gautama",
+                    hero6_name: "Brynhild",
                     hero_btn_discover: "Découvrir",
                     features_title: "Un Royaume Ã  <span class='text-secondary'>Conquérir</span>",
                     feature1_title: "Bâtissez votre Empire",
@@ -2914,12 +3053,12 @@
                     hook_desc: "Discover a vibrant fantasy universe with a unique cartoon style. Form the best team of Immortals, repel the Dwarf invasion, and participate in incredible faction battles!",
                     heroes_title: "Summon <span class='text-highlight'>Legends</span>",
                     heroes_desc: "Command historical Immortals with devastating powers.",
-                    hero1_name: "Royal Champion",
-                    hero2_name: "Ancestral Mage",
-                    hero3_name: "Celestial Archer",
-                    hero4_name: "Steel Knight",
-                    hero5_name: "Shadow Warrior",
-                    hero6_name: "Paladin of Light",
+                    hero1_name: "Cleopatra",
+                    hero2_name: "Genghis Khan",
+                    hero3_name: "D’Artagnan",
+                    hero4_name: "Harald III",
+                    hero5_name: "Siddhartha Gautama",
+                    hero6_name: "Brynhild",
                     hero_btn_discover: "Discover",
                     features_title: "A Kingdom to <span class='text-secondary'>Conquer</span>",
                     feature1_title: "Build your Empire",
@@ -3015,12 +3154,12 @@
                     hook_desc: "Descubre un vibrante universo fantÃ¡stico con un estilo de dibujos animados Ãºnico. Â¡Forma el mejor equipo de Inmortales, repele la invasiÃ³n de los Enanos y participa en increÃ­bles batallas de facciones!",
                     heroes_title: "Convoca <span class='text-highlight'>Leyendas</span>",
                     heroes_desc: "Comanda Inmortales histÃ³ricos con poderes devastadores.",
-                    hero1_name: "CampeÃ³n Real",
-                    hero2_name: "Mago Ancestral",
-                    hero3_name: "Arquero Celestial",
-                    hero4_name: "Caballero de Acero",
-                    hero5_name: "Guerrero de la Sombra",
-                    hero6_name: "PaladÃ­n de Luz",
+                    hero1_name: "Cleopatra",
+                    hero2_name: "Genghis Khan",
+                    hero3_name: "D’Artagnan",
+                    hero4_name: "Harald III",
+                    hero5_name: "Siddhartha Gautama",
+                    hero6_name: "Brynhild",
                     hero_btn_discover: "Descubrir",
                     features_title: "Un Reino por <span class='text-secondary'>Conquistar</span>",
                     feature1_title: "Construye tu Imperio",
@@ -3116,12 +3255,12 @@
                     hook_desc: "Entdecke ein lebendiges Fantasy-Universum in einem einzigartigen Cartoon-Stil. Bilde das beste Team von Unsterblichen, wehre die Zwergeninvasion ab und nimm an unglaublichen FraktionskÃ¤mpfen teil!",
                     heroes_title: "BeschwÃ¶re <span class='text-highlight'>Legenden</span>",
                     heroes_desc: "Befehlige historische Unsterbliche mit verheerenden KrÃ¤ften.",
-                    hero1_name: "KÃ¶niglicher Champion",
-                    hero2_name: "Ahnenmagier",
-                    hero3_name: "Himmlischer BogenschÃ¼tze",
-                    hero4_name: "Stahlritter",
-                    hero5_name: "Schattenkrieger",
-                    hero6_name: "Lichtpaladin",
+                    hero1_name: "Cleopatra",
+                    hero2_name: "Genghis Khan",
+                    hero3_name: "D’Artagnan",
+                    hero4_name: "Harald III",
+                    hero5_name: "Siddhartha Gautama",
+                    hero6_name: "Brynhild",
                     hero_btn_discover: "Entdecken",
                     features_title: "Ein KÃ¶nigreich zu <span class='text-secondary'>Erobern</span>",
                     feature1_title: "Baue dein Imperium",
@@ -3186,12 +3325,12 @@
                     hook_desc: "Descubra um universo de fantasia vibrante com um estilo de desenho animado Ãºnico. Forme a melhor equipe de Imortais, repela a invasÃ£o dos AnÃµes e participe de batalhas incrÃ­veis de facçÃµes!",
                     heroes_title: "Convoque <span class='text-highlight'>Lendas</span>",
                     heroes_desc: "Comande Imortais histÃ³ricos com poderes devastadores.",
-                    hero1_name: "CampeÃ£o Real",
-                    hero2_name: "Mago Ancestral",
-                    hero3_name: "Arqueiro Celestial",
-                    hero4_name: "Cavaleiro de Aço",
-                    hero5_name: "Guerreiro das Sombras",
-                    hero6_name: "Paladino da Luz",
+                    hero1_name: "Cleopatra",
+                    hero2_name: "Genghis Khan",
+                    hero3_name: "D’Artagnan",
+                    hero4_name: "Harald III",
+                    hero5_name: "Siddhartha Gautama",
+                    hero6_name: "Brynhild",
                     hero_btn_discover: "Descobrir",
                     features_title: "Um Reino para <span class='text-secondary'>Conquistar</span>",
                     feature1_title: "Construa seu Império",
@@ -3638,115 +3777,7 @@
         });
 
 
-        // Hero Modal Logic
-        const hmOverlay = document.getElementById('hero-modal');
-        const hmCloseBtn = document.getElementById('close-hero-modal');
-        const hmImage = document.getElementById('hm-image');
-        const hmType = document.getElementById('hm-type');
-        const hmTitle = document.getElementById('hm-title');
-        const hmDesc = document.getElementById('hm-desc');
-        const hmPowerBar = document.getElementById('hm-power-bar');
 
-        const heroData = [
-            {
-                name: "Champion Royal",
-                type: "Guerrier Physiques",
-                power: 90,
-                desc: "Un combattant au corps à corps redoutable, spécialisé dans la défense de première ligne et capable de briser les formations ennemies avec sa puissance brute.",
-                image: "https://shopghila.com/wp-content/uploads/2026/03/character-dir3.webp"
-            },
-            {
-                name: "Mage Ancestral",
-                type: "Dégâts Magiques",
-                power: 95,
-                desc: "Maître des arcanes anciennes. Il déploie des tempêtes dévastatrices sur le champ de bataille, sacrifiant sa défense pour un contrôle de zone absolu.",
-                image: "https://shopghila.com/wp-content/uploads/2026/03/character-fass.webp"
-            },
-            {
-                name: "Archer Céleste",
-                type: "Dégâts à Distance",
-                power: 85,
-                desc: "D'une précision mortelle, cet archer attaque depuis les cieux étoilés pour assassiner les cibles prioritaires avant même qu'elles ne puissent riposter.",
-                image: "https://shopghila.com/wp-content/uploads/2026/03/character-fill.webp"
-            },
-            {
-                name: "Chevalier d'Acier",
-                type: "Tank Lourd",
-                power: 88,
-                desc: "Véritable forteresse ambulante recouverte d'un métal impénétrable. Il encaisse d'énormes quantités de dégâts pour protéger ses alliés.",
-                image: "https://shopghila.com/wp-content/uploads/2026/03/character-jbad.webp"
-            },
-            {
-                name: "Guerrier de l'Ombre",
-                type: "Assassin Vif",
-                power: 92,
-                desc: "Frappant depuis les ténèbres absolues, il s'infiltre derrière les lignes ennemies pour neutraliser les menaces clés en un instant.",
-                image: "https://shopghila.com/wp-content/uploads/2026/03/character-ice-queen.webp"
-            },
-            {
-                name: "Paladin de Lumière",
-                type: "Soutien Sacré",
-                power: 80,
-                desc: "Béni par les esprits primordiaux, il soigne les troupes alliées et purifie toutes les afflictions tout en servant de rempart brillant.",
-                image: "https://shopghila.com/wp-content/uploads/2026/03/character-klio.webp"
-            }
-        ];
-
-        if (hmOverlay && hmCloseBtn) {
-            const discoverBtns = document.querySelectorAll('.hero-card .btn-secondary');
-
-            discoverBtns.forEach((btn, index) => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    // Fetch data
-                    const idx = index % heroData.length; // Ensure index is safe
-                    const data = heroData[idx];
-
-                    // Populate modal
-                    hmImage.src = data.image;
-                    hmType.textContent = window.currentLang === 'fr' ? data.type : "Class Type"; // Simplify i18n for now or just display string
-                    hmTitle.textContent = data.name;
-                    hmDesc.textContent = data.desc;
-                    hmPowerBar.style.width = data.power + '%';
-
-                    // Determine color based on type keyword optionally, but keeping styling simple
-                    if (data.type.includes('Magiques') || data.type.includes('Soutien')) {
-                        hmType.style.color = "#C084FC";
-                        hmType.style.borderColor = "rgba(192, 132, 252, 0.4)";
-                        hmType.style.background = "rgba(192, 132, 252, 0.2)";
-                    } else if (data.type.includes('Tank') || data.type.includes('Guerrier')) {
-                        hmType.style.color = "#F87171";
-                        hmType.style.borderColor = "rgba(248, 113, 113, 0.4)";
-                        hmType.style.background = "rgba(248, 113, 113, 0.2)";
-                    } else {
-                        hmType.style.color = "#38BDF8";
-                        hmType.style.borderColor = "rgba(56, 189, 248, 0.4)";
-                        hmType.style.background = "rgba(56, 189, 248, 0.2)";
-                    }
-
-                    // Show Modal
-                    hmOverlay.classList.add('active');
-                });
-            });
-
-            hmCloseBtn.addEventListener('click', () => {
-                hmOverlay.classList.remove('active');
-            });
-
-            // Close on outside click
-            hmOverlay.addEventListener('click', (e) => {
-                if (e.target === hmOverlay) {
-                    hmOverlay.classList.remove('active');
-                }
-            });
-            // Close on escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && hmOverlay.classList.contains('active')) {
-                    hmOverlay.classList.remove('active');
-                }
-            });
-        }
 
 
         // Gameplay Interactive Tabs Logic
