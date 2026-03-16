@@ -617,6 +617,104 @@
             text-shadow: 0 0 10px rgba(255, 184, 0, 0.5);
         }
 
+        /* Gallery Section Styling */
+        .gallery-section {
+            background: #0B192C;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+            border-top: 2px solid rgba(56, 189, 248, 0.2);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .gallery-slider {
+            width: 100%;
+            padding: 40px 0;
+            overflow: visible !important;
+        }
+
+        .gallery-item {
+            width: 400px;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--primary);
+            transform: scale(1.05) translateY(-5px);
+            z-index: 10;
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            transition: filter 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1);
+        }
+
+        /* Technical HUD Corners for Gallery */
+        .gallery-item .hud-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            z-index: 2;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .hud-corner {
+            opacity: 1;
+        }
+
+        .gallery-item .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .gallery-item .top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+        .gallery-item .bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+        .gallery-item .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+        .gallery-status {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gallery-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse-glow 1.5s infinite;
+        }
         /* Back Face Styles - Tactical Panel */
         .hero-card-back {
             background: #0F172A;
@@ -2430,6 +2528,126 @@
         </div>
     </section>
 
+    <!-- SECTION: BATTLEFIELD GALLERY -->
+    <section class="gallery-section" id="gallery">
+        <div class="container-fluid px-0">
+            <div class="text-center mb-5" data-aos="fade-down">
+                <div class="gallery-status">Tactical Scan: Complete</div>
+                <h2 class="section-title">Battlefield <span class="text-highlight">Intelligence</span></h2>
+                <p class="section-subtitle">Visual snapshots of Norheim’s frontlines. Intelligence updated live.</p>
+            </div>
+
+            <div class="swiper gallery-slider" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <!-- Image 1 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-6.jpg" alt="Gallery 1">
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-5.jpg" alt="Gallery 2">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-4.jpg" alt="Gallery 3">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-3.jpg" alt="Gallery 4">
+                    </div>
+                    <!-- Image 5 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-1.jpg" alt="Gallery 5">
+                    </div>
+                    <!-- Image 6 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-2.jpg" alt="Gallery 6">
+                    </div>
+                    <!-- Image 7 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-13.webp" alt="Gallery 7">
+                    </div>
+                    <!-- Image 8 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-12.webp" alt="Gallery 8">
+                    </div>
+                    <!-- Image 9 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-7.webp" alt="Gallery 9">
+                    </div>
+                    <!-- Image 10 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-8.webp" alt="Gallery 10">
+                    </div>
+                    <!-- Image 11 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-9.webp" alt="Gallery 11">
+                    </div>
+                    <!-- Image 12 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-10.webp" alt="Gallery 12">
+                    </div>
+                    <!-- Image 13 -->
+                    <div class="swiper-slide gallery-item">
+                        <span class="hud-corner top-left"></span>
+                        <span class="hud-corner top-right"></span>
+                        <span class="hud-corner bottom-left"></span>
+                        <span class="hud-corner bottom-right"></span>
+                        <img src="https://shopghila.com/wp-content/uploads/2026/03/Gameplay-11.webp" alt="Gallery 13">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SECTION 4: HEROES SHOWCASE -->
     <section class="heroes-section" id="heroes">
         <div class="container">
@@ -3615,6 +3833,22 @@
                             spaceBetween: 40
                         }
                     }
+                });
+
+                // Initialize Battlefield Gallery Slider
+                const gallerySwiper = new Swiper('.gallery-slider', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 30,
+                    centeredSlides: true,
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+                    grabCursor: true,
+                    freeMode: true,
+                    freeModeSticky: true
                 });
 
                 // Mobile/Touch flip interaction
