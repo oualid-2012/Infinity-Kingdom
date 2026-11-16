@@ -321,6 +321,8 @@
             align-items: center;
             position: relative;
             padding-top: 80px;
+            overflow: hidden;
+            background-color: var(--bg-main);
         }
 
         .hero-bg {
@@ -331,14 +333,20 @@
             height: 100%;
             z-index: 0;
             overflow: hidden;
+            background: #0B192C url('asset/image.webp.webp') no-repeat center center / cover;
         }
 
         .hero-bg img,
-        .hero-bg video {
+        .hero-bg video,
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: center center;
+            z-index: 1;
         }
 
         .overlay {
@@ -347,7 +355,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(11, 25, 44, 0.3) 0%, rgba(11, 25, 44, 0.7) 70%, var(--bg-main) 100%);
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(11, 25, 44, 0.3) 0%, rgba(11, 25, 44, 0.6) 70%, var(--bg-main) 100%);
         }
 
         .hero-content {
@@ -503,8 +513,10 @@
 
         /* Heroes Swiper Section - 3D UPGRADE */
         .heroes-section {
-            background: url('https://player.cloudinary.com/embed/?cloud_name=dq0ocneo3&public_id=Hero_Section_1.07_otaxh9') center/cover fixed;
+            background: #0B192C url('asset/Hero section.webp') center center / cover no-repeat;
             position: relative;
+            overflow: hidden;
+            padding: 90px 0 100px;
         }
 
         .heroes-section::before {
@@ -514,13 +526,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(11, 25, 44, 0.85);
+            background: radial-gradient(circle at 50% 35%, rgba(11, 25, 44, 0.40) 0%, rgba(11, 25, 44, 0.88) 100%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .swiper {
             width: 100%;
-            padding-top: 40px;
-            padding-bottom: 60px;
+            padding-top: 30px;
+            padding-bottom: 55px;
             perspective: 1200px;
             overflow: visible !important;
         }
@@ -532,10 +546,10 @@
         .swiper-slide {
             transform-style: preserve-3d;
             overflow: visible !important;
-            transition: z-index 0.1s;
+            transition: z-index 0.2s;
         }
 
-        .swiper-slide:hover, 
+        .swiper-slide:hover,
         .swiper-slide:has(.hero-card.is-flipped) {
             z-index: 100 !important;
         }
@@ -544,14 +558,22 @@
             background: transparent;
             border: none;
             border-radius: 20px;
-            height: 520px;
+            width: 320px;
+            max-width: 85vw;
+            height: 500px;
             cursor: pointer;
             position: relative;
             transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .hero-card:hover, .hero-card.is-flipped {
-            z-index: 50;
+        .hero-card:hover {
+            z-index: 60;
+        }
+
+        .hero-card.is-flipped {
+            z-index: 70;
         }
 
         .hero-card-inner {
@@ -559,62 +581,184 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
 
-        .hero-card:hover .hero-card-inner,
+        /* Flipping is exclusively driven by click state (.is-flipped) */
         .hero-card.is-flipped .hero-card-inner {
             transform: rotateY(180deg);
         }
 
-        .hero-card-front, .hero-card-back {
+        .hero-card:not(.is-flipped):hover .hero-card-inner {
+            transform: translateY(-8px);
+        }
+
+        .hero-card-front,
+        .hero-card-back {
             position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 20px;
             overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Front Face Styles */
         .hero-card-front {
-            background: linear-gradient(145deg, #1E3A8A, #0F172A);
-            border-color: #38BDF8;
+            background: linear-gradient(160deg, #152549 0%, #0a1428 100%);
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             z-index: 2;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            padding-bottom: 50px;
+            transform: rotateY(0deg);
+        }
+
+        .hero-card.is-flipped .hero-card-front {
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-card.is-flipped .hero-card-back {
+            z-index: 5;
+            pointer-events: auto;
         }
 
         .hero-card-front img {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            transition: transform 0.5s ease;
+            width: auto;
+            max-width: 88%;
+            max-height: 340px;
+            height: auto;
+            object-fit: contain;
+            object-position: center center;
+            margin: auto;
+            display: block;
+            filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.85));
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
+            pointer-events: none;
+            z-index: 2;
         }
 
-        /* 3D Depth Breakthrough Effect */
-        .hero-card:hover .hero-card-front img {
-            transform: translateZ(50px) scale(1.05);
+        /* 3D Depth Pop on Hover */
+        .hero-card:not(.is-flipped):hover .hero-card-front img {
+            transform: translateY(-8px) scale(1.06);
+            filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 14px rgba(255, 184, 0, 0.4));
         }
 
         .hero-card-front .hero-info {
             position: absolute;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
-            padding: 40px 20px 20px;
+            background: linear-gradient(to top, rgba(10, 18, 35, 0.98) 0%, rgba(10, 18, 35, 0.85) 65%, transparent 100%);
+            padding: 24px 15px 16px;
+            text-align: center;
+            z-index: 5;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            pointer-events: none;
         }
 
         .hero-card-front h3 {
-            font-size: 1.8rem;
+            font-size: 1.45rem;
             color: var(--primary);
+            margin: 0 0 2px 0;
+            text-shadow: 0 0 12px rgba(255, 184, 0, 0.6);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #E2E8F0;
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255, 184, 0, 0.5);
+        }
+
+        .card-flip-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: 4px;
+            transition: color 0.3s;
+        }
+
+        .hero-card:hover .card-flip-hint {
+            color: var(--primary);
+        }
+
+        /* Front Elemental Highlights */
+        .card-water .hero-card-front {
+            border-color: #00D2FF;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 210, 255, 0.22);
+        }
+        .card-water .hero-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 160px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 210, 255, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-wind .hero-card-front {
+            border-color: #10B981;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(16, 185, 129, 0.22);
+        }
+        .card-wind .hero-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 160px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-earth .hero-card-front {
+            border-color: #F59E0B;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 158, 11, 0.22);
+        }
+        .card-earth .hero-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 160px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-holy .hero-card-front {
+            border-color: #FBBF24;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(251, 191, 36, 0.25);
+        }
+        .card-holy .hero-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 160px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(251, 191, 36, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Gallery Section Styling */
@@ -630,7 +774,10 @@
         .gallery-section::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
             pointer-events: none;
         }
@@ -686,10 +833,33 @@
             opacity: 1;
         }
 
-        .gallery-item .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-        .gallery-item .top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
-        .gallery-item .bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
-        .gallery-item .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+        .gallery-item .top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .gallery-item .top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .gallery-item .bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .gallery-item .bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
 
         .gallery-status {
             position: absolute;
@@ -715,8 +885,17 @@
             box-shadow: 0 0 10px var(--primary);
             animation: pulse-glow 1.5s infinite;
         }
+
         /* Back Face Styles - Tactical Panel */
         .hero-card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
             background: #0F172A;
             transform: rotateY(180deg);
             padding: 30px 25px;
@@ -725,35 +904,78 @@
             justify-content: flex-start;
             text-align: left;
             z-index: 1;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
-            border: 3px solid rgba(148, 163, 184, 0.3);
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(148, 163, 184, 0.3);
         }
 
         .hero-card-back::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
 
         /* Elemental Themes */
-        .card-water .hero-card-back { background: linear-gradient(135deg, #072E33, #0F172A); border-color: #00D2FF; }
-        .card-water .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.2), transparent 70%); }
-        .card-water .stat-value { background: #00D2FF; box-shadow: 0 0 10px #00D2FF; }
+        .card-water .hero-card-back {
+            background: linear-gradient(135deg, #072E33, #0F172A);
+            border-color: #00D2FF;
+        }
 
-        .card-wind .hero-card-back { background: linear-gradient(135deg, #1E1B4B, #064E3B); border-color: #10B981; }
-        .card-wind .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.2), transparent 70%); }
-        .card-wind .stat-value { background: #10B981; box-shadow: 0 0 10px #10B981; }
+        .card-water .hero-card-back::before {
+            background: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.2), transparent 70%);
+        }
 
-        .card-earth .hero-card-back { background: linear-gradient(135deg, #1E293B, #451A03); border-color: #B45309; }
-        .card-earth .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(180, 83, 9, 0.2), transparent 70%); }
-        .card-earth .stat-value { background: #B45309; box-shadow: 0 0 10px #B45309; }
+        .card-water .stat-value {
+            background: #00D2FF;
+            box-shadow: 0 0 10px #00D2FF;
+        }
 
-        .card-holy .hero-card-back { background: linear-gradient(135deg, #422006, #000000); border-color: #FBBF24; }
-        .card-holy .hero-card-back::before { background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.2), transparent 70%); }
-        .card-holy .stat-value { background: #FBBF24; box-shadow: 0 0 10px #FBBF24; }
+        .card-wind .hero-card-back {
+            background: linear-gradient(135deg, #1E1B4B, #064E3B);
+            border-color: #10B981;
+        }
+
+        .card-wind .hero-card-back::before {
+            background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.2), transparent 70%);
+        }
+
+        .card-wind .stat-value {
+            background: #10B981;
+            box-shadow: 0 0 10px #10B981;
+        }
+
+        .card-earth .hero-card-back {
+            background: linear-gradient(135deg, #1E293B, #451A03);
+            border-color: #B45309;
+        }
+
+        .card-earth .hero-card-back::before {
+            background: radial-gradient(circle at 50% 50%, rgba(180, 83, 9, 0.2), transparent 70%);
+        }
+
+        .card-earth .stat-value {
+            background: #B45309;
+            box-shadow: 0 0 10px #B45309;
+        }
+
+        .card-holy .hero-card-back {
+            background: linear-gradient(135deg, #422006, #000000);
+            border-color: #FBBF24;
+        }
+
+        .card-holy .hero-card-back::before {
+            background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.2), transparent 70%);
+        }
+
+        .card-holy .stat-value {
+            background: #FBBF24;
+            box-shadow: 0 0 10px #FBBF24;
+        }
 
         .back-header {
             font-family: 'Cinzel', serif;
@@ -762,7 +984,7 @@
             margin-bottom: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 10px;
             position: relative;
             z-index: 1;
@@ -804,10 +1026,10 @@
 
         .stat-bar {
             height: 6px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .stat-value {
@@ -821,25 +1043,64 @@
         }
 
         /* Glowing Stat Text */
-        .stat-label { color: #94A3B4; }
-        .stat-percent { color: #FFF; }
+        .stat-label {
+            color: #94A3B4;
+        }
+
+        .stat-percent {
+            color: #FFF;
+        }
 
         /* Swiper custom navigation */
-        .swiper-button-next,
-        .swiper-button-prev {
+        .heroes-slider .swiper-button-next,
+        .heroes-slider .swiper-button-prev {
+            width: 48px;
+            height: 48px;
+            background: rgba(11, 25, 44, 0.9);
+            border: 2px solid rgba(255, 184, 0, 0.5);
+            border-radius: 50%;
             color: var(--primary);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        .heroes-slider .swiper-button-prev {
+            left: 5px;
+        }
+
+        .heroes-slider .swiper-button-next {
+            right: 5px;
+        }
+
+        .heroes-slider .swiper-button-prev:hover,
+        .heroes-slider .swiper-button-next:hover {
+            background: var(--primary);
+            color: #0B192C;
+            box-shadow: 0 0 25px rgba(255, 184, 0, 0.7);
+            transform: translateY(-50%) scale(1.15);
+            border-color: #FFF;
+        }
+
+        .heroes-slider .swiper-button-prev::after,
+        .heroes-slider .swiper-button-next::after {
+            font-size: 1.15rem;
+            font-weight: 900;
         }
 
         .swiper-pagination-bullet {
             background: #FFF;
-            opacity: 0.5;
+            opacity: 0.4;
+            transition: all 0.3s ease;
         }
 
         .swiper-pagination-bullet-active {
             background: var(--primary);
             opacity: 1;
-            transform: scale(1.3);
+            transform: scale(1.4);
+            box-shadow: 0 0 10px var(--primary);
         }
 
         /* Features */
@@ -947,7 +1208,7 @@
 
         /* System Requirements */
         .requirements {
-            background: url('https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096951/Section_2_tfjaxv.png') center/cover no-repeat;
+            background: url('asset/Section Configuration.png') center/cover no-repeat;
             background-attachment: fixed;
             position: relative;
             overflow: hidden;
@@ -1395,6 +1656,18 @@
         .lang-icon {
             color: var(--primary);
             font-size: 1.2rem;
+        }
+
+        .current-lang-display {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-right: 5px;
+            color: #ffffff;
+        }
+
+        .lang-switcher .lang-chevron {
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
         .lang-dropdown {
@@ -2118,9 +2391,17 @@
         }
 
         @keyframes console-pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
+            0% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.4;
+            }
         }
 
         .hud-coordinates {
@@ -2151,10 +2432,33 @@
             filter: drop-shadow(0 0 5px #3B82F6);
         }
 
-        .corner.top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-        .corner.top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
-        .corner.bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
-        .corner.bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+        .corner.top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner.top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
 
         /* Testimonials Section */
         .testimonials {
@@ -2315,7 +2619,7 @@
             color: var(--accent);
         }
     </style>
-    <link rel="icon" type="https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097271/Hero_Section_1.07_otaxh9.mp4">
+    <link rel="icon" href="asset/Logo.png" type="image/png">
 </head>
 
 <body>
@@ -2323,8 +2627,7 @@
     <header class="navbar hidden-scroll">
         <div class="nav-container">
             <div class="logo">
-                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096955/logo.png_ybygy4.png" alt="Infinity Kingdom Logo"
-                    class="brand-logo">
+                <img src="asset/Logo.png" alt="Infinity Kingdom Logo" class="brand-logo">
             </div>
             <nav class="nav-links">
                 <a href="#gameplay" data-i18n="nav_gameplay">Gameplay</a>
@@ -2335,16 +2638,14 @@
             </nav>
             <div class="nav-actions">
                 <!-- Header Sound Controls -->
-                <div class="header-sound-controls" style="margin-right: 15px;">
+                <div class="header-sound-controls">
                     <button id="header-sound-toggle" class="sound-btn" title="Activer/Désactiver le son"><i
                             class="fa-solid fa-volume-xmark"></i></button>
                 </div>
                 <div class="lang-switcher">
                     <i class="fa-solid fa-globe lang-icon"></i>
-                    <span class="text-white font-weight-bold"
-                        style="font-family: var(--font-heading); font-weight: 700; margin-right: 5px;"
-                        id="current-lang-display">FR</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+                    <span class="text-white current-lang-display" id="current-lang-display">FR</span>
+                    <i class="fa-solid fa-chevron-down lang-chevron"></i>
                     <div class="lang-dropdown">
                         <button class="lang-btn active" data-lang="fr">FR</button>
                         <button class="lang-btn" data-lang="en">EN</button>
@@ -2353,8 +2654,8 @@
                         <button class="lang-btn" data-lang="pt">PT</button>
                     </div>
                 </div>
-                <a href="https://to.wendiro.com/5J7J/2J1A1/"
-                    class="btn btn-small btn-primary" target="_blank" rel="noopener" data-i18n="nav_play">Jouer
+                <a href="https://to.dordir.com/5J7J/2J1A1/" class="btn btn-small btn-primary" target="_blank"
+                    rel="noopener" data-i18n="nav_play">Jouer
                     Gratuitement</a>
             </div>
         </div>
@@ -2363,15 +2664,16 @@
     <!-- SECTION 1: HERO -->
     <section class="hero" id="hero">
         <div class="hero-bg">
-            <video id="hero-bg-video" autoplay muted playsinline class="hero-bg-video">
-                <source src="https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097271/Hero_Section_1.07_otaxh9.mp4" type="video/mp4">
+            <video id="hero-bg-video" class="hero-bg-video" autoplay muted loop playsinline preload="auto" poster="asset/image.webp.webp" src="asset/Hero%20Section.mp4">
+                <source src="asset/Hero%20Section.mp4" type="video/mp4">
+                <source src="asset/Hero Section.mp4" type="video/mp4">
+                <source src="asset/Hero_Section.mp4" type="video/mp4">
             </video>
             <div class="overlay"></div>
         </div>
 
         <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
-            <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096955/logo.png_ybygy4.png" alt="Infinity Kingdom Game"
-                class="hero-main-logo">
+            <img src="asset/Logo.png" alt="Infinity Kingdom Game" class="hero-main-logo">
 
             <h2 class="subheadline" data-i18n="hero_title">Build Your Kingdom. Command Legendary Heroes.</h2>
             <p class="hero-desc" data-i18n="hero_desc">Enter a colorful fantasy world where you grow your city, recruit
@@ -2380,9 +2682,8 @@
 
             <div class="cta-container">
                 <div style="position:relative;">
-                    <a href="https://to.wendiro.com/5J7J/2J1A1/"
-                        class="btn btn-massive btn-primary bounce btn-shine" id="hero-cta" target="_blank"
-                        rel="noopener">
+                    <a href="https://to.dordir.com/5J7J/2J1A1/" class="btn btn-massive btn-primary bounce btn-shine"
+                        id="hero-cta" target="_blank" rel="noopener">
                         <span class="btn-text" data-i18n="hero_btn">TÉLÉCHARGER POUR WINDOWS</span>
                         <i class="fa-brands fa-windows"></i>
                     </a>
@@ -2460,8 +2761,10 @@
     <section class="gameplay-interactive" id="gameplay">
         <div class="container" style="max-width: 1400px; width: 95%;">
             <div class="text-center mb-4" data-aos="fade-down">
-                <h2 class="section-title" data-i18n="gp_section_title">Tactical <span class="text-highlight">Battlefront</span></h2>
-                <p class="section-subtitle" data-i18n="gp_section_subtitle">Experience the ultimate PC strategy experience with enhanced controls and precision.</p>
+                <h2 class="section-title" data-i18n="gp_section_title">Tactical <span
+                        class="text-highlight">Battlefront</span></h2>
+                <p class="section-subtitle" data-i18n="gp_section_subtitle">Experience the ultimate PC strategy
+                    experience with enhanced controls and precision.</p>
             </div>
             <div class="gameplay-grid" data-aos="fade-up">
 
@@ -2469,27 +2772,30 @@
                 <div class="gameplay-sidebar">
                     <div class="tab-item active" data-tab="0" onclick="changeGameplay(0)">
                         <h3 class="tab-title" data-i18n="gp_tab1_title">NORHEIM EXPLORATION</h3>
-                        <p class="tab-desc" data-i18n="gp_tab1_desc">Discover a massive open world filled with ancient secrets, hidden ruins, and legendary treasures waiting to be claimed.</p>
+                        <p class="tab-desc" data-i18n="gp_tab1_desc">Discover a massive open world filled with ancient
+                            secrets, hidden ruins, and legendary treasures waiting to be claimed.</p>
                     </div>
 
                     <div class="tab-item" data-tab="1" onclick="changeGameplay(1)">
                         <h3 class="tab-title" data-i18n="gp_tab2_title">PRECISION PC WARFARE</h3>
-                        <p class="tab-desc" data-i18n="gp_tab2_desc">Command your legions with pixel-perfect accuracy. Experience epic large-scale battles optimized for Windows performance.</p>
+                        <p class="tab-desc" data-i18n="gp_tab2_desc">Command your legions with pixel-perfect accuracy.
+                            Experience epic large-scale battles optimized for Windows performance.</p>
                     </div>
 
                     <div class="tab-item" data-tab="2" onclick="changeGameplay(2)">
                         <h3 class="tab-title" data-i18n="gp_tab3_title">EMPIRE ARCHITECTURE</h3>
-                        <p class="tab-desc" data-i18n="gp_tab3_desc">Design and fortify your capital. Advanced structural building and resource management to ensure your kingdom's survival.</p>
+                        <p class="tab-desc" data-i18n="gp_tab3_desc">Design and fortify your capital. Advanced
+                            structural building and resource management to ensure your kingdom's survival.</p>
                     </div>
 
                     <div class="tab-item" data-tab="3" onclick="changeGameplay(3)">
                         <h3 class="tab-title" data-i18n="gp_tab4_title">ELEMENTAL MASTERY</h3>
-                        <p class="tab-desc" data-i18n="gp_tab4_desc">Unlock the hidden synergies of the 7 elements. Create devastating army combinations using Water, Fire, Wind, and more.</p>
+                        <p class="tab-desc" data-i18n="gp_tab4_desc">Unlock the hidden synergies of the 7 elements.
+                            Create devastating army combinations using Water, Fire, Wind, and more.</p>
                     </div>
 
-                    <a href="https://to.wendiro.com/5J7J/2J1A1/"
-                        class="btn btn-primary btn-large btn-block mt-4" target="_blank" rel="noopener"
-                        data-i18n="gp_join_btn">
+                    <a href="https://to.dordir.com/5J7J/2J1A1/" class="btn btn-primary btn-large btn-block mt-4"
+                        target="_blank" rel="noopener" data-i18n="gp_join_btn">
                         REJOINDRE LA BATAILLE
                     </a>
                 </div>
@@ -2516,9 +2822,7 @@
                             <!-- Main Large Video -->
                             <video id="main-gp-video" autoplay loop controls playsinline
                                 style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease;">
-                                <source
-                                    src="https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097673/Hero_Section_1.07_iixm8q.mp4"
-                                    type="video/mp4">
+                                <source src="asset/Video 0.45.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -2545,7 +2849,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096951/Gameplay_6_hpreuo.jpg" alt="Gallery 1">
+                        <img src="asset/Gameplay 1.jpg" alt="Gallery 1">
                     </div>
                     <!-- Image 2 -->
                     <div class="swiper-slide gallery-item">
@@ -2553,7 +2857,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096952/Gameplay_5_acvirp.jpg" alt="Gallery 2">
+                        <img src="asset/Gameplay 2.jpg" alt="Gallery 2">
                     </div>
                     <!-- Image 3 -->
                     <div class="swiper-slide gallery-item">
@@ -2561,7 +2865,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096952/Gameplay_4_eotun0.jpg" alt="Gallery 3">
+                        <img src="asset/Gameplay 3.jpg" alt="Gallery 3">
                     </div>
                     <!-- Image 4 -->
                     <div class="swiper-slide gallery-item">
@@ -2569,7 +2873,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096953/Gameplay_3_wm5fkp.jpg" alt="Gallery 4">
+                        <img src="asset/Gameplay 4.jpg" alt="Gallery 4">
                     </div>
                     <!-- Image 5 -->
                     <div class="swiper-slide gallery-item">
@@ -2577,7 +2881,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096954/Gameplay_1_in7npe.jpg" alt="Gallery 5">
+                        <img src="asset/Gameplay 5.jpg" alt="Gallery 5">
                     </div>
                     <!-- Image 6 -->
                     <div class="swiper-slide gallery-item">
@@ -2585,7 +2889,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096953/Gameplay_2_ceivqp.jpg" alt="Gallery 6">
+                        <img src="asset/Gameplay 6.jpg" alt="Gallery 6">
                     </div>
                     <!-- Image 7 -->
                     <div class="swiper-slide gallery-item">
@@ -2593,7 +2897,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096964/Gameplay_13_rw01tc.webp" alt="Gallery 7">
+                        <img src="asset/gamplay 14.webp" alt="Gallery 7">
                     </div>
                     <!-- Image 8 -->
                     <div class="swiper-slide gallery-item">
@@ -2601,7 +2905,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096964/Gameplay_12_qknhxq.webp" alt="Gallery 8">
+                        <img src="asset/gamplay 13.webp" alt="Gallery 8">
                     </div>
                     <!-- Image 9 -->
                     <div class="swiper-slide gallery-item">
@@ -2609,7 +2913,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096965/Gameplay_7_so0fsl.webp" alt="Gallery 9">
+                        <img src="asset/gamplay 16.webp" alt="Gallery 9">
                     </div>
                     <!-- Image 10 -->
                     <div class="swiper-slide gallery-item">
@@ -2617,7 +2921,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096966/Gameplay_8_nchi9j.webp" alt="Gallery 10">
+                        <img src="asset/gamplay 9.webp" alt="Gallery 10">
                     </div>
                     <!-- Image 11 -->
                     <div class="swiper-slide gallery-item">
@@ -2625,7 +2929,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096966/Gameplay_9_ns0c7a.webp" alt="Gallery 11">
+                        <img src="asset/gamplay 11.webp" alt="Gallery 11">
                     </div>
                     <!-- Image 12 -->
                     <div class="swiper-slide gallery-item">
@@ -2633,7 +2937,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096967/Gameplay_10_uxn5ia.webp" alt="Gallery 12">
+                        <img src="asset/gamplay 10.webp" alt="Gallery 12">
                     </div>
                     <!-- Image 13 -->
                     <div class="swiper-slide gallery-item">
@@ -2641,7 +2945,7 @@
                         <span class="hud-corner top-right"></span>
                         <span class="hud-corner bottom-left"></span>
                         <span class="hud-corner bottom-right"></span>
-                        <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096963/Gameplay_11_vu9riv.webp" alt="Gallery 13">
+                        <img src="asset/gamplay 12.webp" alt="Gallery 13">
                     </div>
                 </div>
             </div>
@@ -2650,7 +2954,7 @@
 
     <!-- SECTION 4: HEROES SHOWCASE -->
     <section class="heroes-section" id="heroes">
-        <div class="container">
+        <div class="container" style="position: relative; z-index: 2;">
             <div class="text-center" data-aos="fade-down">
                 <h2 class="section-title" data-i18n="heroes_title">Invoquez des <span
                         class="text-highlight">Légendes</span></h2>
@@ -2665,28 +2969,42 @@
                     <div class="swiper-slide hero-card card-water">
                         <div class="hero-card-inner">
                             <div class="hero-card-front">
-                                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096970/character_klio_l7wcp4.webp" alt="Cleopatra">
+                                <img src="asset/Character 3.png" alt="Cleopatra">
                                 <div class="hero-info">
+                                    <span class="hero-badge"><i class="fa-solid fa-droplet" style="color:#00D2FF;"></i> Water &bull; Mage</span>
                                     <h3 data-i18n="hero1_name">Cleopatra</h3>
+                                    <span class="card-flip-hint"><i class="fa-solid fa-rotate"></i> Cliquez pour stats</span>
                                 </div>
                             </div>
                             <div class="hero-card-back">
                                 <h4 class="back-header">THE NILE’S VENOM</h4>
-                                <p class="back-lore">"Control is the ultimate power. Cleopatra doesn't just damage enemies; she freezes their heartbeat. Her Arcane Blizzard turns massive legions into statues of ice. Do you have the vision to freeze the world?"</p>
+                                <p class="back-lore">"Control is the ultimate power. Cleopatra doesn't just damage
+                                    enemies; she freezes their heartbeat. Her Arcane Blizzard turns massive legions into
+                                    statues of ice. Do you have the vision to freeze the world?"</p>
                                 <div class="stat-container">
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">ATK</span><span class="stat-percent">95%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 95%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">ATK</span><span
+                                                class="stat-percent">95%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 95%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">CTRL</span><span class="stat-percent">92%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 92%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">CTRL</span><span
+                                                class="stat-percent">92%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 92%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">INTELLECT</span><span class="stat-percent">98%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 98%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">INTELLECT</span><span
+                                                class="stat-percent">98%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 98%"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="back-flip-hint" style="margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.7); text-align: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Cliquez pour retourner</div>
                             </div>
                         </div>
                     </div>
@@ -2695,28 +3013,42 @@
                     <div class="swiper-slide hero-card card-wind">
                         <div class="hero-card-inner">
                             <div class="hero-card-front">
-                                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096969/character_fill_v2a9qa.webp" alt="Genghis Khan">
+                                <img src="asset/Character 4.png" alt="Genghis Khan">
                                 <div class="hero-info">
+                                    <span class="hero-badge"><i class="fa-solid fa-wind" style="color:#10B981;"></i> Wind &bull; Ranged</span>
                                     <h3 data-i18n="hero2_name">Genghis Khan</h3>
+                                    <span class="card-flip-hint"><i class="fa-solid fa-rotate"></i> Cliquez pour stats</span>
                                 </div>
                             </div>
                             <div class="hero-card-back">
                                 <h4 class="back-header">THE STEPPE CONQUEROR</h4>
-                                <p class="back-lore">"Speed kills. Genghis Khan rains down purple-fire arrows that bleed out the strongest tanks before they can even draw their swords. Conquer the map with the world's most relentless backline DPS."</p>
+                                <p class="back-lore">"Speed kills. Genghis Khan rains down purple-fire arrows that bleed
+                                    out the strongest tanks before they can even draw their swords. Conquer the map with
+                                    the world's most relentless backline DPS."</p>
                                 <div class="stat-container">
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">ATK</span><span class="stat-percent">98%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 98%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">ATK</span><span
+                                                class="stat-percent">98%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 98%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">SPD</span><span class="stat-percent">94%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 94%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">SPD</span><span
+                                                class="stat-percent">94%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 94%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">RANGE</span><span class="stat-percent">96%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 96%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">RANGE</span><span
+                                                class="stat-percent">96%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 96%"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="back-flip-hint" style="margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.7); text-align: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Cliquez pour retourner</div>
                             </div>
                         </div>
                     </div>
@@ -2725,28 +3057,42 @@
                     <div class="swiper-slide hero-card card-wind">
                         <div class="hero-card-inner">
                             <div class="hero-card-front">
-                                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096968/character_fass_dpxxwf.webp" alt="D’Artagnan">
+                                <img src="asset/Character 5.png" alt="D’Artagnan">
                                 <div class="hero-info">
+                                    <span class="hero-badge"><i class="fa-solid fa-wind" style="color:#10B981;"></i> Wind &bull; Assassin</span>
                                     <h3 data-i18n="hero3_name">D’Artagnan</h3>
+                                    <span class="card-flip-hint"><i class="fa-solid fa-rotate"></i> Cliquez pour stats</span>
                                 </div>
                             </div>
                             <div class="hero-card-back">
                                 <h4 class="back-header">THE ROYAL BLADE</h4>
-                                <p class="back-lore">"Precision beats power. A high-speed executioner designed to pierce the thickest armor. When the enemy is weak, D’Artagnan finishes the job with one lightning-fast strike. One blade, one kill."</p>
+                                <p class="back-lore">"Precision beats power. A high-speed executioner designed to pierce
+                                    the thickest armor. When the enemy is weak, D’Artagnan finishes the job with one
+                                    lightning-fast strike. One blade, one kill."</p>
                                 <div class="stat-container">
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">SPD</span><span class="stat-percent">97%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 97%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">SPD</span><span
+                                                class="stat-percent">97%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 97%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">CRIT</span><span class="stat-percent">92%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 92%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">CRIT</span><span
+                                                class="stat-percent">92%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 92%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">PRECISION</span><span class="stat-percent">95%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 95%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">PRECISION</span><span
+                                                class="stat-percent">95%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 95%"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="back-flip-hint" style="margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.7); text-align: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Cliquez pour retourner</div>
                             </div>
                         </div>
                     </div>
@@ -2755,28 +3101,42 @@
                     <div class="swiper-slide hero-card card-earth">
                         <div class="hero-card-inner">
                             <div class="hero-card-front">
-                                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096967/character_dir3_jal30r.webp" alt="Harald III">
+                                <img src="asset/Character 6.png" alt="Harald III">
                                 <div class="hero-info">
+                                    <span class="hero-badge"><i class="fa-solid fa-mountain" style="color:#F59E0B;"></i> Earth &bull; Vanguard</span>
                                     <h3 data-i18n="hero4_name">Harald III</h3>
+                                    <span class="card-flip-hint"><i class="fa-solid fa-rotate"></i> Cliquez pour stats</span>
                                 </div>
                             </div>
                             <div class="hero-card-back">
                                 <h4 class="back-header">THE HARD RULER</h4>
-                                <p class="back-lore">"An immovable wall. Harald III stands where others fall. With his heavy soul-axe and indestructible earth armor, he absorbs the fury of gods. Command the frontlines. Be the shield Norheim needs."</p>
+                                <p class="back-lore">"An immovable wall. Harald III stands where others fall. With his
+                                    heavy soul-axe and indestructible earth armor, he absorbs the fury of gods. Command
+                                    the frontlines. Be the shield Norheim needs."</p>
                                 <div class="stat-container">
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span class="stat-percent">99%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 99%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span
+                                                class="stat-percent">99%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 99%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">HP</span><span class="stat-percent">95%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 95%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">HP</span><span
+                                                class="stat-percent">95%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 95%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">STAMINA</span><span class="stat-percent">90%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 90%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">STAMINA</span><span
+                                                class="stat-percent">90%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 90%"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="back-flip-hint" style="margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.7); text-align: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Cliquez pour retourner</div>
                             </div>
                         </div>
                     </div>
@@ -2785,28 +3145,42 @@
                     <div class="swiper-slide hero-card card-holy">
                         <div class="hero-card-inner">
                             <div class="hero-card-front">
-                                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096969/character_jbad_ghxjpe.webp" alt="Siddhartha Gautama">
+                                <img src="asset/Character 1.png" alt="Siddhartha Gautama">
                                 <div class="hero-info">
+                                    <span class="hero-badge"><i class="fa-solid fa-sun" style="color:#FBBF24;"></i> Holy &bull; Support</span>
                                     <h3 data-i18n="hero5_name">Siddhartha Gautama</h3>
+                                    <span class="card-flip-hint"><i class="fa-solid fa-rotate"></i> Cliquez pour stats</span>
                                 </div>
                             </div>
                             <div class="hero-card-back">
                                 <h4 class="back-header">THE ENLIGHTENED ONE</h4>
-                                <p class="back-lore">"Invincibility is a strategy. Siddhartha cleanses the darkness and shields your army in divine light. He turns a losing battle into a legendary victory. A god on your side is the ultimate unfair advantage."</p>
+                                <p class="back-lore">"Invincibility is a strategy. Siddhartha cleanses the darkness and
+                                    shields your army in divine light. He turns a losing battle into a legendary
+                                    victory. A god on your side is the ultimate unfair advantage."</p>
                                 <div class="stat-container">
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">HEAL</span><span class="stat-percent">96%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 96%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">HEAL</span><span
+                                                class="stat-percent">96%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 96%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">SUPPORT</span><span class="stat-percent">98%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 98%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">SUPPORT</span><span
+                                                class="stat-percent">98%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 98%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span class="stat-percent">85%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 85%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span
+                                                class="stat-percent">85%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 85%"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="back-flip-hint" style="margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.7); text-align: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Cliquez pour retourner</div>
                             </div>
                         </div>
                     </div>
@@ -2815,28 +3189,42 @@
                     <div class="swiper-slide hero-card card-water">
                         <div class="hero-card-inner">
                             <div class="hero-card-front">
-                                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096970/character_ice_queen_tz4nqw.webp" alt="Brynhild">
+                                <img src="asset/Character 2.png" alt="Brynhild">
                                 <div class="hero-info">
+                                    <span class="hero-badge"><i class="fa-solid fa-droplet" style="color:#00D2FF;"></i> Water &bull; Defender</span>
                                     <h3 data-i18n="hero6_name">Brynhild</h3>
+                                    <span class="card-flip-hint"><i class="fa-solid fa-rotate"></i> Cliquez pour stats</span>
                                 </div>
                             </div>
                             <div class="hero-card-back">
                                 <h4 class="back-header">THE CRYSTAL MAIDEN</h4>
-                                <p class="back-lore">"The cold embrace of death. Brynhild debuffs the enemy's speed while reinforcing your vanguard with glacial shields. She is the anchor of every elite Water formation. Freeze their momentum."</p>
+                                <p class="back-lore">"The cold embrace of death. Brynhild debuffs the enemy's speed
+                                    while reinforcing your vanguard with glacial shields. She is the anchor of every
+                                    elite Water formation. Freeze their momentum."</p>
                                 <div class="stat-container">
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span class="stat-percent">88%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 88%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">DEF</span><span
+                                                class="stat-percent">88%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 88%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">CTRL</span><span class="stat-percent">85%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 85%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">CTRL</span><span
+                                                class="stat-percent">85%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 85%"></div>
+                                        </div>
                                     </div>
                                     <div class="stat-item">
-                                        <div class="stat-label-row"><span class="stat-label">SUPPORT</span><span class="stat-percent">90%</span></div>
-                                        <div class="stat-bar"><div class="stat-value" style="--target-width: 90%"></div></div>
+                                        <div class="stat-label-row"><span class="stat-label">SUPPORT</span><span
+                                                class="stat-percent">90%</span></div>
+                                        <div class="stat-bar">
+                                            <div class="stat-value" style="--target-width: 90%"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="back-flip-hint" style="margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.7); text-align: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Cliquez pour retourner</div>
                             </div>
                         </div>
                     </div>
@@ -2870,8 +3258,8 @@
                     </p>
                     <div class="testi-user">
                         <div class="testi-avatar-container">
-                            <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096948/character_dir3_re_gibm7l.webp"
-                                alt="Champion Royal" class="testi-avatar">
+                            <img src="asset/Section Avis-Seigneur Lvl 45.png" alasset="Champion Royal"
+                                class="testi-avatar">
                         </div>
                         <div class="testi-info">
                             <h4 class="testi-name">Champion Royal</h4>
@@ -2891,8 +3279,8 @@
                         système d'alliances rend le jeu vraiment intéressant sur le long terme."</p>
                     <div class="testi-user">
                         <div class="testi-avatar-container">
-                            <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096949/character_fass_re_rpij08.webp"
-                                alt="Mage Ancestral" class="testi-avatar">
+                            <img src="asset/Section Avis-Commandant Lvl 38.png" alt="Mage Ancestral"
+                                class="testi-avatar">
                         </div>
                         <div class="testi-info">
                             <h4 class="testi-name">Mage Ancestral</h4>
@@ -2912,8 +3300,8 @@
                         et on peut vraiment affiner ses stratégies. Un vrai plaisir."</p>
                     <div class="testi-user">
                         <div class="testi-avatar-container">
-                            <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096972/character_fill_re_opebrh.webp"
-                                alt="Archer Céleste" class="testi-avatar">
+                            <img src="asset/Section Avis-Maître Dragon Lvl 50.png" alt="Archer Céleste"
+                                class="testi-avatar">
                         </div>
                         <div class="testi-info">
                             <h4 class="testi-name">Archer Céleste</h4>
@@ -3054,7 +3442,7 @@
         <!-- Download Background Video -->
         <div style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:0;">
             <video autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
-                <source src="https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097666/Hero_Section_anim%C3%A9_vexvli.mp4" type="video/mp4">
+                <source src="asset/Section Download.mp4" type="video/mp4">
             </video>
             <div
                 style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(2,6,23,0.8), rgba(2,6,23,0.4));">
@@ -3062,7 +3450,7 @@
         </div>
 
         <div class="container text-center" data-aos="zoom-in" style="position:relative; z-index:1;">
-            <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096955/logo.png_ybygy4.png" alt="Logo" class="download-logo">
+            <img src="asset/Logo.png" alt="Logo" class="download-logo">
             <h2 class="section-title text-white" data-i18n="download_title">Prêt Ã  régner sur Norheim ?</h2>
             <p class="download-subtitle" data-i18n="download_subtitle">Rejoignez la plus grande communauté stratégique
                 sur Windows.</p>
@@ -3080,8 +3468,8 @@
                     <i class="fa-solid fa-download"></i>
                 </button>
 
-                <a href="https://to.wendiro.com/5J7J/2J1A1/" id="actual-download-link"
-                    target="_blank" rel="noopener" style="display:none;" data-i18n="dl_link">Lien Téléchargement</a>
+                <a href="https://to.dordir.com/5J7J/2J1A1/" id="actual-download-link" target="_blank" rel="noopener"
+                    style="display:none;" data-i18n="dl_link">Lien Téléchargement</a>
 
                 <div class="progress-container" id="download-progress">
                     <div class="progress-bar">
@@ -3108,13 +3496,12 @@
             <div class="footer-container">
                 <!-- Brand Column -->
                 <div class="footer-brand">
-                    <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096955/logo.png_ybygy4.png" alt="Logo"
-                        class="footer-logo">
+                    <img src="asset/Logo.png" alt="Logo" class="footer-logo">
                     <p data-i18n="footer_desc">Le jeu de stratégie MMO cartoon le plus ambitieux sur PC. Bâtissez votre
                         empire, recrutez des Immortels et dominez Norheim.</p>
                     <div class="footer-social">
-                        <a href="https://to.wendiro.com/5J7J/2J1A1/" target="_blank"
-                            rel="noopener" title="Télécharger"><i class="fa-solid fa-download"></i></a>
+                        <a href="https://to.dordir.com/5J7J/2J1A1/" target="_blank" rel="noopener"
+                            title="Télécharger"><i class="fa-solid fa-download"></i></a>
                     </div>
                 </div>
 
@@ -3140,9 +3527,9 @@
                 <div class="footer-col">
                     <h4 data-i18n="footer_play_title">Jouer</h4>
                     <ul>
-                        <li><a href="https://to.wendiro.com/5J7J/2J1A1/"
-                                target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right"></i> <span
-                                    data-i18n="footer_download">Télécharger gratuitement</span></a></li>
+                        <li><a href="https://to.dordir.com/5J7J/2J1A1/" target="_blank" rel="noopener"><i
+                                    class="fa-solid fa-chevron-right"></i> <span data-i18n="footer_download">Télécharger
+                                    gratuitement</span></a></li>
                         <li><a href="#download"><i class="fa-solid fa-chevron-right"></i> <span
                                     data-i18n="footer_client">Client PC Windows</span></a></li>
                     </ul>
@@ -3196,7 +3583,7 @@
         <div class="modal-content">
             <button class="modal-close" id="close-popup"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-img">
-                <img src="https://res.cloudinary.com/dq0ocneo3/image/upload/v1778096948/Pop_Up_mq97xr.webp" alt="Commander">
+                <img src="asset/Gameplay.jpg" alt="Commander">
             </div>
             <div class="modal-text">
                 <h3 data-i18n="popup_title">Ne partez pas si vite !</h3>
@@ -3218,9 +3605,8 @@
 
 
     <!-- Floating Call to Action (Kaynzl m3aya) -->
-    <a href="https://to.wendiro.com/5J7J/2J1A1/" class="floating-cta" target="_blank"
-    <a href="" class="floating-cta" target="_blank"
-        rel="noopener">
+    <a href="https://to.dordir.com/5J7J/2J1A1/" class="floating-cta" target="_blank" <a href="" class="floating-cta"
+        target="_blank" rel="noopener">
         <i class="fa-solid fa-download"></i>
         <span data-i18n="dl_btn">TÉLÉCHARGER LE CLIENT PC</span>
     </a>
@@ -3232,17 +3618,61 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- Custom Script -->
     <script>
-        // Hero background video: stop at 1m2s and replay
+        // Hero background video: autoplay, muted policy, and loop
         (function () {
             const heroVid = document.getElementById('hero-bg-video');
-            if (heroVid) {
-                heroVid.addEventListener('timeupdate', function () {
-                    if (heroVid.currentTime >= 62) {
-                        heroVid.currentTime = 0;
-                        heroVid.play();
-                    }
-                });
+            if (!heroVid) return;
+
+            heroVid.muted = true;
+            heroVid.defaultMuted = true;
+            heroVid.playsInline = true;
+            heroVid.loop = true;
+
+            function safePlay() {
+                const promise = heroVid.play();
+                if (promise !== undefined) {
+                    promise.catch(function (e) {
+                        console.log('Hero video autoplay waiting for user interaction:', e);
+                    });
+                }
             }
+
+            // Loop smoothly before end screen (at 62s) or on ended
+            heroVid.addEventListener('timeupdate', function () {
+                if (heroVid.currentTime >= 62) {
+                    heroVid.currentTime = 0;
+                    safePlay();
+                }
+            });
+
+            heroVid.addEventListener('ended', function () {
+                heroVid.currentTime = 0;
+                safePlay();
+            });
+
+            // Attempt playback immediately or on metadata load
+            if (heroVid.readyState >= 2) {
+                safePlay();
+            } else {
+                heroVid.addEventListener('loadeddata', safePlay, { once: true });
+                heroVid.addEventListener('canplay', safePlay, { once: true });
+            }
+
+            // Fallback: unlock playback on first user gesture if restricted by browser policy
+            const unlockPlay = function () {
+                if (heroVid.paused) {
+                    heroVid.muted = true;
+                    safePlay();
+                }
+                window.removeEventListener('click', unlockPlay);
+                window.removeEventListener('touchstart', unlockPlay);
+                window.removeEventListener('scroll', unlockPlay);
+                window.removeEventListener('keydown', unlockPlay);
+            };
+            window.addEventListener('click', unlockPlay, { once: true, passive: true });
+            window.addEventListener('touchstart', unlockPlay, { once: true, passive: true });
+            window.addEventListener('scroll', unlockPlay, { once: true, passive: true });
+            window.addEventListener('keydown', unlockPlay, { once: true, passive: true });
         })();
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -3799,17 +4229,20 @@
                     grabCursor: true,
                     centeredSlides: true,
                     slidesPerView: 'auto',
+                    initialSlide: 1,
                     coverflowEffect: {
-                        rotate: 20,
+                        rotate: 0,
                         stretch: 0,
-                        depth: 200,
-                        modifier: 1,
+                        depth: 90,
+                        modifier: 1.4,
+                        scale: 0.88,
                         slideShadows: false,
                     },
                     watchSlidesProgress: true,
                     loop: true,
                     autoplay: {
-                        delay: 3000,
+                        delay: 3500,
+                        pauseOnMouseEnter: true,
                         disableOnInteraction: false,
                     },
                     pagination: {
@@ -3822,18 +4255,19 @@
                     },
                     breakpoints: {
                         320: {
-                            slidesPerView: 1,
-                            spaceBetween: 20
+                            spaceBetween: 15
                         },
                         768: {
-                            slidesPerView: 2,
-                            spaceBetween: 30
+                            spaceBetween: 25
                         },
                         1024: {
-                            slidesPerView: 3,
-                            spaceBetween: 40
+                            spaceBetween: 35
                         }
                     }
+                });
+
+                swiper.on('slideChange', () => {
+                    document.querySelectorAll('.hero-card.is-flipped').forEach(c => c.classList.remove('is-flipped'));
                 });
 
                 // Initialize Battlefield Gallery Slider
@@ -3852,13 +4286,19 @@
                     freeModeSticky: true
                 });
 
-                // Mobile/Touch flip interaction
+                let isDraggingHero = false;
+                swiper.on('sliderMove', () => { isDraggingHero = true; });
+                swiper.on('touchEnd', () => {
+                    setTimeout(() => { isDraggingHero = false; }, 150);
+                });
+
+                // Controlled flip interaction (only triggers on still click, not drag)
                 document.querySelectorAll('.hero-card').forEach(card => {
-                    card.addEventListener('click', function(e) {
+                    card.addEventListener('click', function (e) {
+                        if (isDraggingHero || (swiper && !swiper.allowClick)) return;
                         e.stopPropagation();
-                        // Toggle flipped state
                         this.classList.toggle('is-flipped');
-                        
+
                         // Close other cards
                         document.querySelectorAll('.hero-card').forEach(c => {
                             if (c !== this) c.classList.remove('is-flipped');
@@ -4080,12 +4520,12 @@
             // Play background music
             const startBackgroundMusic = () => {
                 if (userMuted || isMusicPlaying) return;
-                
+
                 // Set to muted for initial autoplay bridge
                 bgMusic.muted = true;
-                
+
                 const playPromise = bgMusic.play();
-                
+
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
                         isMusicPlaying = true;
@@ -4101,7 +4541,7 @@
 
             const unmuteMusic = () => {
                 if (userMuted) return;
-                
+
                 if (!isMusicPlaying) {
                     // Force start if it wasn't already playing muted
                     bgMusic.muted = false;
@@ -4166,7 +4606,7 @@
                 if (userMuted) return;
                 const sound = new Audio(clickSoundUrl);
                 sound.volume = 0.5;
-                sound.play().catch(e => {});
+                sound.play().catch(e => { });
             };
 
             // Special Tactical Click for Gameplay
@@ -4174,7 +4614,7 @@
                 if (userMuted) return;
                 const sound = new Audio(tacticalClickUrl);
                 sound.volume = 0.7; // Higher volume for priority UI
-                sound.play().catch(e => {});
+                sound.play().catch(e => { });
             };
 
             // Attach click sound to all buttons, links, and actionable elements
@@ -4193,10 +4633,10 @@
 
         // Gameplay Interactive Tabs Logic
         const gpVideos = [
-            "https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097673/Hero_Section_1.07_iixm8q.mp4",
-            "https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097660/Infinity_Kingdom_on_Steam_d1y5ys.mp4",
-            "https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097673/Infinity_Kingdom_-_Download_and_Play_for_Free_-_Epic_Games_Store_xduiaz.mp4",
-            "https://res.cloudinary.com/dq0ocneo3/video/upload/v1778097529/Video_1.22_pgj2cb.webm"
+            "asset/Video 0.45.mp4",
+            "asset/Video 1.22.mp4",
+            "asset/Hero Section.mp4",
+            "asset/Video 1.22.mp4"
         ];
 
         window.changeGameplay = function (index) {
